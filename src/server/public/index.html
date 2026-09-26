@@ -669,6 +669,154 @@
     }
 
     /* ==========================================================================
+       Live Agent Browser View Panel
+       ========================================================================== */
+    .live-view-panel {
+      background: #090d16;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .live-view-header {
+      background: #101624;
+      padding: 9px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11.5px;
+    }
+
+    .live-view-title-group {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .live-indicator-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #475569;
+      display: inline-block;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    .live-indicator-dot.is-active {
+      background: #10b981;
+      animation: liveDotPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes liveDotPulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+
+    .live-view-title {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--text-main);
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
+
+    .live-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+    }
+
+    .badge-live {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .badge-init {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .badge-unavailable {
+      background: rgba(148, 163, 184, 0.12);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    .badge-complete {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.35);
+    }
+
+    .badge-idle {
+      background: rgba(100, 116, 139, 0.15);
+      color: #64748b;
+      border: 1px solid rgba(100, 116, 139, 0.25);
+    }
+
+    .live-view-subtext {
+      color: var(--text-dim);
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
+
+    .live-view-viewport {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background: #04060a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .live-view-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #04060a;
+      display: block;
+    }
+
+    .live-view-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .live-placeholder-icon {
+      font-size: 32px;
+      opacity: 0.7;
+    }
+
+    .live-placeholder-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 440px;
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
        Terminal Console Stream
        ========================================================================== */
     .terminal-container {
@@ -1409,7 +1557,12 @@
               logs: [],
               status: 'idle',
               result: null,
-              activeTab: 'logs'
+              activeTab: 'logs',
+              lastFrameUrl: null,
+              livePollTimer: null,
+              livePollActive: false,
+              liveFailedCount: 0,
+              liveUnavailable: false,
             };
           }
         });
@@ -1683,14 +1836,82 @@
     }
 
     /**
-     * HTML Generator for Live Monospace Terminal
+     * HTML Generator for Live Monospace Terminal & Live Agent Browser View
      */
     function renderTerminalHtml(tcId, run) {
+      const isRunning = run.status === 'running';
+      const hasFrame = !!run.lastFrameUrl;
+      const isUnavailable = !!run.liveUnavailable;
+
+      let badgeText = 'IDLE';
+      let badgeClass = 'badge-idle';
+      let subtext = 'Execution paused or completed';
+      let icon = '🖥️';
+      let placeholderText = 'Live view feed idle. Run test to start visual streaming.';
+
+      if (isUnavailable) {
+        badgeText = 'UNAVAILABLE';
+        badgeClass = 'badge-unavailable';
+        subtext = 'Playwright child process runner';
+        icon = 'ℹ️';
+        placeholderText = 'Live view not available for this test type';
+      } else if (isRunning) {
+        if (hasFrame) {
+          badgeText = 'LIVE';
+          badgeClass = 'badge-live';
+          subtext = '~1 FPS Visual Stream';
+        } else {
+          badgeText = 'INITIALIZING';
+          badgeClass = 'badge-init';
+          subtext = 'Connecting to browser session...';
+          icon = '📡';
+          placeholderText = 'Waiting for browser automation frames...';
+        }
+      } else if (hasFrame) {
+        badgeText = 'COMPLETED';
+        badgeClass = 'badge-complete';
+        subtext = 'Final frame captured';
+      }
+
       const logLinesHtml = run.logs.length > 0
         ? run.logs.map(line => formatTerminalLine(line)).join('')
         : '<div class="terminal-line" style="color: var(--text-dim);">[Stream Idle] Click "Run Test" above to start live execution telemetry...</div>';
 
       return `
+        <!-- Live Browser View (Near-Real-Time Visual Feed) -->
+        <div class="live-view-panel" id="livePanel-${escapeHtml(tcId)}">
+          <div class="live-view-header">
+            <div class="live-view-title-group">
+              <span class="live-indicator-dot ${isRunning ? 'is-active' : ''}" id="liveDot-${escapeHtml(tcId)}"></span>
+              <span class="live-view-title">LIVE BROWSER VIEW</span>
+              <span class="live-badge ${badgeClass}" id="liveBadge-${escapeHtml(tcId)}">
+                ${badgeText}
+              </span>
+            </div>
+            <div class="live-view-subtext" id="liveSubtext-${escapeHtml(tcId)}">
+              ${subtext}
+            </div>
+          </div>
+          <div class="live-view-viewport" id="liveViewport-${escapeHtml(tcId)}">
+            <img 
+              id="liveImg-${escapeHtml(tcId)}" 
+              class="live-view-img" 
+              src="${hasFrame ? escapeHtml(run.lastFrameUrl) : ''}" 
+              style="${hasFrame ? 'display: block;' : 'display: none;'}" 
+              alt="Live Agent Browser View" 
+            />
+            <div class="live-view-placeholder" id="livePlaceholder-${escapeHtml(tcId)}" style="${hasFrame ? 'display: none;' : 'display: flex;'}">
+              <div class="live-placeholder-icon" id="livePlaceholderIcon-${escapeHtml(tcId)}">
+                ${icon}
+              </div>
+              <div class="live-placeholder-text" id="livePlaceholderText-${escapeHtml(tcId)}">
+                ${placeholderText}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Container -->
         <div class="terminal-container">
           <div class="terminal-header">
             <div class="terminal-controls">
@@ -1727,14 +1948,173 @@
     }
 
     /**
+     * Start live frame polling for real-time visual browser updates
+     */
+    function startLiveFramePolling(tcId, runId) {
+      if (!state.runs[tcId]) return;
+      const run = state.runs[tcId];
+
+      stopLiveFramePolling(tcId);
+
+      run.livePollActive = true;
+      run.liveFailedCount = 0;
+      run.liveUnavailable = false;
+
+      const tc = state.testCases.find(c => (c.id || c.testCaseId || c.title) === tcId);
+      const isPlanner = tc ? isPlannerType(tc) : false;
+
+      const pollTick = () => {
+        if (!run.livePollActive || run.status !== 'running' || run.runId !== runId) {
+          return;
+        }
+
+        const timestamp = Date.now();
+        const frameUrl = `/api/run/${encodeURIComponent(runId)}/live-frame?t=${timestamp}`;
+
+        const testImg = new Image();
+        testImg.onload = () => {
+          if (!run.livePollActive || run.status !== 'running' || run.runId !== runId) {
+            return;
+          }
+
+          run.liveFailedCount = 0;
+          run.lastFrameUrl = frameUrl;
+
+          const imgEl = document.getElementById(`liveImg-${tcId}`);
+          const placeholderEl = document.getElementById(`livePlaceholder-${tcId}`);
+          const badgeEl = document.getElementById(`liveBadge-${tcId}`);
+          const subtextEl = document.getElementById(`liveSubtext-${tcId}`);
+          const dotEl = document.getElementById(`liveDot-${tcId}`);
+
+          if (imgEl) {
+            imgEl.src = frameUrl;
+            imgEl.style.display = 'block';
+          }
+          if (placeholderEl) {
+            placeholderEl.style.display = 'none';
+          }
+          if (badgeEl) {
+            badgeEl.textContent = 'LIVE';
+            badgeEl.className = 'live-badge badge-live';
+          }
+          if (dotEl) {
+            dotEl.className = 'live-indicator-dot is-active';
+          }
+          if (subtextEl) {
+            subtextEl.textContent = 'Active Visual Stream (~1 FPS)';
+          }
+
+          run.livePollTimer = setTimeout(pollTick, 850);
+        };
+
+        testImg.onerror = () => {
+          if (!run.livePollActive || run.status !== 'running' || run.runId !== runId) {
+            return;
+          }
+
+          run.liveFailedCount = (run.liveFailedCount || 0) + 1;
+
+          const badgeEl = document.getElementById(`liveBadge-${tcId}`);
+          const placeholderEl = document.getElementById(`livePlaceholder-${tcId}`);
+          const placeholderText = document.getElementById(`livePlaceholderText-${tcId}`);
+          const placeholderIcon = document.getElementById(`livePlaceholderIcon-${tcId}`);
+          const subtextEl = document.getElementById(`liveSubtext-${tcId}`);
+
+          // For spec-file (child process) test cases: fallback after 5 failed polls
+          if (!isPlanner && run.liveFailedCount >= 5) {
+            run.liveUnavailable = true;
+            if (badgeEl) {
+              badgeEl.textContent = 'UNAVAILABLE';
+              badgeEl.className = 'live-badge badge-unavailable';
+            }
+            if (placeholderText) {
+              placeholderText.textContent = 'Live view not available for this test type';
+            }
+            if (placeholderIcon) {
+              placeholderIcon.textContent = 'ℹ️';
+            }
+            if (subtextEl) {
+              subtextEl.textContent = 'Playwright child process runner';
+            }
+            // Cease polling for spec-file tests
+            return;
+          }
+
+          // For AI planner test cases initializing
+          if (isPlanner) {
+            if (badgeEl) {
+              badgeEl.textContent = 'INITIALIZING';
+              badgeEl.className = 'live-badge badge-init';
+            }
+            if (placeholderText) {
+              if (run.liveFailedCount < 10) {
+                placeholderText.textContent = 'AI Agent generating scenario plan & launching browser...';
+              } else {
+                placeholderText.textContent = 'Waiting for active browser navigation frames...';
+              }
+            }
+          }
+
+          run.livePollTimer = setTimeout(pollTick, 1000);
+        };
+
+        testImg.src = frameUrl;
+      };
+
+      // Start initial poll after brief spinup delay
+      run.livePollTimer = setTimeout(pollTick, 600);
+    }
+
+    /**
+     * Stop live frame polling
+     */
+    function stopLiveFramePolling(tcId) {
+      if (!state.runs[tcId]) return;
+      const run = state.runs[tcId];
+      run.livePollActive = false;
+      if (run.livePollTimer) {
+        clearTimeout(run.livePollTimer);
+        run.livePollTimer = null;
+      }
+
+      const dotEl = document.getElementById(`liveDot-${tcId}`);
+      if (dotEl) {
+        dotEl.className = 'live-indicator-dot';
+      }
+
+      const badgeEl = document.getElementById(`liveBadge-${tcId}`);
+      const subtextEl = document.getElementById(`liveSubtext-${tcId}`);
+      if (badgeEl && run.lastFrameUrl) {
+        badgeEl.textContent = 'COMPLETED';
+        badgeEl.className = 'live-badge badge-complete';
+      }
+      if (subtextEl && run.lastFrameUrl) {
+        subtextEl.textContent = 'Final frame captured';
+      }
+    }
+
+    /**
      * 2. On Run Test Click:
      * - Disable Run button, set button text to "Running..." with pulsing spinner.
      * - Call POST /api/run/:testCaseId to get { runId }.
      * - Open live log terminal within the card via EventSource.
+     * - Start live visual browser frame polling.
      */
     async function runTestCase(tcId) {
       if (!state.runs[tcId]) {
-        state.runs[tcId] = { runId: null, evtSource: null, logs: [], status: 'idle', result: null, activeTab: 'logs' };
+        state.runs[tcId] = {
+          runId: null,
+          evtSource: null,
+          logs: [],
+          status: 'idle',
+          result: null,
+          activeTab: 'logs',
+          lastFrameUrl: null,
+          livePollTimer: null,
+          livePollActive: false,
+          liveFailedCount: 0,
+          liveUnavailable: false,
+        };
       }
 
       const run = state.runs[tcId];
@@ -1745,10 +2125,15 @@
         run.evtSource.close();
       }
 
+      stopLiveFramePolling(tcId);
+
       run.status = 'running';
       run.activeTab = 'logs';
       run.logs = [`[${new Date().toLocaleTimeString()}] Initializing test case execution for "${tcId}"...`];
       run.result = null;
+      run.lastFrameUrl = null;
+      run.liveUnavailable = false;
+      run.liveFailedCount = 0;
 
       renderTestCases();
       showToast(`Started test run for: ${tcId}`, 'info');
@@ -1774,6 +2159,9 @@
         appendLog(tcId, `[SYSTEM] Run instance allocated. Run ID: ${runId}`);
         appendLog(tcId, `[STREAM] Connecting to EventSource stream at /api/run/${runId}/stream...`);
 
+        // Start live visual frame polling
+        startLiveFramePolling(tcId, runId);
+
         // Open live EventSource stream
         const evtSource = new EventSource(`/api/run/${encodeURIComponent(runId)}/stream`);
         run.evtSource = evtSource;
@@ -1787,6 +2175,7 @@
           appendLog(tcId, `[STREAM] Server signaled execution completion ("done" event).`);
           evtSource.close();
           run.evtSource = null;
+          stopLiveFramePolling(tcId);
           fetchResult(tcId, runId);
         });
 
@@ -1794,10 +2183,12 @@
           appendLog(tcId, `[STREAM] Stream disconnected or ended.`);
           evtSource.close();
           run.evtSource = null;
+          stopLiveFramePolling(tcId);
           fetchResult(tcId, runId);
         };
 
       } catch (err) {
+        stopLiveFramePolling(tcId);
         console.error(`Execution start error for ${tcId}:`, err);
         appendLog(tcId, `[ERROR] Failed to start test: ${err.message}`);
         run.status = 'failed';
@@ -1840,6 +2231,7 @@
       const run = state.runs[tcId];
       if (!run || !run.runId) return;
 
+      stopLiveFramePolling(tcId);
       appendLog(tcId, `[USER] Sending stop/cancel request for run ID: ${run.runId}...`);
 
       if (run.evtSource) {
@@ -1899,6 +2291,7 @@
         run.status = 'failed';
         showToast(`Could not fetch result for ${tcId}`, 'error');
       } finally {
+        stopLiveFramePolling(tcId);
         renderStats();
         renderTestCases();
       }

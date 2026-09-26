@@ -41,6 +41,7 @@ export interface RunRecord {
   listeners: Array<(log: string) => void>;
   onDoneListeners: Array<() => void>;
   startTime: number;
+  childProcess?: any;
 }
 
 // In-memory run storage
@@ -148,6 +149,7 @@ async function executeRun(
     try {
       const scenarios = await runFeatureAgentPipeline(summary, {
         onLog: (line) => addRunLog(run, line),
+        runId: run.runId,
       });
 
       run.scenarios = scenarios;
@@ -206,6 +208,8 @@ async function executeRun(
       FORCE_COLOR: '0',
     },
   });
+
+  run.childProcess = child;
 
   const handleStreamData = (chunk: Buffer | string) => {
     const text = chunk.toString();
@@ -336,6 +340,27 @@ app.post('/api/run/:testCaseId', handleRunRequest);
 app.post('/api/run', handleRunRequest);
 
 /**
+  * Stop / Cancel an active test run
+  */
+app.post('/api/run/:runId/stop', (req: Request, res: Response): void => {
+  const rawId = req.params.runId;
+  const runId = Array.isArray(rawId) ? rawId[0] : rawId;
+  const run = runs.get(runId);
+  if (!run) {
+    res.status(404).json({ error: `Run with ID "${runId}" not found` });
+    return;
+  }
+  if (run.childProcess) {
+    try {
+      run.childProcess.kill();
+    } catch {}
+  }
+  addRunLog(run, '[STOP] Test run cancelled by user.');
+  finishRun(run, 'failed');
+  res.json({ success: true, message: `Run ${runId} stopped` });
+});
+
+/**
  * 3. GET /api/run/:runId/stream
  * Server-Sent Events (SSE) streaming endpoint.
  * Immediately pushes all buffered logs, streams new logs in real-time,
@@ -423,6 +448,27 @@ app.get('/api/run/:runId/result', (req: Request, res: Response): void => {
     status: run.status,
     scenarios: run.scenarios,
   });
+});
+
+/**
+ * 5. GET /api/run/:runId/live-frame
+ * Returns the most recently captured live browser frame (JPEG) for an active run.
+ * Cache-Control is explicitly disabled so polling clients get instantaneous updates.
+ */
+app.get('/api/run/:runId/live-frame', (req: Request, res: Response): void => {
+  const rawId = req.params.runId;
+  const runId = Array.isArray(rawId) ? rawId[0] : rawId;
+  const framePath = path.resolve(__dirname, '../../runs/live', runId, 'frame.jpg');
+
+  if (!fs.existsSync(framePath)) {
+    res.status(404).json({ error: 'No live frame available for this run' });
+    return;
+  }
+
+  res.setHeader('Content-Type', 'image/jpeg');
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+  res.setHeader('Pragma', 'no-cache');
+  res.sendFile(framePath);
 });
 
 // -------------------------------------------------------------

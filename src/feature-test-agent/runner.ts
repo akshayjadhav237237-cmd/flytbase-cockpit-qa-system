@@ -18,6 +18,7 @@ export interface FeatureAgentPipelineOptions {
   cockpitUrl?: string;
   onLog?: (line: string) => void;
   runsBaseDir?: string;
+  runId?: string;
 }
 
 /**
@@ -106,7 +107,7 @@ export async function runFeatureAgentPipeline(
 
   // Launch Playwright browser
   const browser = await chromium.launch({
-    headless: true,
+    headless: false,
   });
 
   const runsBaseDir = options?.runsBaseDir || path.resolve(__dirname, '../../runs/feature-agent');
@@ -141,6 +142,44 @@ export async function runFeatureAgentPipeline(
 
       const page = await context.newPage();
       const { testInfo, attachments } = createMockTestInfo(scenario.title, scenarioOutputDir);
+
+      // Start live screenshot capture loop if runId is provided
+      let isLiveActive = false;
+      let liveTimer: NodeJS.Timeout | null = null;
+
+      if (options?.runId) {
+        isLiveActive = true;
+        const liveDir = path.resolve(__dirname, '../../runs/live', options.runId);
+        fs.mkdirSync(liveDir, { recursive: true });
+        const liveFile = path.join(liveDir, 'frame.jpg');
+        const liveTmp = path.join(liveDir, `frame.${Date.now()}.tmp.jpg`);
+
+        const captureLiveFrame = async () => {
+          if (!isLiveActive || page.isClosed()) return;
+          try {
+            const buf = await page.screenshot({
+              type: 'jpeg',
+              quality: 50,
+              timeout: 2000,
+            });
+            if (isLiveActive && !page.isClosed()) {
+              fs.writeFileSync(liveTmp, buf);
+              if (fs.existsSync(liveTmp)) {
+                fs.renameSync(liveTmp, liveFile);
+              }
+            }
+          } catch {
+            // Non-critical; ignore frame capture errors during DOM updates or navigation
+          } finally {
+            if (isLiveActive && !page.isClosed()) {
+              liveTimer = setTimeout(captureLiveFrame, 800);
+            }
+          }
+        };
+
+        // Trigger immediate capture
+        captureLiveFrame().catch(() => {});
+      }
 
       let verdict: ScenarioVerdict = {
         scenarioId: scenario.id,
@@ -202,6 +241,13 @@ export async function runFeatureAgentPipeline(
         verdict.result = 'fail';
         verdict.reasoning = `Unhandled error during execution: ${execErr.message || execErr}`;
       } finally {
+        // Clean up live frame loop for this scenario
+        isLiveActive = false;
+        if (liveTimer) {
+          clearTimeout(liveTimer);
+          liveTimer = null;
+        }
+
         // Retrieve video handle before closing page
         const video = page.video();
         await page.close().catch(() => {});
