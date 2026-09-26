@@ -1,0 +1,19 @@
+{
+  "scenarioId": "semantic-takeoff-action",
+  "title": "Semantic identification of take-off action",
+  "description": "Locates and actuates the drone take-off control on the operator dashboard purely by natural-language description without CSS or data-testid selectors.",
+  "approach": "Use Midscene aiLocate() with semantic description to obtain element coordinates, dispatch mouse click to center, and verify flight state transition via Control API.",
+  "capabilityId": "cockpit.semantic.takeoff-action",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-f4d73-fication-of-take-off-action-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-f4d73-fication-of-take-off-action-desktop\\attachments\\screenshot-before-c30c0cb4ef6f987db1ce3c89fbcbfaaf13b5f3b0.png"
+    ]
+  },
+  "reasoning": "[SEMANTIC ELEMENT IDENTIFICATION: TAKE-OFF ACTION]\nTarget Element: Operator flight initiation control for drone-1.\nNatural-Language Description: \"the button or control that starts the flight or initiates takeoff for drone-1\"\nLocating Mechanism: Midscene agent.aiLocate() (visual-semantic coordinate inference).\nIdentified Geometry: center=[696, 380], rect={left:658, top:363, width:78, height:34}.\nActuation: Dispatched mouse click directly to identified coordinates (696, 380).\nFollow-up Verification: Drone-1 status transitioned to \"in_flight\" (success: true).\nHardcoded Selector Audit: Stable selector EXISTS in DOM: data-testid=\"dash-takeoff-drone-1\" (data-cmd=\"takeoff\").\nAssessment: Semantic location successfully resolved the take-off control without relying on the data-testid that happened to be present in the DOM, and real physical command execution was verified.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:24:08.068Z"
+}

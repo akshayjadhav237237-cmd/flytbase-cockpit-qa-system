@@ -1,0 +1,21 @@
+{
+  "scenarioId": "api-data-state-survives-refresh",
+  "title": "State survives a page refresh",
+  "description": "Confirms that in_flight state persists accurately across page refresh and does not revert to stale/docked state.",
+  "approach": "Takeoff drone-1 via Control API, verify UI in_flight status, reload page, verify UI still reflects in_flight state, then land drone.",
+  "capabilityId": "cockpit.api-data.state-refresh-persistence",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-ac273-ate-survives-a-page-refresh-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-ac273-ate-survives-a-page-refresh-desktop\\attachments\\screenshot-before-refresh-a2ef75d30901ddf15d4c2206564d8b02fe99ee26.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-ac273-ate-survives-a-page-refresh-desktop\\attachments\\screenshot-after-refresh-3d997f8c2278e26fdc79c4965d7e09cec8bbb438.png"
+    ],
+    "tracePath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-ac273-ate-survives-a-page-refresh-desktop\\trace.zip"
+  },
+  "reasoning": "[STATE REFRESH PERSISTENCE AUDIT]\nInitial State Setup: Drone-1 commanded to takeoff; verified via Control API: status=\"in_flight\".\nPre-refresh Cockpit UI: telemetry status=\"in_flight\", row pills=\"dock open in_flight\" (in_flight confirmed: true).\nPage Action: Triggered full browser reload (page.reload()).\nPost-refresh Cockpit UI: telemetry status=\"in_flight\", row pills=\"dock open in_flight\".\nPersistence Assessment: Drone flight state survived browser reload (true) and did not revert to default docked state (revertedDocked=false).\nCleanup: Issued land command to drone-1 via POST /control/command.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:29:56.305Z"
+}

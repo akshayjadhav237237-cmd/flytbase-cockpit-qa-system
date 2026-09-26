@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.mute-alerts-toggle-default",
+  "title": "Verify Mute Alerts toggle is present and disabled by default",
+  "description": "Autonomous agent goal: Open the cockpit application, locate the Mute Alerts control in the cockpit interface, and check its initial state.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.mute-alerts-toggle-default",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-toggle-default\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-toggle-default\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-toggle-default\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Verify Mute Alerts toggle is present and disabled by default]\nGoal ID: feature-agent.mute-alerts-toggle-default\nNatural-Language Instruction: \"Open the cockpit application, locate the Mute Alerts control in the cockpit interface, and check its initial state.\"\nAgent Execution Outcome: The cockpit application is open, the Mute Alerts control is located in the Drone Telemetry panel for Drone 1, and its initial state is \"Mute alerts: Off\".\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-15-02-8a06ea9a.html\nVerification Query: \"The Mute Alerts toggle should be visible and in the disabled (off) state by default.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T10:45:11.600Z"
+}

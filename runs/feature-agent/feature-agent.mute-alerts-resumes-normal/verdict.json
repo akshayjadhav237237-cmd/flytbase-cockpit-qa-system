@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.mute-alerts-resumes-normal",
+  "title": "Verify disabling Mute Alerts resumes normal alert display",
+  "description": "Autonomous agent goal: Disable the Mute Alerts toggle after having it enabled, then trigger a new alert. Check both the screen for banners and the alerts panel.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.mute-alerts-resumes-normal",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-resumes-normal\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-resumes-normal\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-resumes-normal\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Verify disabling Mute Alerts resumes normal alert display]\nGoal ID: feature-agent.mute-alerts-resumes-normal\nNatural-Language Instruction: \"Disable the Mute Alerts toggle after having it enabled, then trigger a new alert. Check both the screen for banners and the alerts panel.\"\nAgent Execution Outcome: Disabled Mute Alerts after enabling it, triggered a new alert, and checked the screen and alerts panel.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-18-02-6f1bca69.html\nVerification Query: \"Incoming alert banners and panel entries are once again displayed normally after disabling the Mute Alerts toggle.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T10:49:57.850Z"
+}

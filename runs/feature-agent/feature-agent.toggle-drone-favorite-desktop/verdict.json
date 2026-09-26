@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.toggle-drone-favorite-desktop",
+  "title": "Toggle drone favorite status in devices panel on desktop",
+  "description": "Autonomous agent goal: Open the application at http://localhost:4010. Locate the devices panel, find any drone item in the list, and click the star or favorite button next to it. Observe the state change of the button.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.toggle-drone-favorite-desktop",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-drone-favorite-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-drone-favorite-desktop\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-drone-favorite-desktop\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Toggle drone favorite status in devices panel on desktop]\nGoal ID: feature-agent.toggle-drone-favorite-desktop\nNatural-Language Instruction: \"Open the application at http://localhost:4010. Locate the devices panel, find any drone item in the list, and click the star or favorite button next to it. Observe the state change of the button.\"\nAgent Execution Outcome: The application was opened, Drone 1 was located in the devices panel, and clicking the star button successfully changed its state to favorited/filled.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-06-05-51754987.html\nVerification Query: \"The star button for the selected drone successfully changes its appearance to indicate a favorited state (such as filled or highlighted), and remains in that state.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T10:36:17.836Z"
+}

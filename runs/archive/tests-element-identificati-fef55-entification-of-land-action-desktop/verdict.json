@@ -1,0 +1,19 @@
+{
+  "scenarioId": "semantic-land-action",
+  "title": "Semantic identification of land action",
+  "description": "Locates and actuates the drone landing control on the operator dashboard purely by natural-language description without CSS or data-testid selectors.",
+  "approach": "Bring drone-1 to flight, use Midscene aiLocate() to resolve landing control coordinates, dispatch mouse click to center, and confirm landing state transition via Control API.",
+  "capabilityId": "cockpit.semantic.land-action",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-fef55-entification-of-land-action-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-fef55-entification-of-land-action-desktop\\attachments\\screenshot-before-1103c43de2f1155dccb2093fa11a2e1d31fbc4b1.png"
+    ]
+  },
+  "reasoning": "[SEMANTIC ELEMENT IDENTIFICATION: LAND ACTION]\nTarget Element: Operator landing command control for airborne drone-1.\nNatural-Language Description: \"the button or control that commands a flying drone to land or return to ground for drone-1\"\nLocating Mechanism: Midscene agent.aiLocate() (visual-semantic coordinate inference).\nIdentified Geometry: center=[770, 379], rect={left:741, top:363, width:59, height:32}.\nActuation: Dispatched mouse click directly to identified coordinates (770, 379).\nFollow-up Verification: Drone-1 status transitioned to \"landing\" (success: true).\nHardcoded Selector Audit: Stable selector EXISTS in DOM: data-testid=\"dash-land-drone-1\" (data-cmd=\"land\").\nAssessment: Semantic location successfully identified and activated the Land control while drone was airborne, without relying on data-testid=\"dash-land-drone-1\", successfully triggering landing sequence.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:24:16.503Z"
+}

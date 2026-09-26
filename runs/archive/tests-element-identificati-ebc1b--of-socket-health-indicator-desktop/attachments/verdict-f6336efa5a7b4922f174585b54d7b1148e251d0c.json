@@ -1,0 +1,19 @@
+{
+  "scenarioId": "semantic-socket-health-indicator",
+  "title": "Semantic identification of socket health indicator",
+  "description": "Locates and reads the global WebSocket backend connection health badge using purely natural-language description without CSS or data-testid selectors.",
+  "approach": "Use Midscene aiLocate() to resolve badge geometry, and aiString() to extract its active health message.",
+  "capabilityId": "cockpit.semantic.socket-health-indicator",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-ebc1b--of-socket-health-indicator-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-ebc1b--of-socket-health-indicator-desktop\\attachments\\screenshot-socket-be35e187ddcd6410ea8fe8508f210705b4b025dc.png"
+    ]
+  },
+  "reasoning": "[SEMANTIC ELEMENT IDENTIFICATION: SOCKET HEALTH INDICATOR]\nTarget Element: Global WebSocket backend connection indicator badge in dashboard header.\nNatural-Language Description: \"whatever on screen tells the user if the app is currently connected to the backend\"\nLocating Mechanism: Midscene agent.aiLocate() (visual-semantic coordinate inference).\nIdentified Geometry: center=[1105, 22], rect={left:1047, top:14, width:116, height:17}.\nExtracted State: \"socket connected\" (contains \"connected\": true).\nHardcoded Selector Audit: Stable selector EXISTS in DOM: data-testid=\"socket-status\" (class=\"pill pill-connected\").\nAssessment: Semantic location successfully resolved the header connectivity pill without relying on data-testid=\"socket-status\", and verified the healthy connection text.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:25:33.852Z"
+}

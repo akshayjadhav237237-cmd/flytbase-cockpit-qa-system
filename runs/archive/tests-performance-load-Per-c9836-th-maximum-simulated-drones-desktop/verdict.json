@@ -1,0 +1,19 @@
+{
+  "scenarioId": "perf-max-drones-responsiveness",
+  "title": "UI stays responsive with maximum simulated drones",
+  "description": "Verifies that unrelated UI controls (map 2D/3D toggle, device list selection) remain responsive within 3 seconds under maximum fleet load of 10 simulated drones.",
+  "approach": "Add 6 drones via POST /control/drones (10 total), navigate to Cockpit, measure response latency of device row selection with 3s deterministic timeout assertion, then cleanly delete created drones.",
+  "capabilityId": "cockpit.performance.max-drones-responsiveness",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-performance-load-Per-c9836-th-maximum-simulated-drones-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-performance-load-Per-c9836-th-maximum-simulated-drones-desktop\\attachments\\screenshot-max-drones-ad67ecc432bd88d9c927f66f2eb2376bbe80ba6d.png"
+    ]
+  },
+  "reasoning": "[PERFORMANCE UNDER LOAD: MAXIMUM SIMULATED DRONES]\nInitial fleet: 4 drones. Scaled fleet: added 6 drones (drone-79, drone-80, drone-81, drone-82, drone-83, drone-84), reaching maximum capacity of 10 total drones.\nUnrelated Control (Device List Selection): Click to selected class on drone-2 transitioned in 111 ms (deterministic <= 3000ms threshold: PASS).\nFleet Cleanup: All 6 added drones deleted via DELETE /control/drones/:id. Confirmed fleet returned to baseline 4 drones: CONFIRMED.\nEvaluation: UI interactions and state reconciliation remained fully responsive within 3 seconds under full 10-drone telemetry and map rendering load.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:35:24.689Z"
+}

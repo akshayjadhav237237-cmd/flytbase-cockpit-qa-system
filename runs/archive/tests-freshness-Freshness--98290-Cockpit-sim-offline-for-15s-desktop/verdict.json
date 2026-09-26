@@ -1,0 +1,19 @@
+{
+  "scenarioId": "freshness-sim-offline-15s",
+  "title": "sim-offline for 15s simulator disconnect honesty",
+  "description": "Checks whether Cockpit UI alerts operators when simulator goes offline versus silently showing last-known telemetry as current.",
+  "approach": "POST /control/fault with sim-offline, verify GET /health returns simulator: disconnected, wait 6s, and inspect UI and Midscene aiBoolean.",
+  "capabilityId": "cockpit.freshness.sim-offline",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--98290-Cockpit-sim-offline-for-15s-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--98290-Cockpit-sim-offline-for-15s-desktop\\attachments\\baseline-screenshot-6d6b738866bb669570d64790e1bd1b3162a6d89f.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--98290-Cockpit-sim-offline-for-15s-desktop\\attachments\\fault-screenshot-cc41dc4f8b14ef3950bad5d2917723b12a44b6e4.png"
+    ]
+  },
+  "reasoning": "[FAULT INJECTION: sim-offline (15s simulator disconnection)]\nGround Truth (Control API /health): simulator=\"disconnected\" (objectively offline).\nBaseline DOM: socket-status=\"socket connected\", battery=\"35 %\", alt=\"0.0 m\".\nFault-Active DOM: socket-status=\"socket connected\", battery=\"35 %\", alt=\"0.0 m\".\nMidscene aiBoolean evaluation: indicatesDegraded=false.\nAssessment: GET /health objectively confirms simulator is disconnected. However, because the WebSocket between browser and backend remains connected, the UI still displays a green \"socket connected\" badge and silently retains last-known telemetry values as if they are fresh. The cockpit fails to warn operators that the data source is offline.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T07:42:45.041Z"
+}

@@ -1,0 +1,19 @@
+{
+  "scenarioId": "responsive-telemetry-readability",
+  "title": "Telemetry panel readability at phone width",
+  "description": "Confirms telemetry numbers (battery, altitude, speed, wind, distance) are not clipped, truncated, or overlapping at 390px mobile width.",
+  "approach": "Scroll telemetry panel into view, inspect cell bounding boxes and scrollWidth vs clientWidth, and evaluate visual clarity with Midscene aiBoolean.",
+  "capabilityId": "cockpit.mobile.telemetry-readability",
+  "viewport": "mobile",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-4231d--readability-at-phone-width-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-4231d--readability-at-phone-width-mobile\\attachments\\telemetry-screenshot-0396ca60d022d5c1079786f6e7654e564caef2cd.png"
+    ]
+  },
+  "reasoning": "[RESPONSIVE EVALUATION: Telemetry panel readability at 390x844]\nTelemetry metrics inspected: 9 cells (Battery: \"35 %\", Altitude RLT: \"0.0 m\", Altitude AGL: \"0.0 m\", Altitude ASL: \"560.0 m\", H-Speed: \"0.0 m/s\", V-Speed: \"0.0 m/s\", Heading: \"47 °\", Wind: \"E 6.8 m/s\", Dist. from home: \"0 m\").\nGrid bounding box horizontal clipping (>390px): false.\nInternal text overflow (scrollWidth > clientWidth): false.\nMidscene aiBoolean (truncated, cut off, overlapping, or unreadable): false.\nAssessment: Telemetry metrics (2-column layout) are formatted, legible, and contained within 390px viewport width without text overflow.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:09:15.289Z"
+}

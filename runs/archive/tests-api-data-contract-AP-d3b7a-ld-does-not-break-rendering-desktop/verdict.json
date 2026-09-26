@@ -1,0 +1,21 @@
+{
+  "scenarioId": "api-data-missing-telemetry-resilience",
+  "title": "Unexpected or missing telemetry field does not break rendering",
+  "description": "Verifies that frontend degrades gracefully under total telemetry data gap (socket-drop 100) without crashing, blank screens, NaN display, or fatal JS error overlays.",
+  "approach": "Inject 100% socket-drop fault for 10s, monitor pageerror and console listeners, inspect DOM for NaN/overlays, and evaluate visual health via Midscene aiBoolean.",
+  "capabilityId": "cockpit.api-data.fault-resilience-rendering",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "fault-response",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-d3b7a-ld-does-not-break-rendering-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-d3b7a-ld-does-not-break-rendering-desktop\\attachments\\screenshot-baseline-ab51dea16a545257274be3e1f9a455b5dc43c549.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-d3b7a-ld-does-not-break-rendering-desktop\\attachments\\screenshot-fault-e7ad2093d4998cb1458193221969b86d1d8f650a.png"
+    ],
+    "tracePath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-api-data-contract-AP-d3b7a-ld-does-not-break-rendering-desktop\\trace.zip"
+  },
+  "reasoning": "[TELEMETRY FAULT RENDERING RESILIENCE AUDIT]\nCurrent Control API payload keys: [running, speed, tick, drones].\nDrone-1 baseline attributes: {\"id\":\"drone-1\",\"status\":\"standby\",\"latitude\":18.5613,\"longitude\":73.69439999999997,\"height\":0,\"heading\":47,\"battery\":100}.\nFault Injected: socket-drop (value=100, seconds=10) to simulate complete telemetry packet drop. Active in backend: true.\nDeterministic Exception Audit: uncaughtPageErrors=0, fatalConsoleErrors=0.\nDOM Telemetry Audit: battery=\"100 %\", alt=\"0.0 m\", speed=\"0.0 m/s\", socketBadge=\"socket connected\".\nIntegrity Verification: bodyVisible=true, domHasNaN=false, domHasUndefined=false, hasErrorOverlay=false.\nMidscene AI Visual Judgment (\"crashed, blank, showing NaN, or displaying unhandled error overlay\"): appearsCrashedOrBlank=false.\nAssessment: Frontend gracefully sustained 100% telemetry data drop without unhandled JS exceptions, blank screen rendering, NaN display, or error overlays.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:30:10.054Z"
+}

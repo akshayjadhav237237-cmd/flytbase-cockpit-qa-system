@@ -1,0 +1,17 @@
+{
+  "scenarioId": "sec-unauth-fault-injection",
+  "title": "Unauthenticated fault injection",
+  "description": "Verifies whether system fault injection (/control/fault) can be performed without authentication.",
+  "approach": "Direct HTTP POST to /control/fault with sim-offline payload without auth headers or cookies.",
+  "capabilityId": "security.control.unauthenticated-fault-injection",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 1,
+  "checkType": "security",
+  "evidence": {
+    "videoPath": "",
+    "screenshotPaths": []
+  },
+  "reasoning": "[SECURITY AUDIT FINDING: VULNERABILITY CONFIRMED]\nUnauthenticated fault injection succeeded with HTTP 200 without any authentication or credentials.\nRequest: POST http://localhost:4000/api/control/fault with payload {\"kind\":\"sim-offline\",\"seconds\":5} (no auth headers, no cookies).\nResponse: HTTP 200 {\"faults\":[{\"kind\":\"sim-offline\",\"until\":1790408683859}]}.\nCleanup Request: DELETE http://localhost:4000/api/control/fault.\nCleanup Response: HTTP 200 {\"faults\":[]}.\nReal-world impact: Any entity on the network can inject simulated hardware dropouts, sensor failures, or network freezes during live operations. This can blind operators, trigger unneeded emergency procedures, or mask actual hardware anomalies with zero audit attribution.",
+  "timestamp": "2026-09-26T07:44:38.872Z"
+}

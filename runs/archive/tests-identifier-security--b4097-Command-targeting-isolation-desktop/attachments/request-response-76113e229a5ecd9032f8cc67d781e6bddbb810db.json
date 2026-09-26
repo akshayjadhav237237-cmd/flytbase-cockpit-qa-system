@@ -1,0 +1,65 @@
+{
+  "commandRequest": {
+    "method": "POST",
+    "url": "http://localhost:4000/api/control/command",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "data": {
+      "deviceId": "drone-999",
+      "type": "takeoff"
+    }
+  },
+  "commandResponse": {
+    "status": 200,
+    "body": {
+      "ok": false,
+      "error": "unknown device"
+    }
+  },
+  "baselineDrones": {
+    "drone-1": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-2": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-3": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-4": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-5": {
+      "status": "standby",
+      "height": 0
+    }
+  },
+  "postCommandDrones": {
+    "drone-1": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-2": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-3": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-4": {
+      "status": "standby",
+      "height": 0
+    },
+    "drone-5": {
+      "status": "standby",
+      "height": 0
+    }
+  },
+  "affectedDrones": []
+}

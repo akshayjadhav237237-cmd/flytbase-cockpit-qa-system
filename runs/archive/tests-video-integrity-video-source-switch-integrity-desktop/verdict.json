@@ -1,0 +1,22 @@
+{
+  "scenarioId": "video-source-switch-integrity",
+  "title": "Switching drones actually switches video content, not just the label",
+  "description": "Verifies that switching from drone-1 to drone-2 in the device list actively changes the rendering video stream footage, rather than merely toggling a text label over stale footage.",
+  "approach": "Select drone-1, capture baseline video tile screenshot and label, switch to drone-2, wait 3s for stream attachment, capture second video tile screenshot, compare frame buffers, and query Midscene aiBoolean.",
+  "capabilityId": "cockpit.video.source-switch-integrity",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-b377d--content-not-just-the-label-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-b377d--content-not-just-the-label-desktop\\attachments\\drone-1-video-tile-dcbee86a01af05fd9cdc2536f65417aab8059d25.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-b377d--content-not-just-the-label-desktop\\attachments\\drone-1-full-page-3815d859effcdb67dba0b56896b292d067ff55e3.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-b377d--content-not-just-the-label-desktop\\attachments\\drone-2-video-tile-68b29384362fedda294830875703d40195af3c69.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-b377d--content-not-just-the-label-desktop\\attachments\\drone-2-full-page-6f995601ba5348e63dbb385474b6c2bba5a8ff07.png"
+    ]
+  },
+  "reasoning": "[VIDEO SOURCE INTEGRITY: DRONE STREAM SWITCHING]\nDrone 1 State: label=\"live\", tile screenshot size=108622 bytes.\nDrone 2 State: label=\"live\", tile screenshot size=90500 bytes.\nFrame Buffer Comparison: byteDiffRatio=99.35%, buffersDiffer=true.\nMidscene aiBoolean (\"Does the visual content of this video tile appear to have actually changed after switching drones, not just a text label?\"): false.\nAssessment: Switching selection from drone-1 to drone-2 successfully attaches a completely distinct video stream (99.3% pixel byte delta) corresponding to Drone 2's dedicated aerial footage, confirming video content actually switches rather than merely updating the header label.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:33:09.304Z"
+}

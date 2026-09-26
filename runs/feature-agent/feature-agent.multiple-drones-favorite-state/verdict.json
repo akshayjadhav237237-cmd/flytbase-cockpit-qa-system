@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.multiple-drones-favorite-state",
+  "title": "Favorite multiple independent drones",
+  "description": "Autonomous agent goal: Open the application at http://localhost:4010. In the devices panel, locate at least two different drone items and click the favorite star button on each of them independently.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.multiple-drones-favorite-state",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.multiple-drones-favorite-state\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.multiple-drones-favorite-state\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.multiple-drones-favorite-state\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Favorite multiple independent drones]\nGoal ID: feature-agent.multiple-drones-favorite-state\nNatural-Language Instruction: \"Open the application at http://localhost:4010. In the devices panel, locate at least two different drone items and click the favorite star button on each of them independently.\"\nAgent Execution Outcome: Clicked the favorite star button on Drone 1 and Drone 2 independently.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-06-57-f7af9bde.html\nVerification Query: \"Both drones show independent favorited states without affecting each other or causing unintended toggles elsewhere in the list.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T10:37:15.227Z"
+}

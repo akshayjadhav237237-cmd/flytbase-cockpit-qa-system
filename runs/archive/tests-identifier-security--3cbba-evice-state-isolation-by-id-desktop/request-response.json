@@ -1,0 +1,34 @@
+{
+  "globalStateRequest": {
+    "method": "GET",
+    "url": "http://localhost:4000/api/control/state"
+  },
+  "globalStateResponse": {
+    "status": 200,
+    "droneCount": 5,
+    "identifiedDrones": [
+      "drone-1",
+      "drone-2"
+    ]
+  },
+  "candidatePerDeviceQueryParam": {
+    "request": {
+      "method": "GET",
+      "url": "http://localhost:4000/api/control/state?deviceId=drone-1"
+    },
+    "responseStatus": 200,
+    "returnsAllDrones": true
+  },
+  "candidatePerDevicePathParam": {
+    "request": {
+      "method": "GET",
+      "url": "http://localhost:4000/api/control/state/drone-1"
+    },
+    "responseStatus": 404,
+    "responseText": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot GET /api/control/state/drone-1</pre>\n</body>\n</html>\n"
+  },
+  "devicesOrgContext": {
+    "orgId": "flytbase",
+    "totalDevices": 10
+  }
+}

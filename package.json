@@ -1,0 +1,26 @@
+{
+  "name": "qa-system",
+  "version": "1.0.0",
+  "description": "Automated UI testing system foundation for FlytBase Cockpit",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "playwright test",
+    "report": "tsx src/report/generate.ts",
+    "dashboard": "tsx src/report/dashboard-generator.ts",
+    "feature-test": "tsx src/feature-test-agent/run.ts",
+    "control-panel": "tsx src/server/index.ts"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.49.1",
+    "dotenv": "^16.4.7",
+    "express": "^5.2.1",
+    "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "@midscene/web": "^1.13.3",
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.17.10",
+    "playwright": "^1.63.0",
+    "tsx": "^4.23.15"
+  }
+}

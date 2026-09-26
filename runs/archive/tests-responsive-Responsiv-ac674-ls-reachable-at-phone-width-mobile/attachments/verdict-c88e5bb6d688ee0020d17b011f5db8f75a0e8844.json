@@ -1,0 +1,20 @@
+{
+  "scenarioId": "responsive-takeoff-land-controls",
+  "title": "Take-off/land controls reachable at phone width",
+  "description": "Verifies whether take-off/land actions and control dashboard links are visible and accessible without requiring horizontal scroll at 390px width.",
+  "approach": "Load cockpit at 390x844, select drone, evaluate main page and control dashboard with boundingBox checks and Midscene aiBoolean neutral query.",
+  "capabilityId": "cockpit.mobile.flight-controls-reachability",
+  "viewport": "mobile",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-ac674-ls-reachable-at-phone-width-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-ac674-ls-reachable-at-phone-width-mobile\\attachments\\cockpit-screenshot-0d909b4201a8358391b583c3ebb7b3af87c7f038.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-ac674-ls-reachable-at-phone-width-mobile\\attachments\\dashboard-screenshot-10579b1aca985f9ab5d90c258d3b782d543548f2.png"
+    ]
+  },
+  "reasoning": "[RESPONSIVE EVALUATION: Take-off/land controls at 390x844]\nCockpit Main UI (http://localhost:4010):\n  - Document scrollWidth: 390px (clientWidth: 390px). Horizontal overflow: false.\n  - Dashboard link visible: true, boundingBox={\"x\":283.5625,\"y\":15.09375,\"width\":90.4375,\"height\":16.796875}.\n  - Midscene evaluation (cut off / pushed outside / horizontal scroll on main): true.\nControl Panel Dashboard (http://localhost:4000/dashboard):\n  - Document scrollWidth: 534px (clientWidth: 390px). Horizontal overflow: true.\n  - Takeoff button visible: true, boundingBox: {\"x\":435.21875,\"y\":534.515625,\"width\":73.96875,\"height\":33.59375}.\n  - Land button visible: true, boundingBox: {\"x\":435.21875,\"y\":576.109375,\"width\":55.890625,\"height\":33.59375}.\n  - Takeoff button pushed outside 390px viewport: true.\n  - Midscene evaluation (cut off / pushed outside / horizontal scroll on dashboard): true.\nFinding: Flight action controls (Take off / Land) on the Control Dashboard overflow the 390px viewport (scrollWidth=534px) and require horizontal scrolling to reach/actuate.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T08:08:35.325Z"
+}

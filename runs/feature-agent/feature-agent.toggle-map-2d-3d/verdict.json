@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.toggle-map-2d-3d",
+  "title": "Toggle map between 2D and 3D modes",
+  "description": "Autonomous agent goal: Open the cockpit main page at http://localhost:4010, locate the map panel, and find the 2D/3D toggle button. Click the toggle button to switch from the default mode to the alternate mode, then click it again to switch back.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.toggle-map-2d-3d",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-map-2d-3d\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-map-2d-3d\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-map-2d-3d\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Toggle map between 2D and 3D modes]\nGoal ID: feature-agent.toggle-map-2d-3d\nNatural-Language Instruction: \"Open the cockpit main page at http://localhost:4010, locate the map panel, and find the 2D/3D toggle button. Click the toggle button to switch from the default mode to the alternate mode, then click it again to switch back.\"\nAgent Execution Outcome: Successfully switched the 2D/3D mode and switched back.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_14-55-48-87207ecd.html\nVerification Query: \"The map rendering mode changes appropriately upon clicking the toggle (e.g., visual perspective changes to 3D and back to flat 2D) and the UI indicates the active mode correctly.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:26:12.304Z"
+}

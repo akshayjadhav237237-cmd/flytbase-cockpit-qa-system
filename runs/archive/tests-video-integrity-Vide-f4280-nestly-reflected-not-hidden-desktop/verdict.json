@@ -1,0 +1,22 @@
+{
+  "scenarioId": "video-degrade-fault-honesty",
+  "title": "video-degrade fault is honestly reflected, not hidden",
+  "description": "Checks whether Cockpit honestly reflects video degradation (re-encoded at 320x180, 80 kbit/s) via quality indicators or badges rather than hiding it under a generic live label.",
+  "approach": "Inject video-degrade fault on drone-1, confirm active via GET /control/fault, wait for degraded frames, query Midscene aiBoolean on visible degradation, inspect video-state label for quality indicators, clean up fault.",
+  "capabilityId": "cockpit.video.degrade-fault-honesty",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "fault-response",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-f4280-nestly-reflected-not-hidden-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-f4280-nestly-reflected-not-hidden-desktop\\attachments\\baseline-tile-553244e07f3ff022e7bd995babcd2315989d9c4f.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-f4280-nestly-reflected-not-hidden-desktop\\attachments\\baseline-page-571a90e61b21363b57cbda4f0e52a4294ceb9603.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-f4280-nestly-reflected-not-hidden-desktop\\attachments\\fault-active-degraded-tile-7ea2a923fe1b8c36bed5da62ae3686597b386746.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-video-integrity-Vide-f4280-nestly-reflected-not-hidden-desktop\\attachments\\fault-active-degraded-page-8e047d65c11fe007e8fc5d45d0853d728a20249b.png"
+    ]
+  },
+  "reasoning": "[FAULT RESPONSE: VIDEO-DEGRADE HONESTY AUDIT]\nGround Truth (Control API): Active fault={\"kind\":\"video-degrade\",\"deviceId\":\"drone-1\",\"until\":1790415165977}. Stream objectively re-encoded at 320x180, 80 kbit/s.\nBaseline DOM Label: \"live\".\nFault-Active DOM Label: \"live\" (simply \"live\" without quality indicator: true).\nMidscene aiBoolean (\"Does the video in the video tile appear visibly degraded or lower quality?\"): false.\nAssessment: DISHONEST STATE PRESENTATION DETECTED. While the video stream was objectively degraded by backend fault injection to 320x180 at 80 kbit/s, the Cockpit UI continued presenting an unqualified \"live\" badge with zero quality degradation indicator, bitrate warning, or low-resolution warning. Operators are misled into believing full-fidelity video is streaming.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T09:32:38.634Z"
+}

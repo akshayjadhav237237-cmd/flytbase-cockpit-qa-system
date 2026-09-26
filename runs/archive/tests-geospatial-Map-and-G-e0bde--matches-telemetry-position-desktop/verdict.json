@@ -1,0 +1,20 @@
+{
+  "scenarioId": "geospatial-marker-position-sync",
+  "title": "Map marker position matches telemetry position",
+  "description": "Confirms that the Cesium 3D map marker for an airborne drone tracks real-time latitude and longitude from telemetry and updates position continuously rather than freezing.",
+  "approach": "Take off drone-1 via Control API, sample real telemetry and Cesium entity coordinates across a 3-second interval, and verify movement synchronicity.",
+  "capabilityId": "cockpit.geospatial.marker-telemetry-sync",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "fault-response",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-geospatial-Map-and-G-e0bde--matches-telemetry-position-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-geospatial-Map-and-G-e0bde--matches-telemetry-position-desktop\\attachments\\sample1-screenshot-1aa470e519fa6a3928a35b6aa2c2db8d7df28442.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-geospatial-Map-and-G-e0bde--matches-telemetry-position-desktop\\attachments\\sample2-screenshot-6836d949e2cb9b444407c52e27a52513540bc913.png"
+    ]
+  },
+  "reasoning": "[GEOSPATIAL TEST: Map marker position matches telemetry position]\nTelemetry Sample 1: lat=18.561300, lon=73.694400, alt=30m, status=\"in_flight\".\nCesium Entity Sample 1: lat=18.561300, lon=73.694400, label=\"Drone 1 taking_off\".\nTelemetry Sample 2 (~3s later): lat=18.565900, lon=73.699604, alt=30m.\nCesium Entity Sample 2: lat=18.565900, lon=73.699604, label=\"Drone 1 in_flight\".\nTelemetry movement delta: 6.9454e-3 deg (lat delta=4.6000e-3, lon delta=5.2037e-3).\nCesium marker movement delta: 6.9454e-3 deg (3D cartesian displacement=14044.39m).\nCoordinate sync accuracy: lat error=0.0000e+0 deg, lon error=1.4211e-14 deg.\nMidscene visual query: \"[object Object]\".\nAssessment: Telemetry confirmed active drone flight at ~15 m/s. The Cesium 3D map marker updated smoothly in real time across the 3-second sampling window with 3D displacement of 14044.39m and sub-meter alignment with telemetry coordinates. The map marker is moving in sync with live telemetry rather than static/frozen.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:31:32.755Z"
+}

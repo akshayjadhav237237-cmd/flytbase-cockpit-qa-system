@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.toggle-drone-favorite-mobile",
+  "title": "Toggle drone favorite status on mobile viewport",
+  "description": "Autonomous agent goal: Open the application at http://localhost:4010 on a mobile screen size. Open the devices panel if collapsed, locate a drone item, and tap the favorite star button.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.toggle-drone-favorite-mobile",
+  "viewport": "mobile",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-drone-favorite-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-drone-favorite-mobile\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-drone-favorite-mobile\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Toggle drone favorite status on mobile viewport]\nGoal ID: feature-agent.toggle-drone-favorite-mobile\nNatural-Language Instruction: \"Open the application at http://localhost:4010 on a mobile screen size. Open the devices panel if collapsed, locate a drone item, and tap the favorite star button.\"\nAgent Execution Outcome: Successfully opened the application on a mobile screen size, opened the devices panel, located Drone 1, and tapped its favorite star button.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-06-40-df2a3f4b.html\nVerification Query: \"The star button changes to the favorited state correctly on the mobile layout without overlapping or touch-target issues.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T10:36:54.426Z"
+}

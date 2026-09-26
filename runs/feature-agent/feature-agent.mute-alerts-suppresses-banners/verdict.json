@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.mute-alerts-suppresses-banners",
+  "title": "Verify enabling Mute Alerts suppresses incoming alert banners",
+  "description": "Autonomous agent goal: Enable the Mute Alerts toggle in the cockpit. Trigger or wait for an incoming alert event, then observe the screen for alert banners.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.mute-alerts-suppresses-banners",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-suppresses-banners\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-suppresses-banners\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-suppresses-banners\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Verify enabling Mute Alerts suppresses incoming alert banners]\nGoal ID: feature-agent.mute-alerts-suppresses-banners\nNatural-Language Instruction: \"Enable the Mute Alerts toggle in the cockpit. Trigger or wait for an incoming alert event, then observe the screen for alert banners.\"\nAgent Execution Outcome: Mute Alerts toggle is enabled and screen observed for alert banners.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-15-16-0185d88c.html\nVerification Query: \"Incoming alert banners are suppressed and do not appear on the screen when Mute Alerts is enabled.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T10:46:11.605Z"
+}

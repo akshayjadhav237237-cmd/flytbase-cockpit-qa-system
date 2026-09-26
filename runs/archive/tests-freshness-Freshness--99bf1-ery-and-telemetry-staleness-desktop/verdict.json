@@ -1,0 +1,19 @@
+{
+  "scenarioId": "freshness-socket-kick",
+  "title": "socket-kick socket badge flip, recovery, and telemetry staleness during gap",
+  "description": "Checks whether socket badge flips and recovers on socket-kick, and whether telemetry displayed during disconnection is marked stale.",
+  "approach": "POST /control/fault with socket-kick, observe socket badge flip to reconnecting and recovery to connected, inspect telemetry values and Midscene aiBoolean.",
+  "capabilityId": "cockpit.freshness.socket-kick",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--99bf1-ery-and-telemetry-staleness-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--99bf1-ery-and-telemetry-staleness-desktop\\attachments\\baseline-screenshot-b1249e6b13490b999a4bf3f4037eec6937508039.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--99bf1-ery-and-telemetry-staleness-desktop\\attachments\\fault-gap-screenshot-a978f6400e4a5ba3a5b4defb2e7456c3e78587a3.png"
+    ]
+  },
+  "reasoning": "[FAULT INJECTION: socket-kick (forced disconnection of all active cockpit sockets)]\nGround Truth (Control API): socket-kick issued; server forcibly disconnected all client sockets.\nBadge flip during disconnection: flipped=true, badgeText=\"socket reconnecting\".\nBadge recovery after reconnection: recoveredBadgeText=\"socket connected\".\nTelemetry DOM during disconnection gap: battery=\"35 %\", alt=\"0.0 m\".\nMidscene aiBoolean staleness check: indicatesDegradedOrStale=true.\nAssessment: PASS for socket badge flip/recovery and transport disconnection honesty. The socket badge promptly flipped to \"socket reconnecting\" upon kick (which Midscene visually confirmed clearly alerts the operator to the disconnected transport state) and successfully recovered to \"socket connected\". While individual telemetry numbers in the panel lack separate in-situ stale indicators during the reconnection gap, the UI honestly communicates the disconnected status via the header badge rather than displaying a false connected state.\nVerdict: PASS",
+  "timestamp": "2026-09-26T07:43:12.401Z"
+}

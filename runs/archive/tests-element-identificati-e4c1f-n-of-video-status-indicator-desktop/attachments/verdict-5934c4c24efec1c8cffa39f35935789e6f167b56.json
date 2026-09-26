@@ -1,0 +1,19 @@
+{
+  "scenarioId": "semantic-video-status-indicator",
+  "title": "Semantic identification of video status indicator",
+  "description": "Locates and reads the video stream live/connection status indicator badge using purely natural-language description without CSS or data-testid selectors.",
+  "approach": "Use Midscene aiLocate() to find indicator coordinates, and aiString() to extract its active state value.",
+  "capabilityId": "cockpit.semantic.video-status-indicator",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-e4c1f-n-of-video-status-indicator-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-e4c1f-n-of-video-status-indicator-desktop\\attachments\\screenshot-video-7b1b5f1eb068bd399a1a3a9741a663619c284cbf.png"
+    ]
+  },
+  "reasoning": "[SEMANTIC ELEMENT IDENTIFICATION: VIDEO STATUS INDICATOR]\nTarget Element: FPV video feed live/reconnecting/off status pill.\nNatural-Language Description: \"whatever on screen tells the user if the video feed is currently live\"\nLocating Mechanism: Midscene agent.aiLocate() (visual-semantic coordinate inference).\nIdentified Geometry: center=[615, 590], rect={left:600, top:580, width:31, height:20}.\nExtracted State: \"live\" (valid state enum match: true).\nHardcoded Selector Audit: Stable selector EXISTS in DOM: data-testid=\"video-state\" (class=\"video-state\").\nAssessment: Semantic location pinpointed the video playback status pill without using data-testid=\"video-state\", and semantically extracted the active feed status.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:25:07.808Z"
+}

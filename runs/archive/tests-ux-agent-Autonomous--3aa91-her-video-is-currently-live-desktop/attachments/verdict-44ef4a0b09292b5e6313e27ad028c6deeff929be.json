@@ -1,0 +1,19 @@
+{
+  "scenarioId": "ux-agent.check-video-live",
+  "title": "Autonomous agent determines whether video is currently live",
+  "description": "Autonomous agent goal: Look at the video feed area and determine whether it is currently showing a live stream.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "ux-agent.check-video-live",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-ux-agent-Autonomous--3aa91-her-video-is-currently-live-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-ux-agent-Autonomous--3aa91-her-video-is-currently-live-desktop\\attachments\\screenshot-before-e5145ef7e4fca861420a0f265473e7089c66f5a7.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Autonomous agent determines whether video is currently live]\nGoal ID: ux-agent.check-video-live\nNatural-Language Instruction: \"Look at the video feed area and determine whether it is currently showing a live stream.\"\nAgent Execution Outcome: Yes, the video feed area is currently showing a live stream (indicated by the \"live\" badge on the FPV - Drone 1 feed).\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_14-18-57-6c3f408f.html\nVerification Query: \"Did the agent correctly report the true current state of the video feed (live or not), matching what a human would see?\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:49:08.083Z"
+}

@@ -1,0 +1,19 @@
+{
+  "scenarioId": "freshness-video-freeze-10s",
+  "title": "video-freeze on drone-1 for 10s video state transition",
+  "description": "Checks whether the video tile label changes from live to reconnecting during a 10s video freeze fault.",
+  "approach": "POST /control/fault with video-freeze, wait for WHEP stall detection, check if video-state changes to reconnecting, query Midscene aiBoolean.",
+  "capabilityId": "cockpit.freshness.video-freeze",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--5dc62-freeze-on-one-drone-for-10s-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--5dc62-freeze-on-one-drone-for-10s-desktop\\attachments\\baseline-screenshot-e83908bcb3d78cbfb6e499b3ba16ba9493480698.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--5dc62-freeze-on-one-drone-for-10s-desktop\\attachments\\fault-screenshot-31933030a6cfb055c26326f73eb40761909f2af5.png"
+    ]
+  },
+  "reasoning": "[FAULT INJECTION: video-freeze (10s on drone-1)]\nGround Truth (Control API): active fault={\"kind\":\"video-freeze\",\"deviceId\":\"drone-1\",\"until\":1790408583581}. WHEP media path was removed.\nBaseline DOM: video-state=\"live\".\nFault-Active DOM: video-state=\"reconnecting\".\nMidscene aiBoolean evaluation: indicatesDegraded=true.\nDocumented expectation: Per README, the video tile should transition from 'live' to 'reconnecting' upon frame stall / stream drop.\nAssessment: Video tile honestly transitioned from 'live' to 'reconnecting' upon stream stall, accurately reflecting the disrupted state to the operator.\nVerdict: PASS",
+  "timestamp": "2026-09-26T07:43:01.363Z"
+}

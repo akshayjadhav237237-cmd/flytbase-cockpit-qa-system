@@ -1,0 +1,19 @@
+{
+  "scenarioId": "ux-agent.reach-flight-control-mobile",
+  "title": "Autonomous agent attempts to reach the flight control at mobile width",
+  "description": "Autonomous agent goal: At this screen size, find and use the control that starts or stops a drone's flight.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "ux-agent.reach-flight-control-mobile",
+  "viewport": "mobile",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-ux-agent-Autonomous--0d09f-each-flight-control-mobile--mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-ux-agent-Autonomous--0d09f-each-flight-control-mobile--mobile\\attachments\\screenshot-before-a80bf3f04e6a2bf8650300437f545761fe29bd32.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Autonomous agent attempts to reach the flight control at mobile width]\nGoal ID: ux-agent.reach-flight-control-mobile\nNatural-Language Instruction: \"At this screen size, find and use the control that starts or stops a drone's flight.\"\nAgent Execution Outcome: Successfully found and used the control to start or stop the drone's flight.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_14-30-40-efaad702.html\nVerification Query: \"Was the agent able to actually locate and interact with the control, or did it fail/get stuck because the control was unreachable at this viewport?\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:01:17.225Z"
+}

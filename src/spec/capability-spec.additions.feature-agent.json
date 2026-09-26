@@ -1,0 +1,66 @@
+[
+  {
+    "id": "feature-agent.toggle-drone-favorite-desktop",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Toggle drone favorite status in devices panel on desktop: The star button for the selected drone successfully changes its appearance to indicate a favorited state (such as filled or highlighted), and remains in that state.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.unfavorite-drone-desktop",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Remove drone from favorites by clicking star again on desktop: The star button returns to its unfavorited appearance (such as outlined or unhighlighted), confirming the toggle functionality works in both directions.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.toggle-drone-favorite-mobile",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Toggle drone favorite status on mobile viewport: The star button changes to the favorited state correctly on the mobile layout without overlapping or touch-target issues.",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.multiple-drones-favorite-state",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Favorite multiple independent drones: Both drones show independent favorited states without affecting each other or causing unintended toggles elsewhere in the list.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.mute-alerts-toggle-default",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Verify Mute Alerts toggle is present and disabled by default: The Mute Alerts toggle should be visible and in the disabled (off) state by default.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.mute-alerts-suppresses-banners",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Verify enabling Mute Alerts suppresses incoming alert banners: Incoming alert banners are suppressed and do not appear on the screen when Mute Alerts is enabled.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.mute-alerts-suppresses-panel",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Verify muted alerts do not appear in the alerts panel: The alerts panel remains clear of any alerts that arrived while the Mute Alerts toggle was active.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.mute-alerts-resumes-normal",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Verify disabling Mute Alerts resumes normal alert display: Incoming alert banners and panel entries are once again displayed normally after disabling the Mute Alerts toggle.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  }
+]

@@ -1,0 +1,442 @@
+[
+  {
+    "id": "cockpit.header.socket-badge",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Header displays socket connection badge with text 'socket connected' and green status indicator when websocket connection to backend is established.",
+    "viewport": "both",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.devices.device-list-rendered",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Device list displays rows for all connected drones and associated docks with their names, dock associations, and operational status pills.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.devices.selection-and-pan",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Clicking a drone row in the device list marks the row as selected, highlights the corresponding map entity, and triggers camera pan to the drone location.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.map.drone-positions",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Cesium map canvas renders 3D drone models and dock billboard icons accurately at their reported GPS coordinates with altitude labels.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.map.view-toggle-mode",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Map view controls switch camera projection smoothly between 2D top-down and 3D oblique perspective views.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.telemetry.battery-display",
+    "area": "Telemetry & Monitoring",
+    "screen": "cockpit-main",
+    "description": "Telemetry panel renders battery level as a real percentage number (e.g. '95 %') rather than a placeholder dash.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.telemetry.altitude-speed-display",
+    "area": "Telemetry & Monitoring",
+    "screen": "cockpit-main",
+    "description": "Telemetry panel displays Altitude RLT, AGL, ASL, and horizontal/vertical speeds as formatted numeric values with respective units ('m' and 'm/s') rather than placeholder dashes.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.video.live-playback",
+    "area": "Video Feed",
+    "screen": "cockpit-main",
+    "description": "FPV video tile displays 'live' status badge and actively plays WebRTC/WHEP stream video footage for the selected drone.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.control.takeoff-transition",
+    "area": "Flight Operations",
+    "screen": "cockpit-main",
+    "description": "Issuing a takeoff command from the control panel transitions the drone flight status pill from taking_off to in_flight upon reaching cruising altitude.",
+    "viewport": "both",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.control.land-transition",
+    "area": "Flight Operations",
+    "screen": "cockpit-main",
+    "description": "Issuing a land command for an airborne drone transitions its flight status pill through landing back to on_dock upon touchdown.",
+    "viewport": "both",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.freshness.socket-drop",
+    "area": "Telemetry & Monitoring",
+    "screen": "cockpit-main",
+    "description": "Telemetry panel visibly indicates packet loss or degraded connection when socket messages are dropped.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.freshness.socket-delay",
+    "area": "Telemetry & Monitoring",
+    "screen": "cockpit-main",
+    "description": "Telemetry panel visibly indicates latency or delayed telemetry updates when socket delay is introduced.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.freshness.sim-offline",
+    "area": "Telemetry & Monitoring",
+    "screen": "cockpit-main",
+    "description": "Cockpit UI clearly warns when simulator is disconnected rather than silently displaying last-known telemetry as current.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.freshness.video-freeze",
+    "area": "Video Feed",
+    "screen": "cockpit-main",
+    "description": "Video tile reflects stream disruption by changing state from live to reconnecting during a video freeze fault.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.freshness.socket-kick",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Socket badge reflects disconnection when socket is kicked, and stale telemetry during disconnection is marked accordingly.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "security.control.unauthenticated-command-execution",
+    "area": "Security and permissions",
+    "screen": "cockpit-main",
+    "description": "Control API must reject unauthenticated flight commands (e.g. takeoff/land) without valid operator credentials or session tokens.",
+    "viewport": "desktop",
+    "checkType": "security"
+  },
+  {
+    "id": "security.control.unauthenticated-fault-injection",
+    "area": "Security and permissions",
+    "screen": "cockpit-main",
+    "description": "Control API must reject unauthenticated fault injection requests (e.g. sim-offline) without valid operator credentials or session tokens.",
+    "viewport": "desktop",
+    "checkType": "security"
+  },
+  {
+    "id": "security.control.unauthenticated-destructive-action",
+    "area": "Security and permissions",
+    "screen": "cockpit-main",
+    "description": "Control API must reject unauthenticated fleet modifications (creating or deleting drone and dock entities) without valid operator credentials or session tokens.",
+    "viewport": "desktop",
+    "checkType": "security"
+  },
+  {
+    "id": "security.dashboard.unauthenticated-reachability",
+    "area": "Security and permissions",
+    "screen": "operator-dashboard",
+    "description": "Control panel dashboard surface must require authentication before exposing operator controls and telemetry to the network.",
+    "viewport": "desktop",
+    "checkType": "security"
+  },
+  {
+    "id": "cockpit.mobile.flight-controls-reachability",
+    "area": "Flight Control & Operations",
+    "screen": "cockpit-main",
+    "description": "Essential flight controls (take-off, land) and control panel access are reachable and usable at phone viewport (390x844) without requiring horizontal scroll or getting pushed off-screen.",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.mobile.device-list-usability",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Device list of connected drones and docks is visible and individual device rows remain tappable and readable without clipping or overlapping at phone viewport (390x844).",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.mobile.telemetry-readability",
+    "area": "Telemetry & Monitoring",
+    "screen": "cockpit-main",
+    "description": "Telemetry metrics (battery percentage, altitude RLT/AGL/ASL, horizontal/vertical speed, heading, and distance) remain fully legible, unclipped, and properly aligned at phone viewport (390x844).",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.mobile.map-video-tile-layout",
+    "area": "Video Feed",
+    "screen": "cockpit-main",
+    "description": "Map canvas, video feed tile, and overlay controls (2D/3D toggle) fit within phone viewport (390x844) without mutual overlap, obstruction of critical actions, or clipping.",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.visual.primary-controls-present",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "All primary dashboard controls including device list, Cesium map canvas, telemetry panel, and video player are fully rendered with non-zero dimensions without missing or empty visual elements.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.visual.no-conflicting-status",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Status indicators across the header socket badge, device list pills, and telemetry panel are mutually consistent and do not show conflicting states simultaneously.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.visual.takeoff-land-button-consistency",
+    "area": "Flight Operations",
+    "screen": "operator-dashboard",
+    "description": "Take-off and land control affordances reflect drone state consistently: docked drone allows takeoff while disabling land; in-flight drone disables takeoff while enabling land.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "security.identifier.device-state-isolation",
+    "area": "Security and permissions",
+    "screen": "cockpit-main",
+    "description": "Control API isolates device telemetry state queries by identifier so a request cannot leak or conflate telemetry across distinct devices.",
+    "viewport": "desktop",
+    "checkType": "security"
+  },
+  {
+    "id": "security.identifier.command-targeting-isolation",
+    "area": "Security and permissions",
+    "screen": "cockpit-main",
+    "description": "Control API command targeting correctly validates device identifiers and rejects or no-ops commands directed at non-existent devices without fallback effects on valid fleet devices.",
+    "viewport": "desktop",
+    "checkType": "security"
+  },
+  {
+    "id": "cockpit.semantic.takeoff-action",
+    "area": "Flight Operations",
+    "screen": "operator-dashboard",
+    "description": "Take-off action affordance is semantically identifiable by natural-language description alone without CSS or data-testid selectors, and initiates drone flight when actuated.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.semantic.land-action",
+    "area": "Flight Operations",
+    "screen": "operator-dashboard",
+    "description": "Land action affordance is semantically identifiable by natural-language description alone without CSS or data-testid selectors, and initiates landing transition when actuated.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.semantic.device-selector",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Device/drone selector control in the fleet list is semantically identifiable by natural-language description alone without CSS or data-testid selectors, and updates dashboard telemetry when clicked.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.semantic.video-status-indicator",
+    "area": "Video Feed",
+    "screen": "cockpit-main",
+    "description": "Video stream live status indicator is semantically identifiable by natural-language description alone without CSS or data-testid selectors, and yields valid playback status text.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.semantic.socket-health-indicator",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "WebSocket connection health indicator badge is semantically identifiable by natural-language description alone without CSS or data-testid selectors, and yields valid connection health text.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "ux-agent.takeoff",
+    "area": "Flight Operations",
+    "screen": "operator-dashboard",
+    "description": "Autonomous browser test agent identifies flight start control from natural-language goal alone and triggers takeoff without scripted selectors.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "ux-agent.switch-drone",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "Autonomous browser test agent navigates device monitoring list from natural-language goal alone and switches active drone telemetry without scripted selectors.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "ux-agent.check-video-live",
+    "area": "Video Feed",
+    "screen": "cockpit-main",
+    "description": "Autonomous browser test agent observes FPV video region from natural-language goal alone and reports live stream status without scripted selectors.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "ux-agent.reach-flight-control-mobile",
+    "area": "Flight Operations",
+    "screen": "cockpit-main",
+    "description": "Autonomous browser test agent attempts to discover and actuate flight controls at mobile viewport width (390x844) from natural-language goal alone.",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.functional.takeoff-socket-drop-honesty",
+    "area": "Flight Control & Operations",
+    "screen": "cockpit-main",
+    "description": "UI honestly reflects drone flight state during network socket packet drop without indicating false takeoff success while drone remains grounded.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.functional.add-drone-sim-offline-honesty",
+    "area": "Flight Control & Operations",
+    "screen": "cockpit-main",
+    "description": "UI and API honestly handle drone registration during simulator offline faults without reporting false success when the drone cannot be connected.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.api-data.state-refresh-persistence",
+    "area": "API and data",
+    "screen": "cockpit-main",
+    "description": "Drone operational state (in_flight) survives a browser page refresh without reverting to default or stale docked state.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.api-data.fault-resilience-rendering",
+    "area": "API and data",
+    "screen": "cockpit-main",
+    "description": "Frontend gracefully handles missing telemetry or complete data gaps without unhandled JS exceptions, blank screen, NaN display, or error overlays.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.geospatial.marker-telemetry-sync",
+    "area": "Map and geospatial",
+    "screen": "cockpit-main",
+    "description": "Cesium 3D map marker for an active drone continuously tracks real-time latitude, longitude, and altitude from the telemetry stream, updating position in sync with live telemetry without freezing.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.geospatial.stale-position-indication",
+    "area": "Map and geospatial",
+    "screen": "cockpit-main",
+    "description": "Cesium map clearly indicates when drone marker position is stale, frozen, or outdated due to simulator disconnection, avoiding presenting old or disconnected positions as current and live.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.video.source-switch-integrity",
+    "area": "Video Feed",
+    "screen": "cockpit-main",
+    "description": "Switching selected drone in the device list updates the video feed content to the selected drone's specific stream rather than only changing the header label.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "cockpit.video.degrade-fault-honesty",
+    "area": "Video Feed",
+    "screen": "cockpit-main",
+    "description": "When video-degrade fault is injected, Cockpit surfaces the degraded stream quality or status rather than presenting an unqualified 'live' badge while the stream is degraded.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "cockpit.performance.max-drones-responsiveness",
+    "area": "Shared dashboard",
+    "screen": "cockpit-main",
+    "description": "UI controls including device list selection and map 2D/3D perspective toggle remain interactive and respond within 3 seconds under full fleet load of 10 simulated drones.",
+    "viewport": "desktop",
+    "checkType": "presence"
+  },
+  {
+    "id": "cockpit.performance.rapid-fault-recovery",
+    "area": "Telemetry & Monitoring",
+    "screen": "cockpit-main",
+    "description": "Rapid sequential triggering and clearing of socket packet-drop faults recovers cleanly without leaving stale degraded or error states on the dashboard.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  },
+  {
+    "id": "feature-agent.toggle-map-2d-3d",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Toggle map between 2D and 3D modes: The map rendering mode changes appropriately upon clicking the toggle (e.g., visual perspective changes to 3D and back to flat 2D) and the UI indicates the active mode correctly.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.drone-marker-visible-in-3d",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Drone position marker remains visible in 3D mode: The selected drone's position marker remains visible and correctly placed on the map in 3D rendering mode.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.drone-marker-visible-in-2d",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Drone position marker remains visible when switching back to 2D mode: The selected drone's position marker remains visible and maintains its correct relative position when switching back to 2D mode.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.mobile-map-toggle",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Map 2D/3D toggle functionality on mobile viewport: The toggle responds properly on mobile screens, successfully changing the map view without breaking the layout or hiding the selected drone marker.",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.toggle-favorite-desktop",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Toggle drone favorite state in devices panel on desktop: The star icon visually updates to indicate the favorited state (e.g., filled or highlighted), and clicking it again reverts it to the unfavorited state.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.toggle-favorite-mobile",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Toggle drone favorite state in devices panel on mobile: The star button correctly registers the tap, transitioning smoothly between favorited and unfavorited visual states on the mobile interface.",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.multiple-favorites-persistence",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Favorite multiple drones independently: Both selected drones show active favorited states while unselected drones remain unfavorited, confirming independent state management per drone item.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.mute-alerts-suppression",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Mute alerts toggle suppresses alert notifications: When Mute alerts toggle is enabled ('🔕 Mute alerts: On'), alert toasts and visual notifications emitted by drones are suppressed and do not appear on screen.",
+    "viewport": "desktop",
+    "checkType": "fault-response"
+  }
+]

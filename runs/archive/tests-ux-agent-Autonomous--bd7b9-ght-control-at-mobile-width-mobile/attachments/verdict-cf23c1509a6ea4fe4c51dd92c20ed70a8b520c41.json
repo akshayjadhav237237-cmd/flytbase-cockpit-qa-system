@@ -1,0 +1,19 @@
+{
+  "scenarioId": "ux-agent.reach-flight-control-mobile",
+  "title": "Autonomous agent attempts to reach the flight control at mobile width",
+  "description": "Autonomous agent goal: At this screen size, find and use the control that starts or stops a drone's flight.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "ux-agent.reach-flight-control-mobile",
+  "viewport": "mobile",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-ux-agent-Autonomous--bd7b9-ght-control-at-mobile-width-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-ux-agent-Autonomous--bd7b9-ght-control-at-mobile-width-mobile\\attachments\\screenshot-before-4f3ad3be23563016284482f5960c0fa9c4ec2207.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Autonomous agent attempts to reach the flight control at mobile width]\nGoal ID: ux-agent.reach-flight-control-mobile\nNatural-Language Instruction: \"At this screen size, find and use the control that starts or stops a drone's flight.\"\nAgent Execution Outcome: Error: AI model request failed after 1 retry (2/2 attempts). Last error: failed to call AI model service (gemini-3.5-flash-lite): 402 status code (no body)\nOpenAI raw error response body: [{\n  \"error\": {\n    \"code\": 402,\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\n    \"status\": \"RESOURCE_EXHAUSTED\"\n  }\n}\n]\nTrouble shooting: https://midscenejs.com/model-provider.html\nPrevious AI call attempt errors:\nAttempt 1: failed to call AI model service (gemini-3.5-flash-lite): 402 status code (no body)\nOpenAI raw error response body: [{\n  \"error\": {\n    \"code\": 402,\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\n    \"status\": \"RESOURCE_EXHAUSTED\"\n  }\n}\n]\nTrouble shooting: https://midscenejs.com/model-provider.html\nVerification Query: \"Was the agent able to actually locate and interact with the control, or did it fail/get stuck because the control was unreachable at this viewport?\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T08:53:47.686Z"
+}

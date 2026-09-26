@@ -1,0 +1,19 @@
+{
+  "scenarioId": "responsive-device-list-usability",
+  "title": "Device list usable at phone width",
+  "description": "Confirms the device list (drones/docks) is visible and each item is cleanly tappable without overlapping or clipping at 390px mobile viewport.",
+  "approach": "Inspect device rows bounding boxes, verify no horizontal clipping or vertical collision, test tap selection, and query Midscene aiBoolean.",
+  "capabilityId": "cockpit.mobile.device-list-usability",
+  "viewport": "mobile",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-c6b06--list-usable-at-phone-width-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-c6b06--list-usable-at-phone-width-mobile\\attachments\\device-list-screenshot-c88718c526b68e884e8b0ace6873a30b5a8bbbe7.png"
+    ]
+  },
+  "reasoning": "[RESPONSIVE EVALUATION: Device list at 390x844]\nTotal device rows rendered: 5.\nRow bounding boxes: [{\"index\":0,\"x\":21,\"w\":348,\"y\":92,\"h\":50},{\"index\":1,\"x\":21,\"w\":348,\"y\":146,\"h\":50},{\"index\":2,\"x\":21,\"w\":348,\"y\":200,\"h\":50},{\"index\":3,\"x\":21,\"w\":348,\"y\":254,\"h\":50},{\"index\":4,\"x\":21,\"w\":348,\"y\":308,\"h\":50}].\nHorizontal clipping detected (bounds outside 390px): false.\nVertical overlap between adjacent rows: false.\nTappability check: successfully clicked rows and toggled 'selected' class.\nMidscene aiBoolean (overlapping/clipped/unreadable in device list): false.\nAssessment: Device list is well-proportioned, fits within 390px width, and each device item is tappable without overlap.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:08:55.187Z"
+}

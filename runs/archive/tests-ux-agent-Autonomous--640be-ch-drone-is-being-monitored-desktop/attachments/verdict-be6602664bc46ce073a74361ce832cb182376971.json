@@ -1,0 +1,19 @@
+{
+  "scenarioId": "ux-agent.switch-drone",
+  "title": "Autonomous agent switches which drone is being monitored",
+  "description": "Autonomous agent goal: Switch the view to show a different drone than whichever one is currently selected.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "ux-agent.switch-drone",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-ux-agent-Autonomous--640be-ch-drone-is-being-monitored-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-ux-agent-Autonomous--640be-ch-drone-is-being-monitored-desktop\\attachments\\screenshot-before-bbcd4ab63ef0177bfbfbce60023c89a05c02423f.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Autonomous agent switches which drone is being monitored]\nGoal ID: ux-agent.switch-drone\nNatural-Language Instruction: \"Switch the view to show a different drone than whichever one is currently selected.\"\nAgent Execution Outcome: Successfully switched the view to Drone 2.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Insight:\n  2. Planning:\n  3. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_14-18-18-2772965b.html\nVerification Query: \"Is the telemetry panel now showing data for a different drone than before?\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:48:37.022Z"
+}

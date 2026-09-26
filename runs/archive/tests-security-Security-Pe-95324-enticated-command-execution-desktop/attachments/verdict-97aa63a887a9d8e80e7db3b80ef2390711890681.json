@@ -1,0 +1,17 @@
+{
+  "scenarioId": "sec-unauth-command-execution",
+  "title": "Unauthenticated command execution",
+  "description": "Verifies whether flight control commands (/control/command) can be executed without authentication.",
+  "approach": "Direct HTTP POST to /control/command with takeoff command without auth headers or cookies.",
+  "capabilityId": "security.control.unauthenticated-command-execution",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 1,
+  "checkType": "security",
+  "evidence": {
+    "videoPath": "",
+    "screenshotPaths": []
+  },
+  "reasoning": "[SECURITY AUDIT FINDING: VULNERABILITY CONFIRMED]\nUnauthenticated flight control command execution succeeded with HTTP 200 without any authentication, authorization, or session validation.\nRequest: POST http://localhost:4000/api/control/command with payload {\"deviceId\":\"drone-1\",\"type\":\"takeoff\"} (no auth headers, no cookies).\nResponse: HTTP 200 {\"ok\":true}.\nCleanup Request: POST http://localhost:4000/api/control/command with payload {\"deviceId\":\"drone-1\",\"type\":\"land\"}.\nCleanup Response: HTTP 200 {\"ok\":true}.\nReal-world impact: Any device or actor on the network can force active drones to take off, alter flight states, or force landings during live missions. Without authentication or caller logging, rogue or accidental commands cannot be prevented or audited.",
+  "timestamp": "2026-09-26T07:44:38.722Z"
+}

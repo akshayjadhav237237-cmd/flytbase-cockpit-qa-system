@@ -1,0 +1,20 @@
+{
+  "scenarioId": "geospatial-stale-position-sim-offline",
+  "title": "Stale position after sim-offline doesn't look current",
+  "description": "Verifies whether the Cesium map surfaces staleness when simulator goes offline while a drone is in flight, or misleadingly presents a frozen position as live and current.",
+  "approach": "Take off drone-1, inject sim-offline fault, confirm simulator disconnection via GET /health, wait 4s, and evaluate the map view with Midscene aiBoolean.",
+  "capabilityId": "cockpit.geospatial.stale-position-indication",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "fault-response",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-geospatial-Map-and-G-1600b-ffline-doesn-t-look-current-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-geospatial-Map-and-G-1600b-ffline-doesn-t-look-current-desktop\\attachments\\baseline-screenshot-211f65a439d14a42cc442254096cb8cfd0259d80.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-geospatial-Map-and-G-1600b-ffline-doesn-t-look-current-desktop\\attachments\\fault-active-screenshot-cb3392dada6daa3e79d2cb37d3aba4abb41049ec.png"
+    ]
+  },
+  "reasoning": "[GEOSPATIAL FAULT TEST: Stale position after sim-offline doesn't look current]\nGround Truth (Control API /health): simulator=\"disconnected\" (confirmed disconnected).\nFault Injected: sim-offline for 12 seconds while drone-1 was in active flight.\nCesium Entity during fault: label=\"Drone 1 in_flight\", lat=18.561607, lon=73.694747.\nMidscene aiBoolean evaluation: mapGivesStalenessIndication=false.\nAssessment: When the simulator disconnected, telemetry updates ceased and the drone position froze in place. However, the Cesium map continues rendering the 3D drone model in full saturated color with the label \"Drone 1 in_flight\" and no staleness warning icon, badge, or timestamp. The map presents an outdated, frozen position as completely live and current, directly violating geospatial freshness honesty.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T09:31:47.757Z"
+}

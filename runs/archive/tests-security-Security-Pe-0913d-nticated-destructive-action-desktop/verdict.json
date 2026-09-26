@@ -1,0 +1,17 @@
+{
+  "scenarioId": "sec-unauth-destructive-action",
+  "title": "Unauthenticated destructive action",
+  "description": "Verifies whether fleet entities (/control/drones) can be created and deleted without administrative authentication.",
+  "approach": "Direct HTTP POST to create drone and DELETE to remove drone with no auth headers or cookies.",
+  "capabilityId": "security.control.unauthenticated-destructive-action",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 1,
+  "checkType": "security",
+  "evidence": {
+    "videoPath": "",
+    "screenshotPaths": []
+  },
+  "reasoning": "[SECURITY AUDIT FINDING: VULNERABILITY CONFIRMED]\nUnauthenticated destructive fleet modification succeeded with HTTP 200 without any administrative credentials.\nCreation Request: POST http://localhost:4000/api/control/drones with payload {\"name\":\"SecTestDrone\"} (no credentials).\nCreation Response: HTTP 200 {\"drone\":{\"id\":\"drone-9\",\"type\":\"drone\",\"name\":\"SecTestDrone\",\"dockId\":\"dock-9\"},\"dock\":{\"id\":\"dock-9\",\"type\":\"dock\",\"name\":\"Dock 9\",\"droneId\":\"drone-9\"}}.\nDeletion Request: DELETE http://localhost:4000/api/control/drones/drone-9 (no credentials).\nDeletion Response: HTTP 200 {\"ok\":true}.\nReal-world impact: Any actor on the network can arbitrarily add phantom drones to the fleet or delete registered drones and docks. Removing operational drones eliminates telemetry and control visibility, while rogue entries can disrupt airspace management and deceive human operators.",
+  "timestamp": "2026-09-26T07:44:38.977Z"
+}

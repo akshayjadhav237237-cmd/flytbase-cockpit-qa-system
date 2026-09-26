@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.mute-alerts-suppresses-panel",
+  "title": "Verify muted alerts do not appear in the alerts panel",
+  "description": "Autonomous agent goal: With Mute Alerts enabled, simulate or wait for an alert to occur. Open the alerts panel and inspect the list of recorded alerts.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.mute-alerts-suppresses-panel",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-suppresses-panel\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-suppresses-panel\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-suppresses-panel\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Verify muted alerts do not appear in the alerts panel]\nGoal ID: feature-agent.mute-alerts-suppresses-panel\nNatural-Language Instruction: \"With Mute Alerts enabled, simulate or wait for an alert to occur. Open the alerts panel and inspect the list of recorded alerts.\"\nAgent Execution Outcome: Error: Replanned 20 times, exceeding the limit. Please configure a larger value for replanningCycleLimit (or use MIDSCENE_REPLANNING_CYCLE_LIMIT) to handle more complex tasks.\nVerification Query: \"The alerts panel remains clear of any alerts that arrived while the Mute Alerts toggle was active.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T10:47:58.765Z"
+}

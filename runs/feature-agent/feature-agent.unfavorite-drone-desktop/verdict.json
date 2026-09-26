@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.unfavorite-drone-desktop",
+  "title": "Remove drone from favorites by clicking star again on desktop",
+  "description": "Autonomous agent goal: Open the application at http://localhost:4010. Locate a drone in the devices panel that is currently marked as a favorite, and click its favorite/star button again to toggle it off.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.unfavorite-drone-desktop",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.unfavorite-drone-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.unfavorite-drone-desktop\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.unfavorite-drone-desktop\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Remove drone from favorites by clicking star again on desktop]\nGoal ID: feature-agent.unfavorite-drone-desktop\nNatural-Language Instruction: \"Open the application at http://localhost:4010. Locate a drone in the devices panel that is currently marked as a favorite, and click its favorite/star button again to toggle it off.\"\nAgent Execution Outcome: Successfully toggled off the favorite status for Drone 1 in the devices panel.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-06-22-37641cc3.html\nVerification Query: \"The star button returns to its unfavorited appearance (such as outlined or unhighlighted), confirming the toggle functionality works in both directions.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T10:36:37.177Z"
+}

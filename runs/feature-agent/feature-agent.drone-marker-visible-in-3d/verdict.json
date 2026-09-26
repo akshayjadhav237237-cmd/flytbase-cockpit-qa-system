@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.drone-marker-visible-in-3d",
+  "title": "Drone position marker remains visible in 3D mode",
+  "description": "Autonomous agent goal: Navigate to the cockpit at http://localhost:4010, select a drone to ensure its position marker is visible on the map, and then click the toggle to switch the map into 3D mode.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.drone-marker-visible-in-3d",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.drone-marker-visible-in-3d\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.drone-marker-visible-in-3d\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.drone-marker-visible-in-3d\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Drone position marker remains visible in 3D mode]\nGoal ID: feature-agent.drone-marker-visible-in-3d\nNatural-Language Instruction: \"Navigate to the cockpit at http://localhost:4010, select a drone to ensure its position marker is visible on the map, and then click the toggle to switch the map into 3D mode.\"\nAgent Execution Outcome: Successfully navigated to the cockpit, selected a drone, and switched the map into 3D mode.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_14-56-18-87513e1e.html\nVerification Query: \"The selected drone's position marker remains visible and correctly placed on the map in 3D rendering mode.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T09:26:31.176Z"
+}

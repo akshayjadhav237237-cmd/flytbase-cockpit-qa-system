@@ -1,0 +1,19 @@
+{
+  "scenarioId": "semantic-device-selector",
+  "title": "Semantic identification of device selector in device list",
+  "description": "Locates and clicks an alternative drone entry in the device list using purely natural-language description, confirming telemetry panel updates to the newly selected drone.",
+  "approach": "Use Midscene aiLocate() to resolve Alpha-2 row coordinates, dispatch click, and query updated telemetry heading via aiString().",
+  "capabilityId": "cockpit.semantic.device-selector",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "presence",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-65d7a-ice-selector-in-device-list-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-element-identificati-65d7a-ice-selector-in-device-list-desktop\\attachments\\screenshot-before-5c369f0a70c91aaf8f159f365df347566544435d.png"
+    ]
+  },
+  "reasoning": "[SEMANTIC ELEMENT IDENTIFICATION: DEVICE SELECTOR]\nTarget Element: Device row in fleet list to select drone Alpha-2.\nNatural-Language Description: \"the control in the device list to switch to or select the second drone Alpha-2\"\nLocating Mechanism: Midscene agent.aiLocate() (visual-semantic coordinate inference).\nIdentified Geometry: center=[150, 174], rect={left:22, top:150, width:257, height:48}.\nActuation: Dispatched mouse click directly to identified coordinates (150, 174).\nFollow-up Verification: Telemetry panel heading updated to \"DRONE TELEMETRY · DRONE 2\" (reflects Alpha-2: true).\nHardcoded Selector Audit: Stable selector EXISTS in DOM: data-testid=\"device-row-drone-2\" (class=\"device-row\").\nAssessment: Semantic location successfully identified the unselected Alpha-2 device row without using data-testid=\"device-row-drone-2\", and clicking it successfully redirected dashboard telemetry to the selected drone.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:24:40.157Z"
+}

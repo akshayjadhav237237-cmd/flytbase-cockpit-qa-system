@@ -1,0 +1,19 @@
+{
+  "scenarioId": "visual-primary-controls-present",
+  "title": "All primary controls present and visible",
+  "description": "Verifies baseline visual completeness of cockpit UI: device list, map canvas, telemetry panel, and video tile are all present and rendering with non-zero dimensions.",
+  "approach": "Navigate to COCKPIT_URL, wait for socket connection, inspect DOM bounding boxes of all 4 primary components, and query Midscene aiBoolean with a neutral completeness question.",
+  "capabilityId": "cockpit.visual.primary-controls-present",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-visual-completeness--d3c6f-ontrols-present-and-visible-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-visual-completeness--d3c6f-ontrols-present-and-visible-desktop\\attachments\\screenshot-primary-controls-2bef90e32e1675d1e32a93bbc7c64b14cd8bb2f4.png"
+    ]
+  },
+  "reasoning": "[VISUAL COMPLETENESS: All primary controls present and visible]\nDevice List: 5 drone/dock rows rendered in DOM (minimum required: 4).\nMap Canvas Container: bounding box=980x752, inner canvas=980x752.\nVideo Tile / Player: bounding box=318x179.\nTelemetry Panel: battery rendered as \"100 %\".\nMidscene aiBoolean (\"is any expected element missing, empty, or not rendering?\"): false.\nAssessment: All key cockpit dashboard elements (device list, Cesium 3D map canvas, telemetry panel, and video tile) are rendered with valid non-zero bounding box geometries, and visual AI analysis confirms no primary element is missing or unrendered.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:12:01.105Z"
+}

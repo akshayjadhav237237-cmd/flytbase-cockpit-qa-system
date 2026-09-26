@@ -1,0 +1,17 @@
+{
+  "scenarioId": "sec-id-device-state-isolation",
+  "title": "Device state isolation by id",
+  "description": "Verifies whether device state can be queried with per-device isolation, or explicitly reports when the API exposes only a global unpartitioned snapshot.",
+  "approach": "Identify two distinct devices (drone-1, drone-2) from /control/state and probe candidate per-device query endpoints (?deviceId and /:id).",
+  "capabilityId": "security.identifier.device-state-isolation",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 1,
+  "checkType": "security",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-identifier-security--3cbba-evice-state-isolation-by-id-desktop\\video.webm",
+    "screenshotPaths": []
+  },
+  "reasoning": "[IDENTIFIER SECURITY AUDIT: DEVICE STATE ISOLATION]\nIdentified distinct registered devices from fleet state: \"drone-1\" and \"drone-2\" (total: 5 drones in org \"flytbase\").\nTested potential per-device state isolation endpoints:\n1. GET http://localhost:4000/api/control/state?deviceId=drone-1 -> HTTP 200: Query parameter is ignored; endpoint returns full snapshot containing all 5 drones.\n2. GET http://localhost:4000/api/control/state/drone-1 -> HTTP 404: Path-based per-device state endpoint does not exist (404 Not Found).\nEvaluation: not applicable — API has no per-device endpoint to test isolation against. The Control API operates in single-tenant mode (orgId: \"flytbase\") where /control/state delivers a consolidated simulation snapshot rather than per-device scoped views.\nVerdict: pass (no cross-device data leak, state corruption, or improper cross-tenant access found; capability is not applicable to current single-tenant API design).",
+  "timestamp": "2026-09-26T08:14:42.070Z"
+}

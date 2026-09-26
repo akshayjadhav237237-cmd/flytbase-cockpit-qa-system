@@ -1,0 +1,19 @@
+{
+  "scenarioId": "functional-add-drone-sim-offline-honesty",
+  "title": "Add-drone command during sim-offline shows false success",
+  "description": "Inspects add-drone UI availability, invokes drone creation under sim-offline fault, and verifies if false success is reported when drone is not present in subsequent GET /devices.",
+  "approach": "Inject sim-offline 10s, attempt drone creation via UI or direct API, check UI/response feedback, and verify presence in subsequent GET /devices.",
+  "capabilityId": "cockpit.functional.add-drone-sim-offline-honesty",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "fault-response",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-functional-honesty-F-68414-offline-shows-false-success-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-functional-honesty-F-68414-offline-shows-false-success-desktop\\attachments\\screenshot-0f5705a7c6eeaea29b0785d27d284503866dcf11.png"
+    ]
+  },
+  "reasoning": "[FUNCTIONAL UI HONESTY: ADD-DRONE UNDER SIM-OFFLINE FAULT]\nFault Injected: sim-offline (simulator disconnected from socket hub for 10s).\nUI Control Inspection: Cockpit UI (http://localhost:4010) hasAddDroneControl=false; Operator Dashboard (http://localhost:4000/dashboard) hasAddDroneControl=true.\nAction: Utilized Operator Dashboard UI control (data-testid=\"dash-drone-add\") with name \"HonestyTestDrone\".\nCommand Feedback: UI indicated success=true, API status=0, response indicated success=false.\nSubsequent GET /devices Check: Drone appeared in devices list=true (id=drone-72).\nUI Table Visibility: Rendered in device list on screen=true.\nHonesty Assessment: The drone was successfully accepted and registered into the simulator devices registry despite sim-offline socket disconnection.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:29:24.414Z"
+}

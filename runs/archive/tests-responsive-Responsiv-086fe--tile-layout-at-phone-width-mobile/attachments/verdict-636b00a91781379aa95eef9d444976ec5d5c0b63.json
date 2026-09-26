@@ -1,0 +1,19 @@
+{
+  "scenarioId": "responsive-map-video-tile-layout",
+  "title": "Map and video tile layout at phone width",
+  "description": "Confirms the map and video tile do not overlap each other or get pushed off-screen, and verifies whether switching between view modes works.",
+  "approach": "Measure bounding boxes of map canvas, video tile, and 2D/3D toggle controls, test click interaction on view toggle, and evaluate visual collision with Midscene aiBoolean.",
+  "capabilityId": "cockpit.mobile.map-video-tile-layout",
+  "viewport": "mobile",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-086fe--tile-layout-at-phone-width-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\mobile\\tests-responsive-Responsiv-086fe--tile-layout-at-phone-width-mobile\\attachments\\map-video-screenshot-70605039b3646ae94095153276bc98cfa818b6fc.png"
+    ]
+  },
+  "reasoning": "[RESPONSIVE EVALUATION: Map and video tile layout at 390x844]\nMap canvas boundingBox: {\"x\":0,\"y\":268,\"width\":390,\"height\":576}.\nVideo tile boundingBox: {\"x\":12,\"y\":688.828125,\"width\":200,\"height\":143.171875}.\nView toggle (2D/3D) boundingBox: {\"x\":150,\"y\":801.203125,\"width\":90,\"height\":30.796875}.\nVideo tile pushed off-screen: false.\nVideo tile overlaps map-view-toggle: true.\nToggle click blocked or intercepted: true (toggle functional: false).\nMidscene aiBoolean (video tile overlaps/obscures toggle or pushed off-screen): false.\nAssessment: Layout defect detected: Video tile (200px wide) overlaps the centered 2D/3D map toggle controls at bottom of mobile screen.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T08:09:37.354Z"
+}

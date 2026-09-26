@@ -1,0 +1,20 @@
+{
+  "scenarioId": "visual-takeoff-land-consistency",
+  "title": "Take-off and land button state consistency",
+  "description": "Verifies that Take off and Land affordances dynamically reflect drone flight state: Take off is available and Land disabled when docked; Take off is disabled and Land available when in-flight.",
+  "approach": "Open operator control panel, verify docked button states, issue takeoff command via Control API, verify status reaches in_flight and buttons swap, verify with Midscene aiBoolean, and land drone to clean up.",
+  "capabilityId": "cockpit.visual.takeoff-land-button-consistency",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-visual-completeness--4ba70-nd-button-state-consistency-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-visual-completeness--4ba70-nd-button-state-consistency-desktop\\attachments\\screenshot-docked-buttons-b90d42253d3ce576dad2446843ddd898c26d535a.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-visual-completeness--4ba70-nd-button-state-consistency-desktop\\attachments\\screenshot-inflight-buttons-d69af55a6223c0793e7147f016ad2a0c8ce46d58.png"
+    ]
+  },
+  "reasoning": "[VISUAL & BEHAVIORAL CONSISTENCY: Take-off and land button state consistency]\nDocked State: drone-1 status=\"standby\", Take off button=enabled, Land button=disabled. Midscene confirmed consistent docked affordances (true).\nFlight Command: Dispatched POST /control/command { deviceId: 'drone-1', type: 'takeoff' }.\nIn-Flight State: drone-1 status transitioned to \"in_flight\". Take off button=disabled, Land button=enabled. Midscene confirmed swapped affordances (true).\nCleanup: Issued POST /control/command { deviceId: 'drone-1', type: 'land' } to restore docked state.\nAssessment: Operator control affordances accurately and safely reflect drone physical state: a grounded drone permits takeoff while blocking landing; an airborne drone permits landing while blocking takeoff.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:12:27.954Z"
+}

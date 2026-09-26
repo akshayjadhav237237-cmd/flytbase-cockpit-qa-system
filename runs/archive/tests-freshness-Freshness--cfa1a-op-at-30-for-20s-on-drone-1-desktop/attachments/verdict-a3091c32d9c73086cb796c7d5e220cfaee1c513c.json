@@ -1,0 +1,19 @@
+{
+  "scenarioId": "freshness-socket-drop-30pct",
+  "title": "socket-drop at 30% for 20s on drone-1",
+  "description": "Checks telemetry panel and connection indicators when 30% socket drop fault is injected on drone-1.",
+  "approach": "POST /control/fault with socket-drop, wait 6s, inspect DOM and query Midscene aiBoolean to check if degradation is surfaced.",
+  "capabilityId": "cockpit.freshness.socket-drop",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--cfa1a-op-at-30-for-20s-on-drone-1-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--cfa1a-op-at-30-for-20s-on-drone-1-desktop\\attachments\\baseline-screenshot-cc8cc6a6da97ca7905445f448d505bee3faaea0e.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-freshness-Freshness--cfa1a-op-at-30-for-20s-on-drone-1-desktop\\attachments\\fault-screenshot-fb5851b2147a7da4f904122018aeb1621d182e78.png"
+    ]
+  },
+  "reasoning": "[FAULT INJECTION: socket-drop (30% dropped packets for 20s on drone-1)]\nGround Truth (Control API): active fault={\"kind\":\"socket-drop\",\"until\":1790408533040,\"value\":30}, dropping 30% of telemetry updates.\nBaseline DOM: socket-status=\"socket connected\", battery=\"35 %\", alt=\"0.0 m\", speed=\"0.0 m/s\".\nFault-Active DOM: socket-status=\"socket connected\", battery=\"35 %\", alt=\"0.0 m\", speed=\"0.0 m/s\".\nMidscene aiBoolean evaluation: indicatesDegraded=false.\nAssessment: Despite 30% of drone telemetry packets being dropped by the backend, the UI continues displaying a healthy \"socket connected\" badge and presents telemetry values without any packet loss warning, staleness indicator, or link quality alert. The UI does not honestly reflect the degraded connection state.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T07:42:03.880Z"
+}

@@ -1,0 +1,19 @@
+{
+  "scenarioId": "perf-rapid-fault-recovery",
+  "title": "Rapid fault toggling doesn't break UI state tracking",
+  "description": "Verifies that rapid sequential triggering and clearing of socket-drop faults leaves the UI in a clean, non-degraded state matching the backend ground truth.",
+  "approach": "Execute 3 cycles of POST /control/fault (socket-drop) and DELETE /control/fault ~2s apart, verify empty faults via GET /control/fault, assert socket-status DOM badge, and evaluate via Midscene aiBoolean that no stale degraded indicator is present.",
+  "capabilityId": "cockpit.performance.rapid-fault-recovery",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "fault-response",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-performance-load-Per-ab1aa-n-t-break-UI-state-tracking-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-performance-load-Per-ab1aa-n-t-break-UI-state-tracking-desktop\\attachments\\screenshot-rapid-fault-recovery-99e39eab3014a95049ffbccdf79915a2fa25ed02.png"
+    ]
+  },
+  "reasoning": "[RAPID FAULT TOGGLING: UI RECOVERY AND HONESTY AUDIT]\nExecuted 3 rapid sequential toggle cycles of 'socket-drop' (50% loss for 15s) on drone-1 with 2000ms pauses.\nControl API Ground Truth: active faults count=0 ([]). Expected empty: PASS.\nDOM Socket Badge: text=\"socket connected\", connected=true, showsDegraded=false.\nMidscene Visual Judgment: screenShowsDegraded=false.\nEvaluation: After rapid back-to-back fault injection and clearance cycles, the Cockpit UI correctly recovered and accurately displays the healthy connected state without getting stuck on a stale degraded warning or ghost error indicator.\nVerdict: PASS",
+  "timestamp": "2026-09-26T09:35:49.642Z"
+}

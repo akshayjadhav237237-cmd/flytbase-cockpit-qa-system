@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Secrets & Environment (DO NOT COMMIT REAL KEYS)
+.env
+
+# Build outputs
+dist/
+
+# Local test & debug artifacts
+midscene_run/
+scratch/
+test-results/
+playwright-report/
+blob-report/
+*.log
+
+# Exclude large trace zips (preserve verdicts, videos, screenshots, SUBMISSION.md, dashboard.html)
+*.zip
+
+# Local deployment temporary folder
+deploy-dashboard/

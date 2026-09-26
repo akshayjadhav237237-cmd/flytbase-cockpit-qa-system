@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.toggle-favorite-mobile",
+  "title": "Toggle drone favorite state in devices panel on mobile",
+  "description": "Autonomous agent goal: Open the cockpit application on mobile. Open the devices panel if collapsed, locate a drone item, and tap the star/favorite button.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.toggle-favorite-mobile",
+  "viewport": "mobile",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-favorite-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-favorite-mobile\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.toggle-favorite-mobile\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Toggle drone favorite state in devices panel on mobile]\nGoal ID: feature-agent.toggle-favorite-mobile\nNatural-Language Instruction: \"Open the cockpit application on mobile. Open the devices panel if collapsed, locate a drone item, and tap the star/favorite button.\"\nAgent Execution Outcome: The cockpit application is open, the devices panel is expanded, and the star/favorite button for Drone 1 has been successfully tapped.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_15-49-58-2a6c5f0a.html\nVerification Query: \"The star button correctly registers the tap, transitioning smoothly between favorited and unfavorited visual states on the mobile interface.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T10:20:11.040Z"
+}

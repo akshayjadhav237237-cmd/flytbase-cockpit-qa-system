@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.mute-alerts-suppression",
+  "title": "Mute alerts toggle suppresses alert notifications",
+  "description": "Autonomous feature verification: Open the cockpit application, locate the 'Mute alerts' toggle button in the Drone Telemetry panel, and turn it On. When an alert is triggered (e.g. drone takeoff), verify whether alert notifications are suppressed.",
+  "approach": "Toggle Mute alerts to On ('🔕 Mute alerts: On'), dispatch drone takeoff command to emit an alert, and verify whether alert toasts are suppressed from the screen.",
+  "capabilityId": "feature-agent.mute-alerts-suppression",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "fault-response",
+  "evidence": {
+    "videoPath": "",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\screenshots\\subagent3-mute-toggle.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\screenshots\\subagent3-alert-still-displayed.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS FEATURE TEST / INTENTIONAL BUG VERIFICATION: Mute alerts toggle]\nGoal ID: feature-agent.mute-alerts-suppression\nNatural-Language Instruction: \"Open the cockpit application, locate the Mute alerts toggle in the Drone Telemetry panel, and turn it On. When an alert is triggered, verify whether alert notifications are suppressed.\"\nAgent Execution Outcome: The 'Mute alerts' toggle was located and activated to '🔕 Mute alerts: On'. A takeoff command was issued to drone-1, triggering an info alert (TAKEOFF: 'Drone 1 taking off').\nVerification Query: \"When Mute alerts is enabled, alert toasts and notifications are suppressed and do not appear on screen.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAssessment: The alert toast ('drone-1 Drone 1 taking off') visibly appeared in the top-right toast notification container (.toast[role=\"status\"]) despite the 'Mute alerts: On' state being active. The control visually toggles to active state but fails to suppress alert rendering, confirming the defect.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T10:15:39.000Z"
+}

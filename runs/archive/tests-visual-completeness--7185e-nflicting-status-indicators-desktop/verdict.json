@@ -1,0 +1,19 @@
+{
+  "scenarioId": "visual-no-conflicting-status",
+  "title": "No conflicting status indicators",
+  "description": "Verifies that status indicators across the header socket badge, device list pills, and telemetry panel do not display contradictory states.",
+  "approach": "Select docked drone-1, read socket and flight status pills from DOM, verify mutual exclusivity of states deterministically, and query Midscene aiBoolean to visually check for indicator contradictions.",
+  "capabilityId": "cockpit.visual.no-conflicting-status",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-visual-completeness--7185e-nflicting-status-indicators-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-visual-completeness--7185e-nflicting-status-indicators-desktop\\attachments\\screenshot-status-indicators-54fa80632f1055aa9a6e5741ecf67e887e61f36a.png"
+    ]
+  },
+  "reasoning": "[VISUAL CONSISTENCY: No conflicting status indicators]\nSocket Badge: \"socket connected\" (consistently connected; no contradictory disconnected badge).\nDevice List Row Pills: [dock closed, standby].\nTelemetry Panel Flight Status: \"standby\".\nDeterministic Check: airborne=false, docked/standby=true, contradiction=false.\nMidscene aiBoolean (\"do any visible status indicators contradict each other?\"): false.\nAssessment: Status indicators across header socket badge, device row pills, and telemetry panel are coherent and mutually consistent. For a docked drone, the UI consistently shows docked/standby status without contradictory airborne labels.\nVerdict: PASS",
+  "timestamp": "2026-09-26T08:12:17.309Z"
+}

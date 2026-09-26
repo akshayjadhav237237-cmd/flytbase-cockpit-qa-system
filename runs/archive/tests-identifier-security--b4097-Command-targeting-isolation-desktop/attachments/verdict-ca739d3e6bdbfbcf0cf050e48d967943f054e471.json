@@ -1,0 +1,17 @@
+{
+  "scenarioId": "sec-id-command-targeting-isolation",
+  "title": "Command targeting isolation",
+  "description": "Verifies whether commands targeting a non-existent deviceId are rejected/no-oped without affecting real fleet devices.",
+  "approach": "POST /control/command with deviceId: drone-999 and type: takeoff, verify rejection response, and assert no real drone status changed.",
+  "capabilityId": "security.identifier.command-targeting-isolation",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 1,
+  "checkType": "security",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\desktop\\tests-identifier-security--b4097-Command-targeting-isolation-desktop\\video.webm",
+    "screenshotPaths": []
+  },
+  "reasoning": "[IDENTIFIER SECURITY SAFETY CHECK: COMMAND TARGETING ISOLATION]\nDispatched takeoff command with deliberately invalid deviceId \"drone-999\".\nRequest: POST http://localhost:4000/api/control/command with payload {\"deviceId\":\"drone-999\",\"type\":\"takeoff\"}.\nResponse: HTTP 200 {\"ok\":false,\"error\":\"unknown device\"}.\nFleet State Verification: Monitored 5 real fleet devices before and after command dispatch.\nAffected Devices: None (all real drones maintained status and telemetry).\nEvaluation: The API correctly rejected the targeted command with \"unknown device\" error (ok: false) and did not fall back to or perturb any active fleet drones. Command targeting isolation holds.\nVerdict: pass (robust deviceId validation without unintended side effects on real fleet entities).",
+  "timestamp": "2026-09-26T08:14:42.224Z"
+}
