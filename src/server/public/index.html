@@ -5,78 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FlytBase Autonomous QA — Live Control Panel</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'/></svg>" />
-    <style>
+  
+  <!-- Premium Google Fonts: Plus Jakarta Sans (Headings), Inter (Body), JetBrains Mono (Terminal/Code) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
     /* ==========================================================================
-       Design System Variables & Light Theme (FlytBase Autonomous QA)
-       Clean, Professional, Enterprise Light Dashboard
+       Design System Variables — Enterprise Light Theme
        ========================================================================== */
     :root {
-      /* Base Surface & Background */
-      --bg-base: #f8fafc;
+      --bg-app: #f8fafc;
       --bg-surface: #ffffff;
-      --bg-card: #ffffff;
-      --bg-card-hover: #f8fafc;
-      --bg-card-active: #f1f5f9;
+      --bg-surface-hover: #f1f5f9;
+      --bg-surface-active: #e2e8f0;
+      
       --border-subtle: #e2e8f0;
       --border-strong: #cbd5e1;
+      --border-focus: #3b82f6;
 
-      /* High-Contrast Neutral Typography */
       --text-main: #0f172a;
       --text-muted: #475569;
-      --text-dim: #64748b;
+      --text-dim: #94a3b8;
 
-      /* Status Colors - Light Adapted */
+      --accent-blue: #2563eb;
+      --accent-blue-hover: #1d4ed8;
+      --accent-blue-light: #eff6ff;
+      --accent-blue-border: #bfdbfe;
+
+      --accent-purple: #7c3aed;
+      --accent-purple-light: #f5f3ff;
+      --accent-purple-border: #ddd6fe;
+
       --status-pass: #16a34a;
       --status-pass-bg: #f0fdf4;
       --status-pass-border: #bbf7d0;
-      --status-pass-text: #15803d;
 
       --status-fail: #dc2626;
       --status-fail-bg: #fef2f2;
       --status-fail-border: #fecaca;
-      --status-fail-text: #b91c1c;
 
-      --status-inconclusive: #d97706;
-      --status-inconclusive-bg: #fffbeb;
-      --status-inconclusive-border: #fde68a;
-      --status-inconclusive-text: #b45309;
+      --status-warn: #d97706;
+      --status-warn-bg: #fffbeb;
+      --status-warn-border: #fde68a;
 
-      --status-running: #2563eb;
-      --status-running-bg: #eff6ff;
-      --status-running-border: #bfdbfe;
-      --status-running-text: #1d4ed8;
-
-      /* Confident Accent Color (Deep Indigo/Blue) */
-      --accent-blue: #2563eb;
-      --accent-blue-hover: #1d4ed8;
-      --accent-blue-bg: #eff6ff;
-      --accent-blue-border: #bfdbfe;
-
-      /* Secondary Accent for AI Feature Planner */
-      --accent-purple: #7c3aed;
-      --accent-purple-hover: #6d28d9;
-      --accent-purple-bg: #f5f3ff;
-      --accent-purple-border: #ddd6fe;
-
-      /* Embedded Developer Terminal */
       --terminal-bg: #020617;
-      --terminal-header: #0f172a;
       --terminal-border: #1e293b;
+      --terminal-text: #f8fafc;
 
-      /* Elevations & Radii */
+      --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, "SF Mono", monospace;
+
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 14px;
       --radius-xl: 18px;
 
       --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
       --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-      --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-      --shadow-card-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
-      --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Fira Code", monospace;
     }
 
     * {
@@ -85,252 +74,200 @@
       padding: 0;
     }
 
-    body {
-      background-color: var(--bg-base);
+    html, body {
+      height: 100%;
+      background-color: var(--bg-app);
       color: var(--text-main);
       font-family: var(--font-sans);
+      font-size: 14px;
       line-height: 1.5;
-      padding: 24px;
-      min-height: 100vh;
+      overflow: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Container */
-    .control-panel-container {
-      max-width: 1560px;
-      margin: 0 auto;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      letter-spacing: -0.02em;
     }
 
     /* ==========================================================================
-       Header Banner
+       Top Navigation Bar
        ========================================================================== */
-    .header-banner {
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 24px 32px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header-banner::before {
-      content: "";
-      position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .header-top {
+    .app-header {
+      height: 64px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 8px;
+      padding: 0 24px;
+      z-index: 50;
+      position: relative;
     }
 
-    .header-brand {
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .header-logo {
-      width: 44px;
-      height: 44px;
-      background: var(--accent-blue);
-      border: 1px solid var(--accent-blue-hover);
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
     }
 
-    .header-title-group h1 {
-      font-size: 23px;
+    .brand-title {
+      font-size: 17px;
       font-weight: 700;
-      letter-spacing: -0.02em;
       color: #0f172a;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .header-title-group p {
-      font-size: 13.5px;
-      color: var(--text-muted);
-      margin-top: 3px;
+    .brand-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue-border);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .header-meta {
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .status-pill {
-      display: inline-flex;
+    .system-status {
+      display: flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 12.5px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      border: 1px solid var(--status-pass-border);
-      background: var(--status-pass-bg);
-      color: var(--status-pass-text);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-app);
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
     }
 
-    .status-beacon {
+    .status-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--status-pass);
-      box-shadow: 0 0 6px var(--status-pass);
-      animation: pulse-beacon 2s infinite ease-in-out;
+      background: #16a34a;
+      box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
     }
 
-    .status-beacon.disconnected {
-      background: var(--status-fail);
-      box-shadow: 0 0 6px var(--status-fail);
-      animation: none;
+    .status-dot.pulsing {
+      animation: pulse-dot 1.5s infinite;
     }
 
-    @keyframes pulse-beacon {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.9); }
+    @keyframes pulse-dot {
+      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); background: #2563eb; }
+      70% { box-shadow: 0 0 0 6px rgba(37, 99, 235, 0); background: #2563eb; }
+      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); background: #2563eb; }
     }
 
-    .badge-count {
-      background: var(--accent-blue-bg);
-      border: 1px solid var(--accent-blue-border);
-      color: var(--status-running-text);
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 12.5px;
+    .header-stat-pill {
+      font-size: 12px;
       font-weight: 600;
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      background: var(--bg-app);
+      border: 1px solid var(--border-subtle);
     }
 
-    .btn-refresh {
-      background: #ffffff;
-      border: 1px solid var(--border-strong);
-      color: var(--text-main);
-      padding: 6px 13px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12.5px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow-sm);
+    .header-stat-pill strong {
+      color: var(--accent-blue);
     }
 
-    .btn-refresh:hover {
-      background: #f8fafc;
-      color: #0f172a;
-      border-color: #94a3b8;
-    }
-
-    .btn-refresh svg {
-      transition: transform 0.4s ease;
-    }
-
-    .btn-refresh:active svg {
-      transform: rotate(180deg);
-    }
-
-    /* ==========================================================================
-       Stats Strip
-       ========================================================================== */
-    .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .stat-card {
-      background: #ffffff;
+    .btn-icon {
+      background: transparent;
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 16px 20px;
+      padding: 8px 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 16px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s, box-shadow 0.2s;
+      gap: 6px;
+      transition: all 0.15s ease;
     }
 
-    .stat-card:hover {
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .stat-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .stat-info .stat-val {
-      font-size: 22px;
-      font-weight: 700;
-      color: #0f172a;
-      line-height: 1.2;
-    }
-
-    .stat-info .stat-lbl {
-      font-size: 11.5px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      margin-top: 2px;
+    .btn-icon:hover {
+      background: var(--bg-surface-hover);
+      color: var(--text-main);
+      border-color: var(--border-strong);
     }
 
     /* ==========================================================================
-       Controls & Filter Toolbar
+       Master-Detail Workspace Layout
        ========================================================================== */
-    .controls-toolbar {
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 16px 20px;
-      margin-bottom: 24px;
+    .workspace-layout {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       SIDEBAR (Master List)
+       ========================================================================== */
+    .sidebar-panel {
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      box-shadow: var(--shadow-sm);
+      height: 100%;
+      overflow: hidden;
     }
 
-    @media (min-width: 860px) {
-      .controls-toolbar {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
+    .sidebar-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .search-wrapper {
+    .search-box {
       position: relative;
-      flex: 1;
-      max-width: 440px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 9px 12px 9px 36px;
+      font-size: 13px;
+      font-family: var(--font-sans);
+      color: var(--text-main);
+      background: var(--bg-app);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      background: #ffffff;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
     }
 
     .search-icon {
@@ -342,561 +279,565 @@
       pointer-events: none;
     }
 
-    .search-input {
-      width: 100%;
-      background: #ffffff;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-md);
-      padding: 10px 38px 10px 38px;
-      font-size: 13.5px;
-      color: var(--text-main);
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
-    }
-
-    .search-input:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    }
-
-    .search-clear-btn {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: transparent;
-      border: none;
-      color: var(--text-dim);
-      cursor: pointer;
-      font-size: 16px;
-      padding: 2px;
-      display: none;
-    }
-
-    .search-clear-btn:hover {
-      color: var(--text-main);
-    }
-
     .filter-tabs {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 6px;
+      background: var(--bg-app);
+      padding: 4px;
+      border-radius: var(--radius-md);
     }
 
     .filter-tab {
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 500;
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 12px;
+      font-weight: 600;
       color: var(--text-muted);
+      background: transparent;
+      border: none;
+      border-radius: var(--radius-sm);
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
-    }
-
-    .filter-tab:hover {
-      background: #f8fafc;
-      color: var(--text-main);
-      border-color: var(--border-strong);
+      text-align: center;
+      transition: all 0.15s ease;
+      white-space: nowrap;
     }
 
     .filter-tab.active {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
-      color: #ffffff;
-      font-weight: 600;
-      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+      background: #ffffff;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
     }
 
-    .tab-badge {
-      font-size: 11px;
+    .filter-tab:hover:not(.active) {
+      color: var(--text-main);
+    }
+
+    .sidebar-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Test Case Sidebar Item */
+    .test-item {
+      padding: 14px 16px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+
+    .test-item:hover {
+      background: var(--bg-surface-hover);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .test-item.selected {
+      background: #ffffff;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 1.5px var(--accent-blue), var(--shadow-sm);
+    }
+
+    .test-item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .type-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
       padding: 2px 7px;
-      border-radius: 9999px;
-      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    .type-badge.planner {
+      background: var(--accent-purple-light);
+      color: var(--accent-purple);
+      border: 1px solid var(--accent-purple-border);
+    }
+
+    .type-badge.spec {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue-border);
+    }
+
+    /* Sidebar Category Section Header */
+    .sidebar-category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 4px 6px 4px;
+      margin-top: 8px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .sidebar-category-header:first-of-type {
+      margin-top: 0;
+      border-top: none;
+      padding-top: 2px;
+    }
+
+    .cat-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cat-icon {
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .cat-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: #475569;
     }
 
-    .filter-tab.active .tab-badge {
-      background: rgba(255, 255, 255, 0.25);
-      color: #ffffff;
+    .cat-count-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 9999px;
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Category Badges for Items & Detail Panel */
+    .cat-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 2.5px 8px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .cat-autonomous-feature-testing {
+      background: #f5f3ff;
+      color: #7c3aed;
+      border: 1px solid #ddd6fe;
+    }
+
+    .cat-visual-ui {
+      background: #fdf2f8;
+      color: #db2777;
+      border: 1px solid #fbcfe8;
+    }
+
+    .cat-responsive-ui {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+
+    .cat-functional-ui {
+      background: #fff1f2;
+      color: #e11d48;
+      border: 1px solid #fecdd3;
+    }
+
+    .cat-live-data--freshness {
+      background: #ecfeff;
+      color: #0891b2;
+      border: 1px solid #a5f3fc;
+    }
+
+    .cat-basic-security {
+      background: #f0fdf4;
+      color: #059669;
+      border: 1px solid #a7f3d0;
+    }
+
+    .cat-api--data-contract {
+      background: #eef2ff;
+      color: #4338ca;
+      border: 1px solid #c7d2fe;
+    }
+
+    .cat-semantic-element-understanding {
+      background: #f0f9ff;
+      color: #0284c7;
+      border: 1px solid #bae6fd;
+    }
+
+    .cat-autonomous-browser-agent {
+      background: #faf5ff;
+      color: #9333ea;
+      border: 1px solid #e9d5ff;
+    }
+
+    .cat-performance-under-load {
+      background: #fff7ed;
+      color: #ea580c;
+      border: 1px solid #fed7aa;
+    }
+
+    .cat-default {
+      background: #f8fafc;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    .item-status-pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .item-status-pill.idle {
+      background: var(--bg-app);
+      color: var(--text-dim);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .item-status-pill.running {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue-border);
+    }
+
+    .item-status-pill.passed {
+      background: var(--status-pass-bg);
+      color: var(--status-pass);
+      border: 1px solid var(--status-pass-border);
+    }
+
+    .item-status-pill.failed {
+      background: var(--status-fail-bg);
+      color: var(--status-fail);
+      border: 1px solid var(--status-fail-border);
+    }
+
+    .item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .item-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     /* ==========================================================================
-       Test Cases Grid
+       DETAIL PANEL (Single Detail View)
        ========================================================================== */
-    .test-cases-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+    .detail-panel {
+      background: var(--bg-app);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    /* Sticky Action Header */
+    .detail-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 20px 32px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .detail-info {
+      flex: 1;
+    }
+
+    .detail-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .detail-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .detail-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+    }
+
+    .detail-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      max-width: 900px;
+    }
+
+    .detail-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-run {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      color: #ffffff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+      transition: all 0.15s ease;
+    }
+
+    .btn-run:hover:not(:disabled) {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-run:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-stop {
+      background: #ffffff;
+      color: var(--status-fail);
+      border: 1px solid var(--status-fail-border);
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-stop:hover {
+      background: var(--status-fail-bg);
+    }
+
+    /* Detail Tabs: Live Execution vs Verdicts */
+    .detail-nav-tabs {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 32px;
+      display: flex;
       gap: 24px;
     }
 
-    @media (min-width: 1280px) {
-      .test-cases-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .nav-tab {
+      padding: 14px 4px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+    }
+
+    .nav-tab.active {
+      color: var(--accent-blue);
+      border-bottom-color: var(--accent-blue);
+    }
+
+    .nav-tab:hover:not(.active) {
+      color: var(--text-main);
+    }
+
+    .tab-counter {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      background: var(--bg-app);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Detail Body Content Area */
+    .detail-body {
+      padding: 24px 32px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+    }
+
+    /* ==========================================================================
+       LIVE EXECUTION VIEW: Split Viewport & Console
+       ========================================================================== */
+    .live-execution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      min-height: 480px;
+    }
+
+    @media (max-width: 1200px) {
+      .live-execution-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    /* Card Item */
-    .test-card {
+    /* Card Containers */
+    .view-card {
       background: #ffffff;
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s ease-out;
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--shadow-sm);
     }
 
-    .test-card:hover {
-      border-color: #cbd5e1;
-      box-shadow: var(--shadow-card-hover);
-      transform: translateY(-2px);
-    }
-
-    .test-card.is-running {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 1px #3b82f6, 0 8px 24px rgba(37, 99, 235, 0.12);
-    }
-
-    .test-card.is-passed {
-      border-color: #86efac;
-      box-shadow: 0 0 0 1px #86efac, 0 6px 20px rgba(22, 163, 74, 0.08);
-    }
-
-    .test-card.is-failed {
-      border-color: #fca5a5;
-      box-shadow: 0 0 0 1px #fca5a5, 0 6px 20px rgba(220, 38, 38, 0.08);
-    }
-
-    /* Card Top */
-    .card-top {
-      padding: 20px 24px 16px 24px;
+    .view-card-header {
+      padding: 12px 20px;
+      background: #ffffff;
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
-      flex-direction: column;
-      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .card-badges-row {
+    .view-card-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0f172a;
       display: flex;
-      justify-content: space-between;
       align-items: center;
       gap: 8px;
     }
 
-    .card-type-badge {
-      font-size: 11.5px;
-      font-weight: 600;
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      display: inline-flex;
+    /* Double-Buffered Live Frame Container (Zero-Flicker) */
+    .live-frame-viewport {
+      flex: 1;
+      background: #0f172a;
+      position: relative;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      letter-spacing: 0.03em;
+      justify-content: center;
+      min-height: 380px;
+      overflow: hidden;
     }
 
-    .badge-planner {
-      background: var(--accent-purple-bg);
-      color: var(--accent-purple);
-      border: 1px solid var(--accent-purple-border);
+    .live-frame-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+      transition: opacity 0.15s ease-in-out;
     }
 
-    .badge-spec {
-      background: var(--accent-blue-bg);
-      color: var(--accent-blue);
-      border: 1px solid var(--accent-blue-border);
+    .live-frame-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      gap: 12px;
+      padding: 32px;
+      text-align: center;
     }
 
-    .card-state-pill {
+    .live-frame-placeholder svg {
+      color: #334155;
+    }
+
+    .live-frame-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #f8fafc;
       font-size: 11px;
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 9999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      letter-spacing: 0.02em;
-    }
-
-    .state-idle {
-      background: #f1f5f9;
-      color: #64748b;
-      border: 1px solid #e2e8f0;
-    }
-
-    .state-running {
-      background: var(--status-running-bg);
-      color: var(--status-running-text);
-      border: 1px solid var(--status-running-border);
-      animation: pulse-border 1.5s infinite;
-    }
-
-    @keyframes pulse-border {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-
-    .state-pass {
-      background: var(--status-pass-bg);
-      color: var(--status-pass-text);
-      border: 1px solid var(--status-pass-border);
-    }
-
-    .state-fail {
-      background: var(--status-fail-bg);
-      color: var(--status-fail-text);
-      border: 1px solid var(--status-fail-border);
-    }
-
-    /* Typography hierarchy: Title is most prominent */
-    .card-title {
-      font-size: 17.5px;
-      font-weight: 700;
-      color: #0f172a;
-      line-height: 1.35;
-    }
-
-    .card-meta-row {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-      color: var(--text-dim);
-      flex-wrap: wrap;
-    }
-
-    .card-id-chip {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      padding: 2px 8px;
-      border-radius: 4px;
-      color: #475569;
-    }
-
-    .tag-viewport {
-      font-size: 11px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      color: #475569;
-      padding: 2px 8px;
-      border-radius: 4px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .card-description {
-      font-size: 13.5px;
-      color: #475569;
-      line-height: 1.55;
-    }
-
-    /* Card Action Bar */
-    .card-action-bar {
-      padding: 12px 24px;
-      background: #f8fafc;
-      border-bottom: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .action-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-run {
-      background: var(--accent-blue);
-      color: #ffffff;
-      border: 1px solid #1d4ed8;
-      border-radius: var(--radius-sm);
-      padding: 8px 18px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-run:hover:not(:disabled) {
-      background: var(--accent-blue-hover);
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-      transform: translateY(-1px);
-    }
-
-    .btn-run:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .btn-stop {
-      background: #fef2f2;
-      color: #dc2626;
-      border: 1px solid #fecaca;
-      border-radius: var(--radius-sm);
-      padding: 8px 14px;
-      font-size: 12.5px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s ease;
+      z-index: 10;
     }
 
-    .btn-stop:hover {
-      background: #fee2e2;
-      border-color: #f87171;
-    }
-
-    .action-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .view-tab-btn {
-      background: transparent;
-      border: 1px solid transparent;
-      color: #64748b;
-      font-size: 12.5px;
-      font-weight: 500;
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
-    }
-
-    .view-tab-btn:hover {
-      color: #0f172a;
-      background: #f1f5f9;
-    }
-
-    .view-tab-btn.active {
-      color: #0f172a;
-      background: #ffffff;
-      border-color: var(--border-subtle);
-      font-weight: 600;
-      box-shadow: var(--shadow-sm);
-    }
-
-    /* Spinner Animation */
-    .spinner {
-      width: 14px;
-      height: 14px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-top-color: #ffffff;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* ==========================================================================
-       Live Agent Browser View Panel (Window Frame Design)
-       ========================================================================== */
-    .live-view-panel {
-      background: #0f172a;
-      border-bottom: 1px solid #1e293b;
+    /* Terminal Console */
+    .terminal-container {
+      background: var(--terminal-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--terminal-border);
       display: flex;
       flex-direction: column;
-      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      height: 100%;
+      min-height: 440px;
     }
 
-    .live-view-header {
-      background: #0f172a;
+    .terminal-topbar {
+      background: #090d16;
+      border-bottom: 1px solid var(--terminal-border);
       padding: 10px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #1e293b;
-      font-size: 11.5px;
     }
 
-    .live-view-title-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .live-window-dots {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-right: 4px;
-    }
-
-    .live-window-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    .live-indicator-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #64748b;
-      display: inline-block;
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-
-    .live-indicator-dot.is-active {
-      background: #10b981;
-      animation: liveDotPulse 1.6s ease-in-out infinite;
-    }
-
-    @keyframes liveDotPulse {
-      0% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      }
-      70% {
-        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-      }
-    }
-
-    .live-view-title {
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: #f8fafc;
-      font-size: 11px;
-      font-family: var(--font-mono);
-    }
-
-    .live-badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 4px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-family: var(--font-sans);
-    }
-
-    .badge-live {
-      background: rgba(16, 185, 129, 0.2);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.4);
-    }
-
-    .badge-init {
-      background: rgba(56, 189, 248, 0.2);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-    }
-
-    .badge-unavailable {
-      background: rgba(148, 163, 184, 0.15);
-      color: #94a3b8;
-      border: 1px solid rgba(148, 163, 184, 0.25);
-    }
-
-    .badge-complete {
-      background: rgba(168, 85, 247, 0.2);
-      color: #c084fc;
-      border: 1px solid rgba(168, 85, 247, 0.35);
-    }
-
-    .badge-idle {
-      background: rgba(100, 116, 139, 0.2);
-      color: #94a3b8;
-      border: 1px solid rgba(100, 116, 139, 0.3);
-    }
-
-    .live-view-subtext {
-      color: #94a3b8;
-      font-size: 11px;
-      font-family: var(--font-mono);
-    }
-
-    .live-view-viewport {
-      position: relative;
-      width: 100%;
-      height: 380px;
-      background: #020617;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .live-view-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #020617;
-      display: block;
-    }
-
-    .live-view-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 30px;
-      text-align: center;
-    }
-
-    .live-placeholder-icon {
-      font-size: 32px;
-      opacity: 0.7;
-    }
-
-    .live-placeholder-text {
-      font-size: 13px;
-      color: #94a3b8;
-      max-width: 440px;
-      line-height: 1.45;
-    }
-
-    /* ==========================================================================
-       Terminal Console Stream (Developer Console Embedded inside Card)
-       ========================================================================== */
-    .terminal-container {
-      background: var(--terminal-bg);
-      display: flex;
-      flex-direction: column;
-      border-top: 1px solid var(--terminal-border);
-    }
-
-    .terminal-header {
-      background: var(--terminal-header);
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      font-size: 11.5px;
-      color: #94a3b8;
-    }
-
-    .terminal-controls {
+    .terminal-dots {
       display: flex;
       align-items: center;
       gap: 6px;
@@ -906,430 +847,278 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      display: inline-block;
     }
 
-    .dot-red { background: #ef4444; }
-    .dot-yellow { background: #f59e0b; }
-    .dot-green { background: #10b981; }
-
     .terminal-title {
-      font-family: var(--font-mono);
       color: #94a3b8;
-      margin-left: 8px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      font-weight: 500;
     }
 
     .terminal-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .terminal-btn {
-      background: transparent;
-      border: none;
-      color: #94a3b8;
-      font-size: 11px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s;
-    }
-
-    .terminal-btn:hover {
-      color: #f8fafc;
-    }
-
-    .terminal-body {
-      padding: 14px 18px;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      line-height: 1.6;
-      color: #e2e8f0;
-      max-height: 280px;
-      min-height: 140px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      background: #020617;
-    }
-
-    .terminal-line {
-      margin-bottom: 2px;
-    }
-
-    .log-info { color: #38bdf8; }
-    .log-success { color: #34d399; font-weight: 600; }
-    .log-warn { color: #fbbf24; }
-    .log-error { color: #f87171; font-weight: 600; }
-    .log-timestamp { color: #64748b; margin-right: 6px; }
-    .log-agent { color: #c084fc; font-weight: 600; }
-
-    /* ==========================================================================
-       Scenario Results & Video Reports
-       ========================================================================== */
-    .results-container {
-      padding: 20px 22px;
-      background: #f8fafc;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .verdict-banner {
-      border-radius: var(--radius-md);
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .banner-pass {
-      background: var(--status-pass-bg);
-      border: 1px solid var(--status-pass-border);
-      color: var(--status-pass-text);
-    }
-
-    .banner-fail {
-      background: var(--status-fail-bg);
-      border: 1px solid var(--status-fail-border);
-      color: var(--status-fail-text);
-    }
-
-    .banner-summary-title {
-      font-size: 14px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
       gap: 8px;
     }
 
-    .banner-metrics {
+    .btn-term-tool {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 11.5px;
+      cursor: pointer;
+      padding: 3px 8px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+      font-family: var(--font-sans);
+    }
+
+    .btn-term-tool:hover {
+      background: #1e293b;
+      color: #f8fafc;
+    }
+
+    .terminal-output {
+      flex: 1;
+      padding: 16px 20px;
+      overflow-y: auto;
+      font-family: var(--font-mono);
       font-size: 12.5px;
-      color: var(--text-muted);
+      line-height: 1.6;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .log-line {
+      margin-bottom: 2px;
+    }
+
+    .log-line.log-pass { color: #4ade80; }
+    .log-line.log-fail { color: #f87171; }
+    .log-line.log-warn { color: #fbbf24; }
+    .log-line.log-system { color: #60a5fa; font-weight: 600; }
+    .log-line.log-agent { color: #c084fc; }
+
+    /* ==========================================================================
+       VERDICTS & VIDEO REPORT VIEW
+       ========================================================================== */
+    .report-view-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .verdict-summary-card {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .summary-status-group {
       display: flex;
       align-items: center;
       gap: 16px;
     }
 
-    /* Scenario Card within Result */
-    .scenario-item {
+    .summary-badge-large {
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .summary-badge-large.passed {
+      background: var(--status-pass-bg);
+      color: var(--status-pass);
+      border: 1.5px solid var(--status-pass-border);
+    }
+
+    .summary-badge-large.failed {
+      background: var(--status-fail-bg);
+      color: var(--status-fail);
+      border: 1.5px solid var(--status-fail-border);
+    }
+
+    .summary-metrics {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .metric-item {
+      text-align: right;
+    }
+
+    .metric-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      font-family: var(--font-heading);
+    }
+
+    .metric-lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Scenario Card */
+    .scenario-card {
       background: #ffffff;
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 16px;
+      border-radius: var(--radius-lg);
+      padding: 24px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 20px;
       box-shadow: var(--shadow-sm);
     }
 
-    .scenario-header {
+    .scenario-topbar {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .scenario-title-area {
+      display: flex;
+      align-items: center;
       gap: 12px;
       flex-wrap: wrap;
     }
 
-    .scenario-title-area {
-      flex: 1;
-    }
-
-    .scenario-name {
-      font-size: 15px;
+    .scenario-title {
+      font-size: 16px;
       font-weight: 700;
       color: #0f172a;
-      margin-bottom: 4px;
     }
 
-    .scenario-tags {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .badge-result {
+    .scenario-pill {
       font-size: 11px;
       font-weight: 700;
       padding: 3px 9px;
       border-radius: 9999px;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
     }
 
-    .res-pass {
+    .scenario-pill.pass {
       background: var(--status-pass-bg);
-      color: var(--status-pass-text);
+      color: var(--status-pass);
       border: 1px solid var(--status-pass-border);
     }
 
-    .res-fail {
+    .scenario-pill.fail {
       background: var(--status-fail-bg);
-      color: var(--status-fail-text);
+      color: var(--status-fail);
       border: 1px solid var(--status-fail-border);
     }
 
-    .res-inconclusive {
-      background: var(--status-inconclusive-bg);
-      color: var(--status-inconclusive-text);
-      border: 1px solid var(--status-inconclusive-border);
-    }
-
-    .tag-confidence {
-      font-size: 11px;
-      color: var(--status-running-text);
-      background: var(--accent-blue-bg);
-      border: 1px solid var(--accent-blue-border);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-weight: 600;
+    .scenario-meta-tags {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
     }
 
     /* Video Player */
-    .video-wrapper {
-      position: relative;
+    .video-container {
       background: #020617;
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-md);
       overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      aspect-ratio: 16 / 9;
+      position: relative;
+      width: 100%;
+      max-height: 480px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .scenario-video {
+    .video-player {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #020617;
+      max-height: 480px;
+      display: block;
     }
 
-    .video-placeholder {
+    .video-missing-box {
+      padding: 48px;
+      color: #94a3b8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+    }
+
+    /* Reasoning Box */
+    .reasoning-box {
+      background: var(--bg-app);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .reasoning-heading {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .reasoning-pre {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: #334155;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Empty Placeholder */
+    .empty-placeholder {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      color: #94a3b8;
-      font-size: 13px;
-      padding: 30px;
-      background: #0f172a;
-      width: 100%;
-      height: 100%;
-      border-radius: var(--radius-sm);
-    }
-
-    .placeholder-icon {
-      font-size: 28px;
-      opacity: 0.6;
-    }
-
-    /* Screenshots Strip */
-    .screenshots-strip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 4px 0;
-    }
-
-    .screenshot-thumb {
-      height: 64px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border-subtle);
-      cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .screenshot-thumb:hover {
-      transform: scale(1.04);
-      border-color: var(--accent-blue);
-    }
-
-    /* Reasoning Collapsible */
-    .reasoning-box {
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      background: #f8fafc;
-    }
-
-    .reasoning-toggle-btn {
-      width: 100%;
-      background: #f1f5f9;
-      border: none;
-      color: #475569;
-      padding: 9px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background 0.2s;
-    }
-
-    .reasoning-toggle-btn:hover {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-
-    .reasoning-content {
-      padding: 12px 14px;
-      font-family: var(--font-mono);
-      font-size: 11.5px;
-      line-height: 1.6;
-      color: #334155;
-      white-space: pre-wrap;
-      word-break: break-word;
-      background: #ffffff;
-      border-top: 1px solid var(--border-subtle);
-      max-height: 240px;
-      overflow-y: auto;
-    }
-
-    /* Empty state */
-    .empty-state {
-      padding: 60px 20px;
+      padding: 64px 32px;
       text-align: center;
-      background: #ffffff;
-      border: 1px dashed var(--border-strong);
-      border-radius: var(--radius-lg);
-      color: #64748b;
-      grid-column: 1 / -1;
-      box-shadow: var(--shadow-sm);
+      color: var(--text-dim);
+      gap: 16px;
     }
 
     .empty-icon {
       font-size: 40px;
-      margin-bottom: 12px;
-      opacity: 0.7;
     }
 
     .empty-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #0f172a;
-      margin-bottom: 6px;
-    }
-
-    /* ==========================================================================
-       Modal Lightbox for Full Video / Screenshot
-       ========================================================================== */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(6px);
-      z-index: 9999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .modal-overlay.open {
-      display: flex;
-    }
-
-    .modal-container {
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      max-width: 1000px;
-      width: 100%;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    }
-
-    .modal-header {
-      padding: 14px 20px;
-      background: #ffffff;
-      border-bottom: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .modal-title {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 700;
       color: #0f172a;
     }
 
-    .modal-close-btn {
-      background: transparent;
-      border: none;
-      color: #64748b;
-      font-size: 20px;
-      cursor: pointer;
-      line-height: 1;
+    .empty-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      max-width: 440px;
     }
 
-    .modal-close-btn:hover {
-      color: #0f172a;
-    }
-
-    .modal-content {
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: auto;
-    }
-
-    .modal-content img {
-      max-width: 100%;
-      max-height: 75vh;
-      border-radius: var(--radius-md);
-      object-fit: contain;
-    }
-
-    /* Toast Notification */
-    .toast-container {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      pointer-events: none;
-    }
-
-    .toast {
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 12px 18px;
-      color: #0f172a;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-      animation: toast-in 0.3s ease-out;
-      pointer-events: auto;
-    }
-
-    @keyframes toast-in {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    /* Scrollbar */
+    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -1338,158 +1127,310 @@
       background: transparent;
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(148, 163, 184, 0.5);
-      border-radius: 4px;
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 3px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(100, 116, 139, 0.8);
+      background: rgba(100, 116, 139, 0.7);
     }
   </style>
 </head>
 <body>
 
-  <div class="control-panel-container">
-    
-    <!-- Top Header -->
-    <header class="header-banner">
-      <div class="header-top">
-        <div class="header-brand">
-          <div class="header-logo" title="FlytBase Autonomous QA">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-              <polyline points="2 17 12 22 22 17"></polyline>
-              <polyline points="2 12 12 17 22 12"></polyline>
-            </svg>
-          </div>
-          <div class="header-title-group">
-            <h1>FlytBase Autonomous QA Live Control Panel</h1>
-            <p>Live Midscene-driven agent execution, real-time SSE stream telemetry & automated video verdict verification</p>
-          </div>
+  <!-- Top App Navigation -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-logo" title="FlytBase Autonomous QA">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <div class="brand-title">
+        FlytBase Autonomous QA Live Control Panel
+        <span class="brand-badge">Master-Detail Edition</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="system-status">
+        <span class="status-dot" id="systemStatusDot"></span>
+        <span id="systemStatusText">System Online</span>
+      </div>
+      <div class="header-stat-pill" id="statHeaderTestCount">
+        Total Cases: <strong>0</strong>
+      </div>
+      <button class="btn-icon" onclick="loadTestCases()" title="Reload test cases catalog">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 4v6h-6"></path>
+          <path d="M1 20v-6h6"></path>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <!-- Master-Detail Workspace -->
+  <div class="workspace-layout">
+
+    <!-- MASTER SIDEBAR: Test Cases List -->
+    <aside class="sidebar-panel">
+      <div class="sidebar-header">
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search test cases... (Press '/')" oninput="onSearchInput(this.value)" />
         </div>
 
-        <div class="header-meta">
-          <div class="status-pill">
-            <span class="status-beacon" id="connectionBeacon"></span>
-            <span id="connectionStatus">System Ready</span>
-          </div>
-          <div class="badge-count" id="headerTestCaseCount">
-            0 Test Cases Available
-          </div>
-          <button class="btn-refresh" id="refreshBtn" onclick="loadTestCases()" title="Reload Test Cases">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M23 4v6h-6"></path>
-              <path d="M1 20v-6h6"></path>
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-            </svg>
-            Refresh
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">
+            All (<span id="countAll">0</span>)
+          </button>
+          <button class="filter-tab" data-filter="feature-summary" onclick="setFilter('feature-summary')">
+            ✨ AI Feature (<span id="countFeature">0</span>)
+          </button>
+          <button class="filter-tab" data-filter="spec-file" onclick="setFilter('spec-file')">
+            ⚡ Specs (<span id="countSpec">0</span>)
           </button>
         </div>
       </div>
-    </header>
 
-    <!-- Stats Summary Strip -->
-    <section class="stats-strip">
-      <div class="stat-card">
-        <div class="stat-icon" style="background: #eff6ff; color: #2563eb;">📋</div>
-        <div class="stat-info">
-          <div class="stat-val" id="statTotalSuites">0</div>
-          <div class="stat-lbl">Test Suites</div>
+      <!-- Test Cases Items -->
+      <div class="sidebar-list" id="sidebarList">
+        <!-- Rendered dynamically -->
+        <div class="empty-placeholder">
+          <div class="empty-icon">⏳</div>
+          <div class="empty-title">Loading Test Cases...</div>
         </div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon" style="background: #f5f3ff; color: #7c3aed;">🤖</div>
-        <div class="stat-info">
-          <div class="stat-val" id="statPlannerSuites">0</div>
-          <div class="stat-lbl">AI Feature Suites</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon" style="background: #eff6ff; color: #2563eb;">⚡</div>
-        <div class="stat-info">
-          <div class="stat-val" id="statSpecSuites">0</div>
-          <div class="stat-lbl">Playwright Specs</div>
-        </div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon" style="background: #f0fdf4; color: #16a34a;">✓</div>
-        <div class="stat-info">
-          <div class="stat-val" id="statCompletedRuns">0</div>
-          <div class="stat-lbl">Executed Runs</div>
-        </div>
-      </div>
-    </section>
+    </aside>
 
-    <!-- Controls & Filtering Toolbar -->
-    <section class="controls-toolbar">
-      <div class="search-wrapper">
-        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input 
-          type="text" 
-          id="searchInput" 
-          class="search-input" 
-          placeholder="Filter test cases by title, ID, or description... (Press '/' to search)" 
-          oninput="handleSearchInput()" 
-        />
-        <button id="searchClearBtn" class="search-clear-btn" onclick="clearSearch()" title="Clear search">✕</button>
-      </div>
+    <!-- SINGLE DETAIL PANEL: Selected Test Case Execution & Verdicts -->
+    <main class="detail-panel" id="detailPanel">
+      
+      <!-- Sticky Action Header -->
+      <section class="detail-header" id="detailHeader">
+        <div class="detail-info">
+          <div class="detail-title-row">
+            <span class="type-badge planner" id="detailTypeBadge">AI FEATURE PLANNER</span>
+            <h1 class="detail-title" id="detailTitle">Select a Test Case</h1>
+            <span class="item-status-pill idle" id="detailStatusPill">Idle</span>
+          </div>
 
-      <div class="filter-tabs">
-        <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">
-          All Cases <span class="tab-badge" id="tabCountAll">0</span>
+          <div class="detail-meta-row" id="detailMetaRow">
+            <span>Category: <strong id="detailCategory" style="color: #0f172a;">—</strong></span>
+            <span>ID: <code id="detailId">—</code></span>
+            <span>Target: <code id="detailTarget">FlytBase Cockpit</code></span>
+          </div>
+
+          <p class="detail-desc" id="detailDesc">
+            Choose a test case from the sidebar to inspect details, trigger real-time AI execution, and view full video evidence.
+          </p>
+        </div>
+
+        <div class="detail-actions">
+          <button class="btn-stop" id="btnStopRun" onclick="stopCurrentRun()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+            </svg>
+            Stop
+          </button>
+          <button class="btn-run" id="btnRunTest" onclick="runCurrentTest()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span>Run Test</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- View Navigation Tabs -->
+      <nav class="detail-nav-tabs">
+        <button class="nav-tab active" id="tabNavLive" onclick="switchDetailTab('live')">
+          <span>⚡ Live Execution & Browser Telemetry</span>
+          <span class="tab-counter" id="telemetryLinesBadge">0 Lines</span>
         </button>
-        <button class="filter-tab" data-filter="feature-summary" onclick="setFilter('feature-summary')">
-          ✨ AI Feature Planner <span class="tab-badge" id="tabCountPlanner">0</span>
+        <button class="nav-tab" id="tabNavVerdicts" onclick="switchDetailTab('verdicts')">
+          <span>📋 Verdicts & Video Evidence</span>
+          <span class="tab-counter" id="verdictsCountBadge">0</span>
         </button>
-        <button class="filter-tab" data-filter="spec-file" onclick="setFilter('spec-file')">
-          ⚡ Playwright Specs <span class="tab-badge" id="tabCountSpec">0</span>
-        </button>
-      </div>
-    </section>
+      </nav>
 
-    <!-- Test Cases Grid -->
-    <main class="test-cases-grid" id="testCasesGrid">
-      <!-- Injected dynamically via JS -->
-      <div class="empty-state">
-        <div class="empty-icon">⏳</div>
-        <div class="empty-title">Loading Autonomous QA Test Suites...</div>
-        <p>Connecting to backend API at /api/test-cases</p>
+      <!-- Detail Body Container -->
+      <div class="detail-body">
+
+        <!-- TAB 1: Live Execution & Browser Telemetry -->
+        <div id="viewLiveExecution" class="live-execution-grid">
+          
+          <!-- Double-Buffered Live Browser Frame Viewport -->
+          <div class="view-card">
+            <div class="view-card-header">
+              <span class="view-card-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                Live Browser Surface
+              </span>
+              <span class="live-frame-badge" id="liveFrameStatusBadge">
+                <span class="status-dot" style="background: #94a3b8;"></span>
+                <span>Standby</span>
+              </span>
+            </div>
+
+            <div class="live-frame-viewport" id="liveFrameViewport">
+              <!-- Actual double-buffered image element -->
+              <img id="liveFrameImg" class="live-frame-img" alt="Live browser frame" />
+              
+              <!-- Placeholder when inactive -->
+              <div class="live-frame-placeholder" id="liveFramePlaceholder">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <div style="font-weight: 600; color: #94a3b8; font-size: 14px;">Browser Standby</div>
+                <div style="font-size: 12px; color: #64748b; max-width: 260px;">
+                  Frames stream live with double-buffered swap during execution without flicker.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Real-Time SSE Terminal Console -->
+          <div class="terminal-container">
+            <div class="terminal-topbar">
+              <div class="terminal-dots">
+                <div class="terminal-dot" style="background: #ef4444;"></div>
+                <div class="terminal-dot" style="background: #eab308;"></div>
+                <div class="terminal-dot" style="background: #22c55e;"></div>
+                <span class="terminal-title" id="terminalTitle">sse-stream.log</span>
+              </div>
+              <div class="terminal-actions">
+                <button class="btn-term-tool" onclick="copyActiveLogs()">Copy Logs</button>
+                <button class="btn-term-tool" onclick="clearActiveLogs()">Clear</button>
+              </div>
+            </div>
+
+            <div class="terminal-output" id="terminalOutput">
+              <div class="log-line log-system">=== FlytBase Autonomous QA Live Stream Console ===</div>
+              <div class="log-line">Select a test case and click "Run Test" to observe live output...</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TAB 2: Verdicts & Video Evidence -->
+        <div id="viewVerdicts" class="report-view-container" style="display: none;">
+          <!-- Injected dynamically -->
+          <div class="empty-placeholder" id="verdictsPlaceholder">
+            <div class="empty-icon">📹</div>
+            <div class="empty-title">No Verdicts or Videos Yet</div>
+            <div class="empty-desc">
+              Execute this test case to generate pass/fail verdicts, AI confidence ratings, and recorded video evidence.
+            </div>
+          </div>
+
+          <div id="verdictsContent" style="display: none; display: flex; flex-direction: column; gap: 20px;">
+            <!-- Summary Card -->
+            <div class="verdict-summary-card" id="verdictSummaryCard">
+              <div class="summary-status-group">
+                <div class="summary-badge-large passed" id="summaryBadgeLarge">
+                  <span>✓</span>
+                  <span id="summaryBadgeText">VERIFIED PASS</span>
+                </div>
+                <div>
+                  <div style="font-size: 14px; font-weight: 700; color: #0f172a;" id="summaryTitleText">All Scenarios Passed</div>
+                  <div style="font-size: 12px; color: var(--text-muted);" id="summarySubtext">Autonomous AI agent confirmed requirements</div>
+                </div>
+              </div>
+
+              <div class="summary-metrics">
+                <div class="metric-item">
+                  <div class="metric-val" id="metricTotal">0</div>
+                  <div class="metric-lbl">Total Scenarios</div>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-val" style="color: var(--status-pass);" id="metricPassed">0</div>
+                  <div class="metric-lbl">Passed</div>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-val" style="color: var(--status-fail);" id="metricFailed">0</div>
+                  <div class="metric-lbl">Failed</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scenarios List -->
+            <div id="scenariosList" style="display: flex; flex-direction: column; gap: 16px;"></div>
+          </div>
+        </div>
+
       </div>
     </main>
 
   </div>
 
-  <!-- Fullscreen Lightbox Modal -->
-  <div class="modal-overlay" id="mediaModal" onclick="closeModal(event)">
-    <div class="modal-container" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <span class="modal-title" id="modalTitle">Evidence Media</span>
-        <button class="modal-close-btn" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-content" id="modalContent"></div>
-    </div>
-  </div>
-
-  <!-- Toast Notification Container -->
-  <div class="toast-container" id="toastContainer"></div>
-
-  <!-- Application Logic -->
   <script>
     /**
      * Application State
      */
     const state = {
       testCases: [],
+      filteredCases: [],
+      selectedTestCaseId: null,
       activeFilter: 'all',
       searchQuery: '',
-      // Map of testCaseId -> { runId, evtSource, logs: string[], status: 'idle'|'running'|'complete'|'failed', result: any, activeTab: 'logs'|'verdict' }
+      activeDetailTab: 'live', // 'live' | 'verdicts'
+      
+      // Independent background state tracking per test case ID:
+      // runs[testCaseId] = {
+      //   runId: string,
+      //   status: 'idle' | 'running' | 'complete' | 'failed',
+      //   logs: string[],
+      //   scenarios: ScenarioVerdict[],
+      //   evtSource: EventSource | null,
+      //   liveFrameInterval: number | null
+      // }
       runs: {}
     };
 
     /**
-     * Initializes the Control Panel on page load
+     * Level 1 Brief Categories Specification & Metadata
+     */
+    const LEVEL1_CATEGORIES_ORDER = [
+      'Autonomous Feature Testing',
+      'Visual UI',
+      'Responsive UI',
+      'Functional UI',
+      'Live Data & Freshness',
+      'Basic Security',
+      'API & Data Contract',
+      'Semantic Element Understanding',
+      'Autonomous Browser Agent',
+      'Performance Under Load',
+    ];
+
+    const CATEGORY_META = {
+      'Autonomous Feature Testing': { icon: '🤖', slug: 'cat-autonomous-feature-testing' },
+      'Visual UI': { icon: '🎨', slug: 'cat-visual-ui' },
+      'Responsive UI': { icon: '📱', slug: 'cat-responsive-ui' },
+      'Functional UI': { icon: '🧪', slug: 'cat-functional-ui' },
+      'Live Data & Freshness': { icon: '📡', slug: 'cat-live-data--freshness' },
+      'Basic Security': { icon: '🛡️', slug: 'cat-basic-security' },
+      'API & Data Contract': { icon: '🔌', slug: 'cat-api--data-contract' },
+      'Semantic Element Understanding': { icon: '🧠', slug: 'cat-semantic-element-understanding' },
+      'Autonomous Browser Agent': { icon: '🌐', slug: 'cat-autonomous-browser-agent' },
+      'Performance Under Load': { icon: '⚡', slug: 'cat-performance-under-load' },
+    };
+
+    /**
+     * Initialize on DOM Load
      */
     document.addEventListener('DOMContentLoaded', () => {
       loadTestCases();
@@ -1504,29 +1445,662 @@
     });
 
     /**
-     * Utility: Toast Notifications
+     * Fetches Test Cases from Backend
      */
-    function showToast(message, type = 'info') {
-      const container = document.getElementById('toastContainer');
-      const toast = document.createElement('div');
-      toast.className = 'toast';
-      
-      const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warn' ? '⚠️' : 'ℹ️';
-      toast.innerHTML = `<span>${icon}</span><span>${escapeHtml(message)}</span>`;
-      container.appendChild(toast);
+    async function loadTestCases() {
+      try {
+        const res = await fetch('/api/test-cases');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        
+        state.testCases = data;
+        
+        // Initialize background state for any new test cases
+        data.forEach(tc => {
+          if (!state.runs[tc.id]) {
+            state.runs[tc.id] = {
+              runId: null,
+              status: 'idle',
+              logs: [],
+              scenarios: [],
+              evtSource: null,
+              liveFrameInterval: null
+            };
+          }
+        });
 
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.4s ease';
-        setTimeout(() => toast.remove(), 400);
-      }, 4000);
+        updateFilterCounts();
+        applyFilterAndSearch();
+
+        // Default select first test case if none selected
+        if (!state.selectedTestCaseId && state.filteredCases.length > 0) {
+          selectTestCase(state.filteredCases[0].id);
+        } else if (state.selectedTestCaseId) {
+          renderDetailPanel();
+        }
+      } catch (err) {
+        console.error('Failed to load test cases:', err);
+        document.getElementById('sidebarList').innerHTML = `
+          <div class="empty-placeholder">
+            <div class="empty-icon">⚠️</div>
+            <div class="empty-title">Failed to Load Test Cases</div>
+            <div class="empty-desc">${escapeHtml(err.message)}</div>
+          </div>
+        `;
+      }
     }
 
     /**
-     * Utility: HTML Entity Escaping
+     * Updates category counters
+     */
+    function updateFilterCounts() {
+      const all = state.testCases.length;
+      const feature = state.testCases.filter(t => t.type === 'feature-summary').length;
+      const spec = state.testCases.filter(t => t.type === 'spec-file').length;
+
+      document.getElementById('countAll').innerText = all;
+      document.getElementById('countFeature').innerText = feature;
+      document.getElementById('countSpec').innerText = spec;
+      document.getElementById('statHeaderTestCount').innerHTML = `Total Cases: <strong>${all}</strong>`;
+    }
+
+    /**
+     * Tab Filter Setter
+     */
+    function setFilter(filter) {
+      state.activeFilter = filter;
+      document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.getAttribute('data-filter') === filter);
+      });
+      applyFilterAndSearch();
+    }
+
+    /**
+     * Search Input Handler
+     */
+    function onSearchInput(query) {
+      state.searchQuery = query.trim().toLowerCase();
+      applyFilterAndSearch();
+    }
+
+    /**
+     * Applies filter & search, renders sidebar list
+     */
+    function applyFilterAndSearch() {
+      state.filteredCases = state.testCases.filter(tc => {
+        const matchesFilter = state.activeFilter === 'all' || tc.type === state.activeFilter;
+        const matchesQuery = !state.searchQuery ||
+          tc.title.toLowerCase().includes(state.searchQuery) ||
+          (tc.description && tc.description.toLowerCase().includes(state.searchQuery)) ||
+          (tc.category && tc.category.toLowerCase().includes(state.searchQuery)) ||
+          tc.id.toLowerCase().includes(state.searchQuery);
+        return matchesFilter && matchesQuery;
+      });
+
+      renderSidebarList();
+    }
+
+    /**
+     * Renders Master Sidebar List Grouped by Level 1 Categories
+     */
+    function renderSidebarList() {
+      const container = document.getElementById('sidebarList');
+      if (state.filteredCases.length === 0) {
+        container.innerHTML = `
+          <div class="empty-placeholder">
+            <div class="empty-icon">🔍</div>
+            <div class="empty-title">No Matching Test Cases</div>
+            <div class="empty-desc">Try adjusting your filter or search query.</div>
+          </div>
+        `;
+        return;
+      }
+
+      // Group filtered cases by Level 1 category
+      const groups = {};
+      state.filteredCases.forEach(tc => {
+        const cat = tc.category || 'General';
+        if (!groups[cat]) groups[cat] = [];
+        groups[cat].push(tc);
+      });
+
+      // Sort categories according to Level 1 brief
+      const presentCategories = Object.keys(groups).sort((a, b) => {
+        const idxA = LEVEL1_CATEGORIES_ORDER.indexOf(a);
+        const idxB = LEVEL1_CATEGORIES_ORDER.indexOf(b);
+        if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+        if (idxA !== -1) return -1;
+        if (idxB !== -1) return 1;
+        return a.localeCompare(b);
+      });
+
+      let html = '';
+      presentCategories.forEach(catName => {
+        const items = groups[catName];
+        const meta = CATEGORY_META[catName] || { icon: '📌', slug: 'cat-default' };
+
+        html += `
+          <div class="sidebar-category-header">
+            <div class="cat-title-wrap">
+              <span class="cat-icon">${meta.icon}</span>
+              <span class="cat-title">${escapeHtml(catName)}</span>
+            </div>
+            <span class="cat-count-badge">${items.length}</span>
+          </div>
+        `;
+
+        items.forEach(tc => {
+          const isSelected = tc.id === state.selectedTestCaseId;
+          const runState = state.runs[tc.id] || { status: 'idle' };
+          
+          let statusBadgeHtml = '<span class="item-status-pill idle">Idle</span>';
+          if (runState.status === 'running') {
+            statusBadgeHtml = '<span class="item-status-pill running"><span class="status-dot pulsing" style="background:#2563eb; width:6px; height:6px;"></span> Running</span>';
+          } else if (runState.status === 'complete') {
+            const hasFail = runState.scenarios.some(s => s.result === 'fail');
+            if (hasFail) {
+              statusBadgeHtml = '<span class="item-status-pill failed">✕ Failed</span>';
+            } else {
+              statusBadgeHtml = '<span class="item-status-pill passed">✓ Passed</span>';
+            }
+          }
+
+          html += `
+            <div class="test-item ${isSelected ? 'selected' : ''}" onclick="selectTestCase('${escapeHtml(tc.id)}')">
+              <div class="test-item-top">
+                <span class="cat-badge ${meta.slug}">${escapeHtml(tc.category || tc.type)}</span>
+                ${statusBadgeHtml}
+              </div>
+              <div class="item-title">${escapeHtml(tc.title)}</div>
+              <div class="item-desc">${escapeHtml(tc.description || tc.summary || '')}</div>
+            </div>
+          `;
+        });
+      });
+
+      container.innerHTML = html;
+    }
+
+    /**
+     * Selects a Test Case and Renders Detail Panel
+     */
+    function selectTestCase(id) {
+      state.selectedTestCaseId = id;
+      renderSidebarList();
+      renderDetailPanel();
+    }
+
+    /**
+     * Renders Detail Panel for Selected Test Case
+     */
+    function renderDetailPanel() {
+      const tc = state.testCases.find(t => t.id === state.selectedTestCaseId);
+      if (!tc) return;
+
+      const runState = state.runs[tc.id] || { status: 'idle', logs: [], scenarios: [] };
+
+      // Update Header Info
+      document.getElementById('detailTitle').innerText = tc.title;
+      document.getElementById('detailId').innerText = tc.id;
+      document.getElementById('detailDesc').innerText = tc.description || tc.summary || 'No description provided.';
+      
+      const meta = CATEGORY_META[tc.category] || { icon: '📌', slug: 'cat-default' };
+      const typeBadge = document.getElementById('detailTypeBadge');
+      typeBadge.className = `cat-badge ${meta.slug}`;
+      typeBadge.innerHTML = `<span>${meta.icon}</span> <span>${escapeHtml(tc.category ? tc.category.toUpperCase() : (tc.type === 'feature-summary' ? 'AI FEATURE PLANNER' : 'PLAYWRIGHT SPEC'))}</span>`;
+
+      const catEl = document.getElementById('detailCategory');
+      if (catEl) catEl.innerText = tc.category || 'General';
+
+      if (tc.type === 'feature-summary') {
+        document.getElementById('detailTarget').innerText = 'FlytBase Cockpit (Dynamic Plan)';
+      } else {
+        document.getElementById('detailTarget').innerText = tc.file ? `${tc.file}` : 'Playwright Suite';
+      }
+
+      // Update Action Buttons & Status Pill
+      const runBtn = document.getElementById('btnRunTest');
+      const stopBtn = document.getElementById('btnStopRun');
+      const statusPill = document.getElementById('detailStatusPill');
+
+      if (runState.status === 'running') {
+        runBtn.disabled = true;
+        runBtn.innerHTML = `
+          <span class="status-dot pulsing" style="background:#ffffff; width:7px; height:7px;"></span>
+          <span>Running...</span>
+        `;
+        stopBtn.style.display = 'inline-flex';
+        statusPill.className = 'item-status-pill running';
+        statusPill.innerHTML = '<span class="status-dot pulsing" style="background:#2563eb; width:6px; height:6px;"></span> Running Active';
+      } else {
+        runBtn.disabled = false;
+        runBtn.innerHTML = `
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>Run Test</span>
+        `;
+        stopBtn.style.display = 'none';
+
+        if (runState.status === 'complete') {
+          const hasFail = runState.scenarios.some(s => s.result === 'fail');
+          if (hasFail) {
+            statusPill.className = 'item-status-pill failed';
+            statusPill.innerText = '✕ Completed with Findings';
+          } else {
+            statusPill.className = 'item-status-pill passed';
+            statusPill.innerText = '✓ Verified Passed';
+          }
+        } else {
+          statusPill.className = 'item-status-pill idle';
+          statusPill.innerText = 'Ready to Run';
+        }
+      }
+
+      // Update Counters
+      document.getElementById('telemetryLinesBadge').innerText = `${runState.logs.length} Lines`;
+      document.getElementById('verdictsCountBadge').innerText = runState.scenarios.length;
+
+      // Render Logs
+      renderLogs(runState.logs);
+
+      // Render Live Frame state
+      updateLiveFrameView(tc.id);
+
+      // Render Verdicts
+      renderVerdicts(runState.scenarios);
+    }
+
+    /**
+     * Tab Switcher inside Detail View
+     */
+    function switchDetailTab(tab) {
+      state.activeDetailTab = tab;
+      document.getElementById('tabNavLive').classList.toggle('active', tab === 'live');
+      document.getElementById('tabNavVerdicts').classList.toggle('active', tab === 'verdicts');
+
+      document.getElementById('viewLiveExecution').style.display = tab === 'live' ? 'grid' : 'none';
+      document.getElementById('viewVerdicts').style.display = tab === 'verdicts' ? 'flex' : 'none';
+    }
+
+    /**
+     * Renders Terminal Logs
+     */
+    function renderLogs(logs) {
+      const term = document.getElementById('terminalOutput');
+      if (!logs || logs.length === 0) {
+        term.innerHTML = `
+          <div class="log-line log-system">=== FlytBase Autonomous QA Live Stream Console ===</div>
+          <div class="log-line">No logs yet. Click "Run Test" above to initiate execution.</div>
+        `;
+        return;
+      }
+
+      const formatted = logs.map(line => {
+        let cls = '';
+        if (line.includes('[PASS]') || line.includes('passed') || line.includes('CONFIRMED')) cls = 'log-pass';
+        else if (line.includes('[FAIL]') || line.includes('failed') || line.includes('ERROR') || line.includes('NEGATIVE')) cls = 'log-fail';
+        else if (line.includes('WARN') || line.includes('warning')) cls = 'log-warn';
+        else if (line.includes('[FEATURE-AGENT]') || line.includes('[PLAYWRIGHT]')) cls = 'log-system';
+        else if (line.includes('[Midscene]') || line.includes('[ux-test-agent]')) cls = 'log-agent';
+        return `<div class="log-line ${cls}">${escapeHtml(line)}</div>`;
+      }).join('');
+
+      term.innerHTML = formatted;
+      term.scrollTop = term.scrollHeight;
+    }
+
+    /**
+     * Copies current active logs to clipboard
+     */
+    function copyActiveLogs() {
+      const tcId = state.selectedTestCaseId;
+      if (!tcId) return;
+      const logs = (state.runs[tcId] && state.runs[tcId].logs) || [];
+      navigator.clipboard.writeText(logs.join('\n')).then(() => {
+        alert('Copied execution logs to clipboard!');
+      });
+    }
+
+    /**
+     * Clears logs for active test case
+     */
+    function clearActiveLogs() {
+      const tcId = state.selectedTestCaseId;
+      if (!tcId || !state.runs[tcId]) return;
+      state.runs[tcId].logs = [];
+      renderLogs([]);
+      document.getElementById('telemetryLinesBadge').innerText = '0 Lines';
+    }
+
+    /**
+     * DOUBLE-BUFFERED LIVE FRAME FLICKER FIX
+     * Preloads incoming frame off-screen via new Image(). Only swaps
+     * the DOM img.src once loaded, completely eliminating broken image
+     * icon flashes, layout shifts, or white flicker.
+     */
+    function startLiveFramePolling(testCaseId, runId) {
+      stopLiveFramePolling(testCaseId);
+      const runState = state.runs[testCaseId];
+      if (!runState) return;
+
+      const poll = () => {
+        if (runState.status !== 'running') {
+          stopLiveFramePolling(testCaseId);
+          return;
+        }
+
+        const nextImg = new Image();
+        const frameUrl = `/api/run/${encodeURIComponent(runId)}/live-frame?_t=${Date.now()}`;
+
+        nextImg.onload = () => {
+          // Only update DOM if the user is currently looking at this test case
+          if (state.selectedTestCaseId === testCaseId) {
+            const activeImg = document.getElementById('liveFrameImg');
+            const placeholder = document.getElementById('liveFramePlaceholder');
+            const badge = document.getElementById('liveFrameStatusBadge');
+
+            if (activeImg) {
+              activeImg.src = nextImg.src;
+              activeImg.style.display = 'block';
+            }
+            if (placeholder) {
+              placeholder.style.display = 'none';
+            }
+            if (badge) {
+              badge.innerHTML = '<span class="status-dot pulsing" style="background:#22c55e;"></span><span>Streaming Live</span>';
+            }
+          }
+        };
+
+        nextImg.onerror = () => {
+          // Silently ignore 404s when frame is not yet saved — no broken image icon!
+        };
+
+        nextImg.src = frameUrl;
+      };
+
+      runState.liveFrameInterval = setInterval(poll, 750);
+      poll();
+    }
+
+    function stopLiveFramePolling(testCaseId) {
+      const runState = state.runs[testCaseId];
+      if (runState && runState.liveFrameInterval) {
+        clearInterval(runState.liveFrameInterval);
+        runState.liveFrameInterval = null;
+      }
+      if (state.selectedTestCaseId === testCaseId) {
+        const badge = document.getElementById('liveFrameStatusBadge');
+        if (badge) {
+          badge.innerHTML = '<span class="status-dot" style="background:#94a3b8;"></span><span>Standby</span>';
+        }
+      }
+    }
+
+    function updateLiveFrameView(testCaseId) {
+      const runState = state.runs[testCaseId];
+      const activeImg = document.getElementById('liveFrameImg');
+      const placeholder = document.getElementById('liveFramePlaceholder');
+      const badge = document.getElementById('liveFrameStatusBadge');
+
+      if (runState && runState.status === 'running') {
+        badge.innerHTML = '<span class="status-dot pulsing" style="background:#22c55e;"></span><span>Streaming Live</span>';
+      } else {
+        badge.innerHTML = '<span class="status-dot" style="background:#94a3b8;"></span><span>Standby</span>';
+        if (activeImg) activeImg.style.display = 'none';
+        if (placeholder) placeholder.style.display = 'flex';
+      }
+    }
+
+    /**
+     * Executes the Currently Selected Test Case
+     */
+    async function runCurrentTest() {
+      const tcId = state.selectedTestCaseId;
+      if (!tcId) return;
+
+      const runState = state.runs[tcId];
+      if (runState.status === 'running') return;
+
+      // Reset state for new run
+      runState.status = 'running';
+      runState.logs = [];
+      runState.scenarios = [];
+      
+      renderDetailPanel();
+      renderSidebarList();
+
+      try {
+        const res = await fetch(`/api/run/${encodeURIComponent(tcId)}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const runId = data.runId;
+        runState.runId = runId;
+
+        // Switch to Live Execution Tab automatically on launch
+        switchDetailTab('live');
+
+        // Start SSE Stream
+        startEventStream(tcId, runId);
+
+        // Start Double-Buffered Live Frame Polling
+        startLiveFramePolling(tcId, runId);
+
+      } catch (err) {
+        console.error('Run launch error:', err);
+        runState.status = 'failed';
+        runState.logs.push(`[LAUNCH ERROR] Failed to start run: ${err.message}`);
+        renderDetailPanel();
+        renderSidebarList();
+      }
+    }
+
+    /**
+     * Connects to Server-Sent Events (SSE) Stream
+     */
+    function startEventStream(testCaseId, runId) {
+      const runState = state.runs[testCaseId];
+      if (!runState) return;
+
+      if (runState.evtSource) {
+        runState.evtSource.close();
+      }
+
+      const evtSource = new EventSource(`/api/run/${encodeURIComponent(runId)}/stream`);
+      runState.evtSource = evtSource;
+
+      evtSource.onmessage = (e) => {
+        const line = e.data;
+        runState.logs.push(line);
+
+        if (state.selectedTestCaseId === testCaseId) {
+          const term = document.getElementById('terminalOutput');
+          let cls = '';
+          if (line.includes('[PASS]') || line.includes('passed') || line.includes('CONFIRMED')) cls = 'log-pass';
+          else if (line.includes('[FAIL]') || line.includes('failed') || line.includes('ERROR') || line.includes('NEGATIVE')) cls = 'log-fail';
+          else if (line.includes('WARN') || line.includes('warning')) cls = 'log-warn';
+          else if (line.includes('[FEATURE-AGENT]') || line.includes('[PLAYWRIGHT]')) cls = 'log-system';
+          else if (line.includes('[Midscene]') || line.includes('[ux-test-agent]')) cls = 'log-agent';
+
+          const div = document.createElement('div');
+          div.className = `log-line ${cls}`;
+          div.innerText = line;
+          term.appendChild(div);
+          term.scrollTop = term.scrollHeight;
+          
+          document.getElementById('telemetryLinesBadge').innerText = `${runState.logs.length} Lines`;
+        }
+      };
+
+      const finishStream = async () => {
+        evtSource.close();
+        runState.evtSource = null;
+        stopLiveFramePolling(testCaseId);
+        await fetchRunResult(testCaseId, runId);
+      };
+
+      evtSource.addEventListener('done', finishStream);
+      evtSource.onerror = finishStream;
+    }
+
+    /**
+     * Fetches Final Result Verdicts
+     */
+    async function fetchRunResult(testCaseId, runId) {
+      const runState = state.runs[testCaseId];
+      if (!runState) return;
+
+      try {
+        const res = await fetch(`/api/run/${encodeURIComponent(runId)}/result`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        runState.status = data.status === 'failed' ? 'failed' : 'complete';
+        runState.scenarios = data.scenarios || [];
+
+        renderDetailPanel();
+        renderSidebarList();
+
+        // If currently viewing this test case, automatically switch to verdicts view to show result!
+        if (state.selectedTestCaseId === testCaseId) {
+          switchDetailTab('verdicts');
+        }
+      } catch (err) {
+        console.error('Failed to fetch run results:', err);
+        runState.status = 'failed';
+        renderDetailPanel();
+        renderSidebarList();
+      }
+    }
+
+    /**
+     * Stops Active Run
+     */
+    async function stopCurrentRun() {
+      const tcId = state.selectedTestCaseId;
+      if (!tcId) return;
+      const runState = state.runs[tcId];
+      if (runState && runState.runId) {
+        try {
+          await fetch(`/api/run/${encodeURIComponent(runState.runId)}/stop`, { method: 'POST' });
+        } catch {}
+      }
+      if (runState) {
+        if (runState.evtSource) runState.evtSource.close();
+        stopLiveFramePolling(tcId);
+        runState.status = 'failed';
+        renderDetailPanel();
+        renderSidebarList();
+      }
+    }
+
+    /**
+     * Renders Verdicts Tab
+     */
+    function renderVerdicts(scenarios) {
+      const placeholder = document.getElementById('verdictsPlaceholder');
+      const content = document.getElementById('verdictsContent');
+      const list = document.getElementById('scenariosList');
+
+      if (!scenarios || scenarios.length === 0) {
+        placeholder.style.display = 'flex';
+        content.style.display = 'none';
+        return;
+      }
+
+      placeholder.style.display = 'none';
+      content.style.display = 'flex';
+
+      const total = scenarios.length;
+      const passed = scenarios.filter(s => s.result === 'pass').length;
+      const failed = scenarios.filter(s => s.result === 'fail').length;
+
+      document.getElementById('metricTotal').innerText = total;
+      document.getElementById('metricPassed').innerText = passed;
+      document.getElementById('metricFailed').innerText = failed;
+
+      const summaryBadge = document.getElementById('summaryBadgeLarge');
+      const summaryTitle = document.getElementById('summaryTitleText');
+      const summarySub = document.getElementById('summarySubtext');
+
+      if (failed > 0) {
+        summaryBadge.className = 'summary-badge-large failed';
+        summaryBadge.innerHTML = '<span>✕</span> <span>FINDINGS DETECTED</span>';
+        summaryTitle.innerText = `${failed} Scenario Finding(s) Detected`;
+        summarySub.innerText = `${passed} of ${total} scenarios passed verification`;
+      } else {
+        summaryBadge.className = 'summary-badge-large passed';
+        summaryBadge.innerHTML = '<span>✓</span> <span>VERIFIED PASS</span>';
+        summaryTitle.innerText = `All ${total} Scenarios Passed Verification`;
+        summarySub.innerText = 'Autonomous AI agent verified real browser effects end-to-end';
+      }
+
+      list.innerHTML = scenarios.map((s, idx) => {
+        const isPass = s.result === 'pass';
+        const pillCls = isPass ? 'pass' : 'fail';
+        const pillText = isPass ? 'VERIFIED' : 'FINDING';
+
+        // Convert file path to web accessible /runs/ URL
+        let videoUrl = '';
+        if (s.evidence && s.evidence.videoPath) {
+          const norm = s.evidence.videoPath.replace(/\\/g, '/');
+          const runsIdx = norm.indexOf('/runs/');
+          if (runsIdx !== -1) {
+            videoUrl = norm.substring(runsIdx);
+          } else {
+            videoUrl = `/runs/${pathBasename(norm)}`;
+          }
+        }
+
+        const videoHtml = videoUrl ? `
+          <div class="video-container">
+            <video class="video-player" controls preload="metadata" src="${escapeHtml(videoUrl)}"></video>
+          </div>
+        ` : `
+          <div class="video-container">
+            <div class="video-missing-box">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+              <span>Video artifact not available</span>
+            </div>
+          </div>
+        `;
+
+        return `
+          <div class="scenario-card">
+            <div class="scenario-topbar">
+              <div class="scenario-title-area">
+                <span class="scenario-pill ${pillCls}">${pillText}</span>
+                <span class="scenario-title">${escapeHtml(s.title || `Scenario ${idx + 1}`)}</span>
+              </div>
+              <div class="scenario-meta-tags">
+                <span>Viewport: <code>${escapeHtml(s.viewport || 'desktop')}</code></span>
+                <span>Confidence: <code>${Math.round((s.confidence || 0.95) * 100)}%</code></span>
+              </div>
+            </div>
+
+            ${videoHtml}
+
+            <div class="reasoning-box">
+              <div class="reasoning-heading">Detailed AI Agent Reasoning & Trail</div>
+              <div class="reasoning-pre">${escapeHtml(s.reasoning || 'No detailed reasoning provided.')}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /**
+     * Helpers
      */
     function escapeHtml(str) {
-      if (str === null || str === undefined) return '';
+      if (!str) return '';
       return String(str)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -1535,1037 +2109,8 @@
         .replace(/'/g, '&#039;');
     }
 
-    /**
-     * Normalizes video file path to web-accessible URL
-     * e.g. "D:\...\runs\feature-agent\...\video.webm" -> "/runs/feature-agent/.../video.webm"
-     */
-    function formatVideoUrl(videoPath) {
-      if (!videoPath || typeof videoPath !== 'string') return null;
-      const normalized = videoPath.trim().replace(/\\/g, '/');
-      const runsIdx = normalized.toLowerCase().indexOf('runs/');
-      if (runsIdx !== -1) {
-        return '/' + normalized.substring(runsIdx);
-      }
-      if (normalized.startsWith('http://') || normalized.startsWith('https://')) {
-        return normalized;
-      }
-      if (normalized.startsWith('/')) {
-        return normalized;
-      }
-      return '/' + normalized;
-    }
-
-    /**
-     * Normalizes image screenshot paths
-     */
-    function formatImageUrl(imgPath) {
-      return formatVideoUrl(imgPath);
-    }
-
-    /**
-     * Normalizes verdict scenarios array from any API payload variations
-     */
-    function normalizeVerdicts(resultData) {
-      if (!resultData) return [];
-      if (Array.isArray(resultData)) return resultData;
-      if (Array.isArray(resultData.verdicts)) return resultData.verdicts;
-      if (Array.isArray(resultData.results)) return resultData.results;
-      if (Array.isArray(resultData.scenarios)) return resultData.scenarios;
-      if (typeof resultData === 'object' && (resultData.scenarioId || resultData.title)) {
-        return [resultData];
-      }
-      return [];
-    }
-
-    /**
-     * 1. Fetch GET /api/test-cases
-     */
-    async function loadTestCases() {
-      const beacon = document.getElementById('connectionBeacon');
-      const connStatus = document.getElementById('connectionStatus');
-      const refreshBtn = document.getElementById('refreshBtn');
-
-      if (refreshBtn) refreshBtn.style.opacity = '0.5';
-
-      try {
-        const response = await fetch('/api/test-cases');
-        if (!response.ok) {
-          throw new Error(`HTTP error ${response.status}: ${response.statusText}`);
-        }
-        const data = await response.json();
-        
-        // Handle array or wrapped response { testCases: [...] }
-        const cases = Array.isArray(data) ? data : (data.testCases || data.cases || data.data || []);
-        state.testCases = cases;
-
-        // Initialize runs state for test cases
-        state.testCases.forEach(tc => {
-          const tcId = tc.id || tc.testCaseId || tc.title;
-          if (!state.runs[tcId]) {
-            state.runs[tcId] = {
-              runId: null,
-              evtSource: null,
-              logs: [],
-              status: 'idle',
-              result: null,
-              activeTab: 'logs',
-              lastFrameUrl: null,
-              livePollTimer: null,
-              livePollActive: false,
-              liveFailedCount: 0,
-              liveUnavailable: false,
-            };
-          }
-        });
-
-        beacon.className = 'status-beacon';
-        connStatus.textContent = 'System Ready';
-        renderStats();
-        renderTestCases();
-      } catch (err) {
-        console.error('Failed to load /api/test-cases:', err);
-        beacon.className = 'status-beacon disconnected';
-        connStatus.textContent = 'Backend Reconnecting';
-
-        const grid = document.getElementById('testCasesGrid');
-        grid.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon" style="color: #ef4444;">⚠️</div>
-            <div class="empty-title">Cannot Connect to QA Server</div>
-            <p style="margin-bottom: 16px;">Failed to reach GET /api/test-cases. Please ensure the backend server is running.</p>
-            <button class="btn-run" onclick="loadTestCases()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path>
-                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-              </svg>
-              Retry Connection
-            </button>
-          </div>
-        `;
-      } finally {
-        if (refreshBtn) refreshBtn.style.opacity = '1';
-      }
-    }
-
-    /**
-     * Render global metrics in top strip
-     */
-    function renderStats() {
-      const total = state.testCases.length;
-      const planners = state.testCases.filter(c => isPlannerType(c)).length;
-      const specs = total - planners;
-      const completed = Object.values(state.runs).filter(r => r.status === 'complete').length;
-
-      document.getElementById('headerTestCaseCount').textContent = `${total} Test Cases Available`;
-      document.getElementById('statTotalSuites').textContent = total;
-      document.getElementById('statPlannerSuites').textContent = planners;
-      document.getElementById('statSpecSuites').textContent = specs;
-      document.getElementById('statCompletedRuns').textContent = completed;
-
-      document.getElementById('tabCountAll').textContent = total;
-      document.getElementById('tabCountPlanner').textContent = planners;
-      document.getElementById('tabCountSpec').textContent = specs;
-    }
-
-    /**
-     * Helper to classify test case type
-     */
-    function isPlannerType(tc) {
-      const type = (tc.type || tc.kind || '').toLowerCase();
-      const id = (tc.id || '').toLowerCase();
-      return type.includes('feature') || type.includes('planner') || id.includes('feature') || id.includes('planner');
-    }
-
-    /**
-     * Set active filter tab
-     */
-    function setFilter(filter) {
-      state.activeFilter = filter;
-      document.querySelectorAll('.filter-tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.filter === filter);
-      });
-      renderTestCases();
-    }
-
-    /**
-     * Search input handling
-     */
-    function handleSearchInput() {
-      const input = document.getElementById('searchInput');
-      const clearBtn = document.getElementById('searchClearBtn');
-      state.searchQuery = input.value.trim().toLowerCase();
-      clearBtn.style.display = state.searchQuery ? 'block' : 'none';
-      renderTestCases();
-    }
-
-    function clearSearch() {
-      const input = document.getElementById('searchInput');
-      input.value = '';
-      handleSearchInput();
-      input.focus();
-    }
-
-    /**
-     * Render the Test Case Cards Grid
-     */
-    function renderTestCases() {
-      const grid = document.getElementById('testCasesGrid');
-      let filtered = state.testCases;
-
-      // Filter by tab
-      if (state.activeFilter === 'feature-summary') {
-        filtered = filtered.filter(tc => isPlannerType(tc));
-      } else if (state.activeFilter === 'spec-file') {
-        filtered = filtered.filter(tc => !isPlannerType(tc));
-      }
-
-      // Filter by search query
-      if (state.searchQuery) {
-        filtered = filtered.filter(tc => {
-          const title = (tc.title || tc.name || '').toLowerCase();
-          const id = (tc.id || '').toLowerCase();
-          const desc = (tc.description || tc.summary || '').toLowerCase();
-          return title.includes(state.searchQuery) || id.includes(state.searchQuery) || desc.includes(state.searchQuery);
-        });
-      }
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon">🔍</div>
-            <div class="empty-title">No Matching Test Cases Found</div>
-            <p>Try adjusting your search query or switching the category filter.</p>
-          </div>
-        `;
-        return;
-      }
-
-      grid.innerHTML = filtered.map(tc => renderCardHtml(tc)).join('');
-
-      // Restore scroll and terminal content for active/completed runs
-      filtered.forEach(tc => {
-        const tcId = tc.id || tc.testCaseId || tc.title;
-        const run = state.runs[tcId];
-        if (run && run.logs && run.logs.length > 0) {
-          const termBody = document.getElementById(`terminal-${tcId}`);
-          if (termBody) {
-            termBody.scrollTop = termBody.scrollHeight;
-          }
-        }
-      });
-    }
-
-    /**
-     * HTML string generator for a single Test Case Card
-     */
-    function renderCardHtml(tc) {
-      const tcId = tc.id || tc.testCaseId || tc.title;
-      const title = tc.title || tc.name || tc.id;
-      const description = tc.description || tc.summary || 'Autonomous Playwright execution and verification suite.';
-      const isPlanner = isPlannerType(tc);
-      const typeLabel = isPlanner ? 'AI Feature Planner' : 'Playwright Spec';
-      const typeBadgeClass = isPlanner ? 'badge-planner' : 'badge-spec';
-      const typeIcon = isPlanner ? '✨' : '⚡';
-
-      const run = state.runs[tcId] || { status: 'idle', logs: [], activeTab: 'logs' };
-      const isRunning = run.status === 'running';
-      const isPassed = run.status === 'complete' && run.overallPass === true;
-      const isFailed = run.status === 'complete' && run.overallPass === false;
-
-      let cardClass = 'test-card';
-      if (isRunning) cardClass += ' is-running';
-      else if (isPassed) cardClass += ' is-passed';
-      else if (isFailed) cardClass += ' is-failed';
-
-      let statePillHtml = '';
-      if (isRunning) {
-        statePillHtml = `<span class="card-state-pill state-running"><span class="spinner"></span> Running</span>`;
-      } else if (isPassed) {
-        statePillHtml = `<span class="card-state-pill state-pass">✓ Passed</span>`;
-      } else if (isFailed) {
-        statePillHtml = `<span class="card-state-pill state-fail">✕ Failed</span>`;
-      } else {
-        statePillHtml = `<span class="card-state-pill state-idle">Ready</span>`;
-      }
-
-      const showDrawer = run.status !== 'idle' || run.logs.length > 0 || run.result;
-
-      return `
-        <article class="${cardClass}" id="card-${escapeHtml(tcId)}">
-          
-          <!-- Card Header & Metadata -->
-          <div class="card-top">
-            <div class="card-badges-row">
-              <span class="card-type-badge ${typeBadgeClass}">
-                <span>${typeIcon}</span> ${typeLabel}
-              </span>
-              <div id="statePill-${escapeHtml(tcId)}">
-                ${statePillHtml}
-              </div>
-            </div>
-
-            <h2 class="card-title">${escapeHtml(title)}</h2>
-
-            <div class="card-meta-row">
-              <span class="card-id-chip" title="Test Case ID">${escapeHtml(tcId)}</span>
-              ${tc.viewport ? `<span class="tag-viewport">🖥️ ${escapeHtml(tc.viewport)}</span>` : ''}
-              ${tc.area ? `<span class="tag-viewport">📂 ${escapeHtml(tc.area)}</span>` : ''}
-            </div>
-
-            <p class="card-description">${escapeHtml(description)}</p>
-          </div>
-
-          <!-- Card Action Bar -->
-          <div class="card-action-bar">
-            <div class="action-left">
-              <button 
-                class="btn-run" 
-                id="runBtn-${escapeHtml(tcId)}" 
-                onclick="runTestCase('${escapeHtml(tcId)}')"
-                ${isRunning ? 'disabled' : ''}
-              >
-                ${isRunning ? `
-                  <span class="spinner"></span>
-                  <span>Running...</span>
-                ` : `
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                  </svg>
-                  <span>Run Test</span>
-                `}
-              </button>
-
-              ${isRunning ? `
-                <button class="btn-stop" onclick="stopTestCase('${escapeHtml(tcId)}')">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-                    <rect x="6" y="6" width="12" height="12"></rect>
-                  </svg>
-                  <span>Stop</span>
-                </button>
-              ` : ''}
-            </div>
-
-            <div class="action-right">
-              ${showDrawer ? `
-                <button 
-                  class="view-tab-btn ${run.activeTab === 'logs' ? 'active' : ''}" 
-                  onclick="switchCardTab('${escapeHtml(tcId)}', 'logs')"
-                >
-                  Console Stream (${run.logs.length})
-                </button>
-                ${run.result ? `
-                  <button 
-                    class="view-tab-btn ${run.activeTab === 'verdict' ? 'active' : ''}" 
-                    onclick="switchCardTab('${escapeHtml(tcId)}', 'verdict')"
-                  >
-                    Verdict & Video
-                  </button>
-                ` : ''}
-              ` : ''}
-            </div>
-          </div>
-
-          <!-- Interactive Drawer: Live Terminal Stream or Verdict & Video Report -->
-          ${showDrawer ? `
-            <div id="drawer-${escapeHtml(tcId)}">
-              ${run.activeTab === 'verdict' && run.result ? renderVerdictHtml(tcId, run.result) : renderTerminalHtml(tcId, run)}
-            </div>
-          ` : ''}
-
-        </article>
-      `;
-    }
-
-    /**
-     * Switch view between 'logs' and 'verdict' within a card
-     */
-    function switchCardTab(tcId, tabName) {
-      if (state.runs[tcId]) {
-        state.runs[tcId].activeTab = tabName;
-        renderTestCases();
-      }
-    }
-
-    /**
-     * HTML Generator for Live Monospace Terminal & Live Agent Browser View
-     */
-    function renderTerminalHtml(tcId, run) {
-      const isRunning = run.status === 'running';
-      const hasFrame = !!run.lastFrameUrl;
-      const isUnavailable = !!run.liveUnavailable;
-
-      let badgeText = 'IDLE';
-      let badgeClass = 'badge-idle';
-      let subtext = 'Execution paused or completed';
-      let icon = '🖥️';
-      let placeholderText = 'Live view feed idle. Run test to start visual streaming.';
-
-      if (isUnavailable) {
-        badgeText = 'UNAVAILABLE';
-        badgeClass = 'badge-unavailable';
-        subtext = 'Playwright child process runner';
-        icon = 'ℹ️';
-        placeholderText = 'Live view not available for this test type';
-      } else if (isRunning) {
-        if (hasFrame) {
-          badgeText = 'LIVE';
-          badgeClass = 'badge-live';
-          subtext = '~1 FPS Visual Stream';
-        } else {
-          badgeText = 'INITIALIZING';
-          badgeClass = 'badge-init';
-          subtext = 'Connecting to browser session...';
-          icon = '📡';
-          placeholderText = 'Waiting for browser automation frames...';
-        }
-      } else if (hasFrame) {
-        badgeText = 'COMPLETED';
-        badgeClass = 'badge-complete';
-        subtext = 'Final frame captured';
-      }
-
-      const logLinesHtml = run.logs.length > 0
-        ? run.logs.map(line => formatTerminalLine(line)).join('')
-        : '<div class="terminal-line" style="color: var(--text-dim);">[Stream Idle] Click "Run Test" above to start live execution telemetry...</div>';
-
-      return `
-        <!-- Live Browser View (Near-Real-Time Visual Feed) -->
-        <div class="live-view-panel" id="livePanel-${escapeHtml(tcId)}">
-          <div class="live-view-header">
-            <div class="live-view-title-group">
-              <div class="live-window-dots">
-                <span class="live-window-dot dot-red"></span>
-                <span class="live-window-dot dot-yellow"></span>
-                <span class="live-window-dot dot-green"></span>
-              </div>
-              <span class="live-indicator-dot ${isRunning ? 'is-active' : ''}" id="liveDot-${escapeHtml(tcId)}"></span>
-              <span class="live-view-title">LIVE BROWSER VIEW</span>
-              <span class="live-badge ${badgeClass}" id="liveBadge-${escapeHtml(tcId)}">
-                ${badgeText}
-              </span>
-            </div>
-            <div class="live-view-subtext" id="liveSubtext-${escapeHtml(tcId)}">
-              ${subtext}
-            </div>
-          </div>
-          <div class="live-view-viewport" id="liveViewport-${escapeHtml(tcId)}">
-            <img 
-              id="liveImg-${escapeHtml(tcId)}" 
-              class="live-view-img" 
-              src="${hasFrame ? escapeHtml(run.lastFrameUrl) : ''}" 
-              style="${hasFrame ? 'display: block;' : 'display: none;'}" 
-              alt="Live Agent Browser View" 
-            />
-            <div class="live-view-placeholder" id="livePlaceholder-${escapeHtml(tcId)}" style="${hasFrame ? 'display: none;' : 'display: flex;'}">
-              <div class="live-placeholder-icon" id="livePlaceholderIcon-${escapeHtml(tcId)}">
-                ${icon}
-              </div>
-              <div class="live-placeholder-text" id="livePlaceholderText-${escapeHtml(tcId)}">
-                ${placeholderText}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Terminal Container -->
-        <div class="terminal-container">
-          <div class="terminal-header">
-            <div class="terminal-controls">
-              <span class="terminal-dot dot-red"></span>
-              <span class="terminal-dot dot-yellow"></span>
-              <span class="terminal-dot dot-green"></span>
-              <span class="terminal-title">live-stream :: ${escapeHtml(run.runId || 'unassigned')}</span>
-            </div>
-            <div class="terminal-actions">
-              <button class="terminal-btn" onclick="clearLogs('${escapeHtml(tcId)}')">Clear</button>
-              <button class="terminal-btn" onclick="copyLogs('${escapeHtml(tcId)}')">Copy</button>
-            </div>
-          </div>
-          <div class="terminal-body" id="terminal-${escapeHtml(tcId)}">
-            ${logLinesHtml}
-          </div>
-        </div>
-      `;
-    }
-
-    /**
-     * Format a line for the terminal with color coding
-     */
-    function formatTerminalLine(raw) {
-      const line = escapeHtml(raw);
-      let cls = '';
-      if (/pass|success|verified|confirmed/i.test(line)) cls = 'log-success';
-      else if (/fail|error|exception|reject/i.test(line)) cls = 'log-error';
-      else if (/warn|caution|inconclusive/i.test(line)) cls = 'log-warn';
-      else if (/\[midscene\]|\[agent\]|\[planner\]|\[autonomous\]/i.test(line)) cls = 'log-agent';
-      else if (/info|running|launching/i.test(line)) cls = 'log-info';
-
-      return `<div class="terminal-line ${cls}">${line}</div>`;
-    }
-
-    /**
-     * Start live frame polling for real-time visual browser updates
-     */
-    function startLiveFramePolling(tcId, runId) {
-      if (!state.runs[tcId]) return;
-      const run = state.runs[tcId];
-
-      stopLiveFramePolling(tcId);
-
-      run.livePollActive = true;
-      run.liveFailedCount = 0;
-      run.liveUnavailable = false;
-
-      const tc = state.testCases.find(c => (c.id || c.testCaseId || c.title) === tcId);
-      const isPlanner = tc ? isPlannerType(tc) : false;
-
-      const pollTick = () => {
-        if (!run.livePollActive || run.status !== 'running' || run.runId !== runId) {
-          return;
-        }
-
-        const timestamp = Date.now();
-        const frameUrl = `/api/run/${encodeURIComponent(runId)}/live-frame?t=${timestamp}`;
-
-        const testImg = new Image();
-        testImg.onload = () => {
-          if (!run.livePollActive || run.status !== 'running' || run.runId !== runId) {
-            return;
-          }
-
-          run.liveFailedCount = 0;
-          run.lastFrameUrl = frameUrl;
-
-          const imgEl = document.getElementById(`liveImg-${tcId}`);
-          const placeholderEl = document.getElementById(`livePlaceholder-${tcId}`);
-          const badgeEl = document.getElementById(`liveBadge-${tcId}`);
-          const subtextEl = document.getElementById(`liveSubtext-${tcId}`);
-          const dotEl = document.getElementById(`liveDot-${tcId}`);
-
-          if (imgEl) {
-            imgEl.src = frameUrl;
-            imgEl.style.display = 'block';
-          }
-          if (placeholderEl) {
-            placeholderEl.style.display = 'none';
-          }
-          if (badgeEl) {
-            badgeEl.textContent = 'LIVE';
-            badgeEl.className = 'live-badge badge-live';
-          }
-          if (dotEl) {
-            dotEl.className = 'live-indicator-dot is-active';
-          }
-          if (subtextEl) {
-            subtextEl.textContent = 'Active Visual Stream (~1 FPS)';
-          }
-
-          run.livePollTimer = setTimeout(pollTick, 850);
-        };
-
-        testImg.onerror = () => {
-          if (!run.livePollActive || run.status !== 'running' || run.runId !== runId) {
-            return;
-          }
-
-          run.liveFailedCount = (run.liveFailedCount || 0) + 1;
-
-          const badgeEl = document.getElementById(`liveBadge-${tcId}`);
-          const placeholderEl = document.getElementById(`livePlaceholder-${tcId}`);
-          const placeholderText = document.getElementById(`livePlaceholderText-${tcId}`);
-          const placeholderIcon = document.getElementById(`livePlaceholderIcon-${tcId}`);
-          const subtextEl = document.getElementById(`liveSubtext-${tcId}`);
-
-          // For spec-file (child process) test cases: fallback after 5 failed polls
-          if (!isPlanner && run.liveFailedCount >= 5) {
-            run.liveUnavailable = true;
-            if (badgeEl) {
-              badgeEl.textContent = 'UNAVAILABLE';
-              badgeEl.className = 'live-badge badge-unavailable';
-            }
-            if (placeholderText) {
-              placeholderText.textContent = 'Live view not available for this test type';
-            }
-            if (placeholderIcon) {
-              placeholderIcon.textContent = 'ℹ️';
-            }
-            if (subtextEl) {
-              subtextEl.textContent = 'Playwright child process runner';
-            }
-            // Cease polling for spec-file tests
-            return;
-          }
-
-          // For AI planner test cases initializing
-          if (isPlanner) {
-            if (badgeEl) {
-              badgeEl.textContent = 'INITIALIZING';
-              badgeEl.className = 'live-badge badge-init';
-            }
-            if (placeholderText) {
-              if (run.liveFailedCount < 10) {
-                placeholderText.textContent = 'AI Agent generating scenario plan & launching browser...';
-              } else {
-                placeholderText.textContent = 'Waiting for active browser navigation frames...';
-              }
-            }
-          }
-
-          run.livePollTimer = setTimeout(pollTick, 1000);
-        };
-
-        testImg.src = frameUrl;
-      };
-
-      // Start initial poll after brief spinup delay
-      run.livePollTimer = setTimeout(pollTick, 600);
-    }
-
-    /**
-     * Stop live frame polling
-     */
-    function stopLiveFramePolling(tcId) {
-      if (!state.runs[tcId]) return;
-      const run = state.runs[tcId];
-      run.livePollActive = false;
-      if (run.livePollTimer) {
-        clearTimeout(run.livePollTimer);
-        run.livePollTimer = null;
-      }
-
-      const dotEl = document.getElementById(`liveDot-${tcId}`);
-      if (dotEl) {
-        dotEl.className = 'live-indicator-dot';
-      }
-
-      const badgeEl = document.getElementById(`liveBadge-${tcId}`);
-      const subtextEl = document.getElementById(`liveSubtext-${tcId}`);
-      if (badgeEl && run.lastFrameUrl) {
-        badgeEl.textContent = 'COMPLETED';
-        badgeEl.className = 'live-badge badge-complete';
-      }
-      if (subtextEl && run.lastFrameUrl) {
-        subtextEl.textContent = 'Final frame captured';
-      }
-    }
-
-    /**
-     * 2. On Run Test Click:
-     * - Disable Run button, set button text to "Running..." with pulsing spinner.
-     * - Call POST /api/run/:testCaseId to get { runId }.
-     * - Open live log terminal within the card via EventSource.
-     * - Start live visual browser frame polling.
-     */
-    async function runTestCase(tcId) {
-      if (!state.runs[tcId]) {
-        state.runs[tcId] = {
-          runId: null,
-          evtSource: null,
-          logs: [],
-          status: 'idle',
-          result: null,
-          activeTab: 'logs',
-          lastFrameUrl: null,
-          livePollTimer: null,
-          livePollActive: false,
-          liveFailedCount: 0,
-          liveUnavailable: false,
-        };
-      }
-
-      const run = state.runs[tcId];
-      if (run.status === 'running') return;
-
-      // Close any previous stream
-      if (run.evtSource) {
-        run.evtSource.close();
-      }
-
-      stopLiveFramePolling(tcId);
-
-      run.status = 'running';
-      run.activeTab = 'logs';
-      run.logs = [`[${new Date().toLocaleTimeString()}] Initializing test case execution for "${tcId}"...`];
-      run.result = null;
-      run.lastFrameUrl = null;
-      run.liveUnavailable = false;
-      run.liveFailedCount = 0;
-
-      renderTestCases();
-      showToast(`Started test run for: ${tcId}`, 'info');
-
-      try {
-        const response = await fetch(`/api/run/${encodeURIComponent(tcId)}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' }
-        });
-
-        if (!response.ok) {
-          throw new Error(`Failed to initiate run: HTTP ${response.status}`);
-        }
-
-        const data = await response.json();
-        const runId = data.runId || data.id || data.run_id;
-
-        if (!runId) {
-          throw new Error('API returned success but no runId was found in response payload.');
-        }
-
-        run.runId = runId;
-        appendLog(tcId, `[SYSTEM] Run instance allocated. Run ID: ${runId}`);
-        appendLog(tcId, `[STREAM] Connecting to EventSource stream at /api/run/${runId}/stream...`);
-
-        // Start live visual frame polling
-        startLiveFramePolling(tcId, runId);
-
-        // Open live EventSource stream
-        const evtSource = new EventSource(`/api/run/${encodeURIComponent(runId)}/stream`);
-        run.evtSource = evtSource;
-
-        evtSource.onmessage = (e) => {
-          if (!e.data) return;
-          appendLog(tcId, e.data);
-        };
-
-        evtSource.addEventListener('done', () => {
-          appendLog(tcId, `[STREAM] Server signaled execution completion ("done" event).`);
-          evtSource.close();
-          run.evtSource = null;
-          stopLiveFramePolling(tcId);
-          fetchResult(tcId, runId);
-        });
-
-        evtSource.onerror = (err) => {
-          appendLog(tcId, `[STREAM] Stream disconnected or ended.`);
-          evtSource.close();
-          run.evtSource = null;
-          stopLiveFramePolling(tcId);
-          fetchResult(tcId, runId);
-        };
-
-      } catch (err) {
-        stopLiveFramePolling(tcId);
-        console.error(`Execution start error for ${tcId}:`, err);
-        appendLog(tcId, `[ERROR] Failed to start test: ${err.message}`);
-        run.status = 'failed';
-        renderTestCases();
-        showToast(`Failed to run ${tcId}: ${err.message}`, 'error');
-      }
-    }
-
-    /**
-     * Append log line and auto-scroll
-     */
-    function appendLog(tcId, rawLine) {
-      const run = state.runs[tcId];
-      if (!run) return;
-
-      // Handle rawLine that might be a JSON object string
-      let text = rawLine;
-      if (typeof rawLine === 'string' && rawLine.trim().startsWith('{')) {
-        try {
-          const parsed = JSON.parse(rawLine);
-          text = parsed.message || parsed.line || parsed.log || rawLine;
-        } catch {}
-      }
-
-      run.logs.push(text);
-
-      const termBody = document.getElementById(`terminal-${tcId}`);
-      if (termBody) {
-        const lineEl = document.createElement('div');
-        lineEl.innerHTML = formatTerminalLine(text);
-        termBody.appendChild(lineEl);
-        termBody.scrollTop = termBody.scrollHeight;
-      }
-    }
-
-    /**
-     * Stop / Cancel running test
-     */
-    async function stopTestCase(tcId) {
-      const run = state.runs[tcId];
-      if (!run || !run.runId) return;
-
-      stopLiveFramePolling(tcId);
-      appendLog(tcId, `[USER] Sending stop/cancel request for run ID: ${run.runId}...`);
-
-      if (run.evtSource) {
-        run.evtSource.close();
-        run.evtSource = null;
-      }
-
-      try {
-        await fetch(`/api/run/${encodeURIComponent(run.runId)}/stop`, { method: 'POST' });
-      } catch (err) {
-        console.warn('Stop endpoint error:', err);
-      }
-
-      run.status = 'idle';
-      showToast(`Stopped test execution for ${tcId}`, 'warn');
-      renderTestCases();
-    }
-
-    /**
-     * 3. On Completion:
-     * - Call GET /api/run/:runId/result.
-     * - Parse scenarios, pass/fail status, and embedded videos.
-     * - Re-enable Run button.
-     */
-    async function fetchResult(tcId, runId) {
-      const run = state.runs[tcId];
-      if (!run) return;
-
-      appendLog(tcId, `[RESULT] Fetching test execution results from /api/run/${runId}/result...`);
-
-      try {
-        const res = await fetch(`/api/run/${encodeURIComponent(runId)}/result`);
-        if (!res.ok) {
-          throw new Error(`Failed to retrieve result: HTTP ${res.status}`);
-        }
-
-        const data = await res.json();
-        run.result = data;
-        run.status = 'complete';
-
-        // Check overall pass/fail status across verdicts
-        const scenarios = normalizeVerdicts(data.result || data.verdicts || data);
-        const hasFailures = scenarios.some(s => s.result === 'fail');
-        run.overallPass = !hasFailures;
-
-        // Auto switch tab to verdict view if verdicts exist
-        if (scenarios.length > 0) {
-          run.activeTab = 'verdict';
-        }
-
-        appendLog(tcId, `[RESULT] Verdict received. Total Scenarios: ${scenarios.length} (${hasFailures ? 'FAILURES DETECTED' : 'ALL VERIFIED'}).`);
-        showToast(`Test Run Finished: ${hasFailures ? 'Findings recorded' : 'All scenarios verified!'}`, hasFailures ? 'warn' : 'success');
-
-      } catch (err) {
-        console.error(`Result fetch error for ${tcId}:`, err);
-        appendLog(tcId, `[ERROR] Failed to fetch final verdict: ${err.message}`);
-        run.status = 'failed';
-        showToast(`Could not fetch result for ${tcId}`, 'error');
-      } finally {
-        stopLiveFramePolling(tcId);
-        renderStats();
-        renderTestCases();
-      }
-    }
-
-    /**
-     * HTML Generator for Verdict & Video Evidence Report
-     */
-    function renderVerdictHtml(tcId, rawData) {
-      const scenarios = normalizeVerdicts(rawData.result || rawData.verdicts || rawData);
-
-      if (scenarios.length === 0) {
-        return `
-          <div class="results-container">
-            <div class="empty-state" style="padding: 24px;">
-              <div class="empty-icon">📝</div>
-              <div class="empty-title">Execution Completed</div>
-              <p>No formal verdict scenarios were emitted for this run. Review the console logs for step output.</p>
-              <button class="view-tab-btn active" style="margin-top: 12px;" onclick="switchCardTab('${escapeHtml(tcId)}', 'logs')">
-                View Console Logs
-              </button>
-            </div>
-          </div>
-        `;
-      }
-
-      const passCount = scenarios.filter(s => s.result === 'pass').length;
-      const failCount = scenarios.filter(s => s.result === 'fail').length;
-      const inconclusiveCount = scenarios.filter(s => s.result === 'inconclusive').length;
-      const isOverallPass = failCount === 0;
-
-      return `
-        <div class="results-container">
-          
-          <!-- Summary Banner -->
-          <div class="verdict-banner ${isOverallPass ? 'banner-pass' : 'banner-fail'}">
-            <div class="banner-summary-title">
-              <span>${isOverallPass ? '✅' : '❌'}</span>
-              <span>${isOverallPass ? 'All Scenarios Verified (PASS)' : `${failCount} Scenario Finding(s) Detected`}</span>
-            </div>
-            <div class="banner-metrics">
-              <span><strong>${passCount}</strong> Passed</span>
-              <span><strong>${failCount}</strong> Failed</span>
-              ${inconclusiveCount > 0 ? `<span><strong>${inconclusiveCount}</strong> Inconclusive</span>` : ''}
-              <span><strong>${scenarios.length}</strong> Total Scenarios</span>
-            </div>
-          </div>
-
-          <!-- Scenario Cards List -->
-          ${scenarios.map((s, idx) => renderScenarioItemHtml(s, idx)).join('')}
-
-        </div>
-      `;
-    }
-
-    /**
-     * Render an individual scenario verdict item with embedded video player
-     */
-    function renderScenarioItemHtml(s, idx) {
-      const scenarioId = s.scenarioId || s.id || `scenario-${idx + 1}`;
-      const title = s.title || s.name || scenarioId;
-      const result = (s.result || 'pass').toLowerCase();
-      const viewport = s.viewport || 'desktop';
-      const confidence = s.confidence ? Math.round(s.confidence * 100) : 95;
-      const reasoning = s.reasoning || s.description || 'No reasoning details provided.';
-
-      let resultBadgeCls = 'res-pass';
-      let resultText = 'VERIFIED';
-      if (result === 'fail') {
-        resultBadgeCls = 'res-fail';
-        resultText = 'FINDING';
-      } else if (result === 'inconclusive') {
-        resultBadgeCls = 'res-inconclusive';
-        resultText = 'INCONCLUSIVE';
-      }
-
-      // Convert video path to accessible URL
-      const rawVideoPath = s.evidence && s.evidence.videoPath ? s.evidence.videoPath : (s.videoPath || null);
-      const videoUrl = formatVideoUrl(rawVideoPath);
-
-      // Screenshot paths
-      const screenshots = (s.evidence && Array.isArray(s.evidence.screenshotPaths)) ? s.evidence.screenshotPaths : [];
-
-      return `
-        <div class="scenario-item">
-          
-          <!-- Header -->
-          <div class="scenario-header">
-            <div class="scenario-title-area">
-              <div class="scenario-name">${escapeHtml(title)}</div>
-              <div class="scenario-tags">
-                <span class="badge-result ${resultBadgeCls}">${resultText}</span>
-                <span class="card-id-chip">${escapeHtml(scenarioId)}</span>
-                <span class="tag-viewport">${viewport === 'mobile' ? '📱 Mobile' : '🖥️ Desktop'}</span>
-                <span class="tag-confidence">Confidence: ${confidence}%</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Video Player or Fallback Placeholder -->
-          <div class="video-wrapper">
-            ${videoUrl ? `
-              <video 
-                controls 
-                preload="metadata" 
-                class="scenario-video" 
-                src="${escapeHtml(videoUrl)}"
-                onerror="handleVideoError(this)"
-              >
-                Your browser does not support WebM/MP4 video playback.
-              </video>
-            ` : `
-              <div class="video-placeholder">
-                <div class="placeholder-icon">🎥</div>
-                <div class="placeholder-text">Video recording unavailable</div>
-              </div>
-            `}
-          </div>
-
-          <!-- Screenshot Gallery (if available) -->
-          ${screenshots.length > 0 ? `
-            <div class="screenshots-strip">
-              ${screenshots.map((img, i) => `
-                <img 
-                  src="${escapeHtml(formatImageUrl(img))}" 
-                  class="screenshot-thumb" 
-                  alt="Evidence Screenshot ${i + 1}" 
-                  title="Click to expand evidence screenshot"
-                  onclick="openImageModal('${escapeHtml(formatImageUrl(img))}', '${escapeHtml(title)}')"
-                  onerror="this.style.display='none'"
-                />
-              `).join('')}
-            </div>
-          ` : ''}
-
-          <!-- Collapsible Detailed Reasoning & Evidence -->
-          <div class="reasoning-box">
-            <button class="reasoning-toggle-btn" onclick="toggleReasoning(this)">
-              <span>View Detailed Reasoning & Evidence</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-            <div class="reasoning-content" style="display: none;">${escapeHtml(reasoning)}</div>
-          </div>
-
-        </div>
-      `;
-    }
-
-    /**
-     * Fallback for broken video URLs
-     */
-    function handleVideoError(videoEl) {
-      const container = videoEl.parentElement;
-      if (container) {
-        container.innerHTML = `
-          <div class="video-placeholder">
-            <div class="placeholder-icon">🎥</div>
-            <div class="placeholder-text">Video file not found or could not be loaded</div>
-          </div>
-        `;
-      }
-    }
-
-    /**
-     * Toggle collapsible reasoning accordion
-     */
-    function toggleReasoning(btn) {
-      const content = btn.nextElementSibling;
-      const svg = btn.querySelector('svg');
-      if (content.style.display === 'none') {
-        content.style.display = 'block';
-        if (svg) svg.style.transform = 'rotate(180deg)';
-      } else {
-        content.style.display = 'none';
-        if (svg) svg.style.transform = 'rotate(0deg)';
-      }
-    }
-
-    /**
-     * Terminal Helper: Clear Logs
-     */
-    function clearLogs(tcId) {
-      if (state.runs[tcId]) {
-        state.runs[tcId].logs = [];
-        renderTestCases();
-      }
-    }
-
-    /**
-     * Terminal Helper: Copy Logs
-     */
-    function copyLogs(tcId) {
-      if (state.runs[tcId] && state.runs[tcId].logs.length > 0) {
-        navigator.clipboard.writeText(state.runs[tcId].logs.join('\n'))
-          .then(() => showToast('Console logs copied to clipboard!', 'success'))
-          .catch(() => showToast('Failed to copy logs to clipboard', 'error'));
-      }
-    }
-
-    /**
-     * Modal Lightbox for Full-Size Screenshot inspection
-     */
-    function openImageModal(imgUrl, title) {
-      const modal = document.getElementById('mediaModal');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalContent = document.getElementById('modalContent');
-
-      modalTitle.textContent = title || 'Screenshot Evidence';
-      modalContent.innerHTML = `<img src="${escapeHtml(imgUrl)}" alt="Screenshot evidence high resolution" />`;
-      modal.classList.add('open');
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('mediaModal');
-      modal.classList.remove('open');
-      document.getElementById('modalContent').innerHTML = '';
+    function pathBasename(pathStr) {
+      return pathStr.split('/').pop();
     }
   </script>
 </body>
