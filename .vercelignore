@@ -1,0 +1,12 @@
+node_modules
+.git
+runs/archive
+public/runs/archive
+midscene_run
+scratch
+test-results
+playwright-report
+blob-report
+*.log
+*.zip
+.env

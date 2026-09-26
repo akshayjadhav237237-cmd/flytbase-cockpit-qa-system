@@ -7,7 +7,9 @@
     "test": "playwright test",
     "report": "tsx src/report/generate.ts",
     "feature-test": "tsx src/feature-test-agent/run.ts",
-    "control-panel": "tsx src/server/index.ts"
+    "control-panel": "tsx src/server/index.ts",
+    "build": "node -e \"const fs=require('fs'); fs.mkdirSync('public', {recursive:true}); fs.copyFileSync('src/server/public/index.html', 'public/index.html');\"",
+    "vercel-build": "npm run build && npx esbuild api/index.ts --bundle --platform=node --format=cjs --external:express --outfile=api/index.js"
   },
   "dependencies": {
     "@playwright/test": "^1.49.1",
@@ -19,6 +21,7 @@
     "@midscene/web": "^1.13.3",
     "@types/express": "^5.0.6",
     "@types/node": "^20.17.10",
+    "esbuild": "^0.28.2",
     "playwright": "^1.63.0",
     "tsx": "^4.23.15"
   }
