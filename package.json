@@ -9,7 +9,7 @@
     "feature-test": "tsx src/feature-test-agent/run.ts",
     "control-panel": "tsx src/server/index.ts",
     "build": "node -e \"const fs=require('fs'); fs.mkdirSync('public', {recursive:true}); fs.copyFileSync('src/server/public/index.html', 'public/index.html');\"",
-    "vercel-build": "npm run build && npx esbuild api/index.ts --bundle --platform=node --format=cjs --external:express --outfile=api/index.js"
+    "vercel-build": "npm run build && npx esbuild src/server/api-handler.ts --bundle --platform=node --format=cjs --external:express --outfile=api/index.js"
   },
   "dependencies": {
     "@playwright/test": "^1.49.1",

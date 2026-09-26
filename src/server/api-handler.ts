@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import { TEST_CASES } from '../src/server/test-cases';
+import { TEST_CASES } from './test-cases';
 
 const app = express();
 app.use(express.json());

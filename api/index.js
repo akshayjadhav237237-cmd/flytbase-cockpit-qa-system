@@ -27,12 +27,12 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// api/index.ts
-var index_exports = {};
-__export(index_exports, {
-  default: () => index_default
+// src/server/api-handler.ts
+var api_handler_exports = {};
+__export(api_handler_exports, {
+  default: () => api_handler_default
 });
-module.exports = __toCommonJS(index_exports);
+module.exports = __toCommonJS(api_handler_exports);
 var import_express = __toESM(require("express"));
 var import_path = __toESM(require("path"));
 var import_fs = __toESM(require("fs"));
@@ -302,7 +302,7 @@ var TEST_CASES = [
   }
 ];
 
-// api/index.ts
+// src/server/api-handler.ts
 var app = (0, import_express.default)();
 app.use(import_express.default.json());
 app.use((req, res, next) => {
@@ -441,4 +441,4 @@ app.get("/api/run/:runId/result", (req, res) => {
 app.get("/api/run/:runId/live-frame", (req, res) => {
   res.status(404).json({ error: "No live frame available" });
 });
-var index_default = app;
+var api_handler_default = app;
