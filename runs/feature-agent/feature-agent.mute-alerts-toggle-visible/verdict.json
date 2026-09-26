@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.mute-alerts-toggle-visible",
+  "title": "Verify Mute Alerts toggle is present in the cockpit",
+  "description": "Autonomous agent goal: Open the cockpit application and locate the Mute Alerts control toggle within the cockpit interface.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.mute-alerts-toggle-visible",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-toggle-visible\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-toggle-visible\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.mute-alerts-toggle-visible\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Verify Mute Alerts toggle is present in the cockpit]\nGoal ID: feature-agent.mute-alerts-toggle-visible\nNatural-Language Instruction: \"Open the cockpit application and locate the Mute Alerts control toggle within the cockpit interface.\"\nAgent Execution Outcome: The FlytBase Cockpit application is open, and the Mute Alerts control toggle is located at the bottom-left telemetry panel (\"Mute alerts: Off\").\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_17-02-10-0f8337f4.html\nVerification Query: \"The Mute Alerts toggle is clearly visible and currently set to the disabled state by default.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T11:32:19.274Z"
+}

@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.multiple-drones-favorite-persistence",
+  "title": "Favorite multiple drones independently",
+  "description": "Autonomous agent goal: In the devices panel on desktop, favorite two distinct drones one after another. Check that each drone's favorite state toggles independently without affecting the other.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.multiple-drones-favorite-persistence",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.multiple-drones-favorite-persistence\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.multiple-drones-favorite-persistence\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.multiple-drones-favorite-persistence\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Favorite multiple drones independently]\nGoal ID: feature-agent.multiple-drones-favorite-persistence\nNatural-Language Instruction: \"In the devices panel on desktop, favorite two distinct drones one after another. Check that each drone's favorite state toggles independently without affecting the other.\"\nAgent Execution Outcome: Successfully attempted to favorite two distinct drones in the devices panel and verified their states.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_16-52-20-52be7095.html\nVerification Query: \"Both selected drones show active favorite states while unselected drones remain unfavorited.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T11:22:45.853Z"
+}

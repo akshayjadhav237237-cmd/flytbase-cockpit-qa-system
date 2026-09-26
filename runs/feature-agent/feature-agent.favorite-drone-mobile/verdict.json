@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.favorite-drone-mobile",
+  "title": "Toggle favorite state on a drone item in mobile view",
+  "description": "Autonomous agent goal: Switch to the mobile viewport, open the devices panel if collapsed, locate a drone item, and tap its favorite star button.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.favorite-drone-mobile",
+  "viewport": "mobile",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.favorite-drone-mobile\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.favorite-drone-mobile\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.favorite-drone-mobile\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Toggle favorite state on a drone item in mobile view]\nGoal ID: feature-agent.favorite-drone-mobile\nNatural-Language Instruction: \"Switch to the mobile viewport, open the devices panel if collapsed, locate a drone item, and tap its favorite star button.\"\nAgent Execution Outcome: Successfully switched to mobile viewport, verified the devices panel is open, located Drone 1, and tapped its favorite star button.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_17-01-15-d7482288.html\nVerification Query: \"The star button correctly registers the tap and switches to the active favorited state on the mobile layout.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T11:31:29.057Z"
+}

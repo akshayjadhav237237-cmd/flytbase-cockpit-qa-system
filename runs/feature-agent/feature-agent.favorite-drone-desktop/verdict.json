@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.favorite-drone-desktop",
+  "title": "Toggle favorite state on a drone item in desktop view",
+  "description": "Autonomous agent goal: Open the application on the desktop view, navigate to the devices panel, locate the first drone item, and click on its star/favorite icon. Observe if the icon changes to a filled or active state.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.favorite-drone-desktop",
+  "viewport": "desktop",
+  "result": "fail",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.favorite-drone-desktop\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.favorite-drone-desktop\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.favorite-drone-desktop\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Toggle favorite state on a drone item in desktop view]\nGoal ID: feature-agent.favorite-drone-desktop\nNatural-Language Instruction: \"Open the application on the desktop view, navigate to the devices panel, locate the first drone item, and click on its star/favorite icon. Observe if the icon changes to a filled or active state.\"\nAgent Execution Outcome: The star/favorite icon of the first drone item was successfully clicked and changed to a filled/active state.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_17-00-39-356f032b.html\nVerification Query: \"The star icon for the selected drone successfully toggles to the favorited state, indicating it has been added to favorites.\"\nSemantic AI Verification Result: NEGATIVE / UNMET (false)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: FAIL",
+  "timestamp": "2026-09-26T11:30:55.087Z"
+}

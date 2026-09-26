@@ -6,7 +6,6 @@
   "scripts": {
     "test": "playwright test",
     "report": "tsx src/report/generate.ts",
-    "dashboard": "tsx src/report/dashboard-generator.ts",
     "feature-test": "tsx src/feature-test-agent/run.ts",
     "control-panel": "tsx src/server/index.ts"
   },

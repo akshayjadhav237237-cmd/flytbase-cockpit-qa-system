@@ -11,7 +11,7 @@
     "id": "feature-agent.unfavorite-drone-desktop",
     "area": "Dynamic Feature Verification",
     "screen": "cockpit-main",
-    "description": "Remove drone from favorites by clicking star again on desktop: The star button returns to its unfavorited appearance (such as outlined or unhighlighted), confirming the toggle functionality works in both directions.",
+    "description": "Toggle favorited drone back to unfavorited state: The star icon changes from the active favorited state back to the inactive/unfavorited state.",
     "viewport": "desktop",
     "checkType": "visual-judgment"
   },
@@ -60,6 +60,70 @@
     "area": "Dynamic Feature Verification",
     "screen": "cockpit-main",
     "description": "Verify disabling Mute Alerts resumes normal alert display: Incoming alert banners and panel entries are once again displayed normally after disabling the Mute Alerts toggle.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.favorite-drone-desktop",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Toggle favorite state on a drone item in desktop view: The star icon for the selected drone successfully toggles to the favorited state, indicating it has been added to favorites.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.favorite-drone-mobile",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Toggle favorite state on a drone item in mobile view: The star button correctly registers the tap and switches to the active favorited state on the mobile layout.",
+    "viewport": "mobile",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.multiple-drones-favorite-persistence",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Favorite multiple drones independently: Both selected drones show active favorite states while unselected drones remain unfavorited.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.multiple-favorites-persistence",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Favorite multiple drones independently: Both selected drones show active favorite star icons independently without affecting each other.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.mute-alerts-toggle-visible",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Verify Mute Alerts toggle is present in the cockpit: The Mute Alerts toggle is clearly visible and currently set to the disabled state by default.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.enable-mute-alerts",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Enable Mute Alerts toggle: The Mute Alerts toggle visually updates to show it is enabled or active.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.suppress-incoming-alert-banners",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Verify incoming alert banners are suppressed when muted: Incoming alert banners do not pop up on the screen and no new entries appear in the alerts panel.",
+    "viewport": "desktop",
+    "checkType": "visual-judgment"
+  },
+  {
+    "id": "feature-agent.restore-alerts-on-unmute",
+    "area": "Dynamic Feature Verification",
+    "screen": "cockpit-main",
+    "description": "Verify alerts display normally after disabling Mute Alerts: Incoming alert banners appear on the screen and are successfully recorded in the alerts panel once the mute is disabled.",
     "viewport": "desktop",
     "checkType": "visual-judgment"
   }

@@ -15,8 +15,5 @@ playwright-report/
 blob-report/
 *.log
 
-# Exclude large trace zips (preserve verdicts, videos, screenshots, SUBMISSION.md, dashboard.html)
+# Exclude large trace zips (preserve verdicts, videos, screenshots, SUBMISSION.md)
 *.zip
-
-# Local deployment temporary folder
-deploy-dashboard/

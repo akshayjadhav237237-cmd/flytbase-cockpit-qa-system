@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.suppress-incoming-alert-banners",
+  "title": "Verify incoming alert banners are suppressed when muted",
+  "description": "Autonomous agent goal: Ensure the Mute Alerts toggle is enabled in the cockpit. Then, trigger or simulate an incoming alert event and observe the screen and alerts panel.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.suppress-incoming-alert-banners",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.suppress-incoming-alert-banners\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.suppress-incoming-alert-banners\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.suppress-incoming-alert-banners\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Verify incoming alert banners are suppressed when muted]\nGoal ID: feature-agent.suppress-incoming-alert-banners\nNatural-Language Instruction: \"Ensure the Mute Alerts toggle is enabled in the cockpit. Then, trigger or simulate an incoming alert event and observe the screen and alerts panel.\"\nAgent Execution Outcome: The Mute Alerts toggle has been enabled and an incoming alert event has been simulated while observing the cockpit screen and alerts panel.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_17-02-38-d1e834e6.html\nVerification Query: \"Incoming alert banners do not pop up on the screen and no new entries appear in the alerts panel.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T11:34:29.560Z"
+}

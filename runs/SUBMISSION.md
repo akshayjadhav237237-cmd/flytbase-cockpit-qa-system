@@ -1,8 +1,4 @@
 # System Design
-> **Evaluation Deliverable Links & Live Demo Note:**
-> - **Public Static Results Dashboard (Permanent)**: [https://deploy-dashboard-pi.vercel.app](https://deploy-dashboard-pi.vercel.app) — A permanent, always-available record of all 45 scenario verification results with embedded video evidence recordings, viewable anytime by judges with no local server or browser runtime dependencies.
-> - **Live Interactive Control Panel (Live Demo)**: The local control panel (`http://localhost:4500`) provides a real-time, interactive testing interface with streaming execution logs and a live visual browser viewport feed. It is best demonstrated live (in person or via screen share) rather than deployed as a static web link, as it requires a local Playwright/Chromium engine and an active FlytBase Cockpit container running on the host machine.
-
 [placeholder: "TODO: describe testing system architecture here"]
 
 # Scenarios
@@ -213,19 +209,19 @@ Autonomy Confirmation: Zero hardcoded selectors or locators used in execution st
 Verdict: FAIL
 
 ### 15. Favorite multiple drones independently
-**Description:** Autonomous agent goal: Open the devices panel on desktop. Click the favorite star button on at least two different drone items in the list. Verify that each drone maintains its own independent favorite state.
+**Description:** Autonomous agent goal: In the desktop devices panel, click the star icon on at least two different drone items to favorite both of them.
 **Approach:** Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().
 **Video:** [TODO: upload D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\runs\feature-agent\feature-agent.multiple-favorites-persistence\video.webm and paste shareable link here]
 **Result:** fail (confidence: 0.95)
 **Reasoning:** [AUTONOMOUS UX TEST AGENT: Favorite multiple drones independently]
 Goal ID: feature-agent.multiple-favorites-persistence
-Natural-Language Instruction: "Open the devices panel on desktop. Click the favorite star button on at least two different drone items in the list. Verify that each drone maintains its own independent favorite state."
-Agent Execution Outcome: The devices panel is open, favorite star buttons were clicked on Drone 1 and Drone 2, and their independent favorite states are verified.
+Natural-Language Instruction: "In the desktop devices panel, click the star icon on at least two different drone items to favorite both of them."
+Agent Execution Outcome: Successfully favorited at least two different drone items by clicking their star icons in the desktop devices panel.
 Agent Action Trail (captured from Midscene execution tasks):
   1. Planning:
   2. Action Space:
-Midscene Execution Report: D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\midscene_run\report\playwright-2026-09-26_15-50-14-1b452f10.html
-Verification Query: "Both selected drones show active favorited states while unselected drones remain unfavorited, confirming independent state management per drone item."
+Midscene Execution Report: D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\midscene_run\report\playwright-2026-09-26_17-01-32-fc57438e.html
+Verification Query: "Both selected drones show active favorite star icons independently without affecting each other."
 Semantic AI Verification Result: NEGATIVE / UNMET (false)
 Autonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.
 Verdict: FAIL
@@ -242,6 +238,106 @@ Agent Execution Outcome: The 'Mute alerts' toggle was located and activated to '
 Verification Query: "When Mute alerts is enabled, alert toasts and notifications are suppressed and do not appear on screen."
 Semantic AI Verification Result: NEGATIVE / UNMET (false)
 Assessment: The alert toast ('drone-1 Drone 1 taking off') visibly appeared in the top-right toast notification container (.toast[role="status"]) despite the 'Mute alerts: On' state being active. The control visually toggles to active state but fails to suppress alert rendering, confirming the defect.
+Verdict: FAIL
+
+### 17. Favorite multiple drones independently
+**Description:** Autonomous agent goal: In the devices panel on desktop, favorite two distinct drones one after another. Check that each drone's favorite state toggles independently without affecting the other.
+**Approach:** Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().
+**Video:** [TODO: upload D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\runs\feature-agent\feature-agent.multiple-drones-favorite-persistence\video.webm and paste shareable link here]
+**Result:** fail (confidence: 0.95)
+**Reasoning:** [AUTONOMOUS UX TEST AGENT: Favorite multiple drones independently]
+Goal ID: feature-agent.multiple-drones-favorite-persistence
+Natural-Language Instruction: "In the devices panel on desktop, favorite two distinct drones one after another. Check that each drone's favorite state toggles independently without affecting the other."
+Agent Execution Outcome: Successfully attempted to favorite two distinct drones in the devices panel and verified their states.
+Agent Action Trail (captured from Midscene execution tasks):
+  1. Planning:
+  2. Action Space:
+Midscene Execution Report: D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\midscene_run\report\playwright-2026-09-26_16-52-20-52be7095.html
+Verification Query: "Both selected drones show active favorite states while unselected drones remain unfavorited."
+Semantic AI Verification Result: NEGATIVE / UNMET (false)
+Autonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.
+Verdict: FAIL
+
+### 18. Toggle drone favorite status on mobile viewport
+**Description:** Autonomous agent goal: Open the application at http://localhost:4010 on a mobile screen size. Open the devices panel if collapsed, locate a drone item, and tap the favorite star button.
+**Approach:** Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().
+**Video:** [TODO: upload D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\runs\feature-agent\feature-agent.toggle-drone-favorite-mobile\video.webm and paste shareable link here]
+**Result:** fail (confidence: 0.95)
+**Reasoning:** [AUTONOMOUS UX TEST AGENT: Toggle drone favorite status on mobile viewport]
+Goal ID: feature-agent.toggle-drone-favorite-mobile
+Natural-Language Instruction: "Open the application at http://localhost:4010 on a mobile screen size. Open the devices panel if collapsed, locate a drone item, and tap the favorite star button."
+Agent Execution Outcome: Successfully opened the application on a mobile screen size, opened the devices panel, located Drone 1, and tapped its favorite star button.
+Agent Action Trail (captured from Midscene execution tasks):
+  1. Planning:
+  2. Action Space:
+Midscene Execution Report: D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\midscene_run\report\playwright-2026-09-26_16-06-40-df2a3f4b.html
+Verification Query: "The star button changes to the favorited state correctly on the mobile layout without overlapping or touch-target issues."
+Semantic AI Verification Result: NEGATIVE / UNMET (false)
+Autonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.
+Verdict: FAIL
+
+### 19. Toggle favorite state on a drone item in desktop view
+**Description:** Autonomous agent goal: Open the application on the desktop view, navigate to the devices panel, locate the first drone item, and click on its star/favorite icon. Observe if the icon changes to a filled or active state.
+**Approach:** Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().
+**Video:** [TODO: upload D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\runs\feature-agent\feature-agent.favorite-drone-desktop\video.webm and paste shareable link here]
+**Result:** fail (confidence: 0.95)
+**Reasoning:** [AUTONOMOUS UX TEST AGENT: Toggle favorite state on a drone item in desktop view]
+Goal ID: feature-agent.favorite-drone-desktop
+Natural-Language Instruction: "Open the application on the desktop view, navigate to the devices panel, locate the first drone item, and click on its star/favorite icon. Observe if the icon changes to a filled or active state."
+Agent Execution Outcome: The star/favorite icon of the first drone item was successfully clicked and changed to a filled/active state.
+Agent Action Trail (captured from Midscene execution tasks):
+  1. Planning:
+  2. Action Space:
+Midscene Execution Report: D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\midscene_run\report\playwright-2026-09-26_17-00-39-356f032b.html
+Verification Query: "The star icon for the selected drone successfully toggles to the favorited state, indicating it has been added to favorites."
+Semantic AI Verification Result: NEGATIVE / UNMET (false)
+Autonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.
+Verdict: FAIL
+
+### 20. Toggle favorite state on a drone item in mobile view
+**Description:** Autonomous agent goal: Switch to the mobile viewport, open the devices panel if collapsed, locate a drone item, and tap its favorite star button.
+**Approach:** Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().
+**Video:** [TODO: upload D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\runs\feature-agent\feature-agent.favorite-drone-mobile\video.webm and paste shareable link here]
+**Result:** fail (confidence: 0.95)
+**Reasoning:** [AUTONOMOUS UX TEST AGENT: Toggle favorite state on a drone item in mobile view]
+Goal ID: feature-agent.favorite-drone-mobile
+Natural-Language Instruction: "Switch to the mobile viewport, open the devices panel if collapsed, locate a drone item, and tap its favorite star button."
+Agent Execution Outcome: Successfully switched to mobile viewport, verified the devices panel is open, located Drone 1, and tapped its favorite star button.
+Agent Action Trail (captured from Midscene execution tasks):
+  1. Planning:
+  2. Action Space:
+Midscene Execution Report: D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\midscene_run\report\playwright-2026-09-26_17-01-15-d7482288.html
+Verification Query: "The star button correctly registers the tap and switches to the active favorited state on the mobile layout."
+Semantic AI Verification Result: NEGATIVE / UNMET (false)
+Autonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.
+Verdict: FAIL
+
+### 21. Verify alerts display normally after disabling Mute Alerts
+**Description:** Autonomous agent goal: With Mute Alerts enabled, click the toggle again to disable it. Trigger an incoming alert event and check the cockpit interface.
+**Approach:** Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().
+**Video:** [TODO: upload D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\runs\feature-agent\feature-agent.restore-alerts-on-unmute\video.webm and paste shareable link here]
+**Result:** fail (confidence: 0.95)
+**Reasoning:** [AUTONOMOUS UX TEST AGENT: Verify alerts display normally after disabling Mute Alerts]
+Goal ID: feature-agent.restore-alerts-on-unmute
+Natural-Language Instruction: "With Mute Alerts enabled, click the toggle again to disable it. Trigger an incoming alert event and check the cockpit interface."
+Agent Execution Outcome: Error: Replanned 20 times, exceeding the limit. Please configure a larger value for replanningCycleLimit (or use MIDSCENE_REPLANNING_CYCLE_LIMIT) to handle more complex tasks.
+Verification Query: "Incoming alert banners appear on the screen and are successfully recorded in the alerts panel once the mute is disabled."
+Semantic AI Verification Result: NEGATIVE / UNMET (false)
+Autonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.
+Verdict: FAIL
+
+### 22. Verify muted alerts do not appear in the alerts panel
+**Description:** Autonomous agent goal: With Mute Alerts enabled, simulate or wait for an alert to occur. Open the alerts panel and inspect the list of recorded alerts.
+**Approach:** Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().
+**Video:** [TODO: upload D:\Akshay final folder\Antigravity\FlytBase Hackathon\qa-system\runs\feature-agent\feature-agent.mute-alerts-suppresses-panel\video.webm and paste shareable link here]
+**Result:** fail (confidence: 0.95)
+**Reasoning:** [AUTONOMOUS UX TEST AGENT: Verify muted alerts do not appear in the alerts panel]
+Goal ID: feature-agent.mute-alerts-suppresses-panel
+Natural-Language Instruction: "With Mute Alerts enabled, simulate or wait for an alert to occur. Open the alerts panel and inspect the list of recorded alerts."
+Agent Execution Outcome: Error: Replanned 20 times, exceeding the limit. Please configure a larger value for replanningCycleLimit (or use MIDSCENE_REPLANNING_CYCLE_LIMIT) to handle more complex tasks.
+Verification Query: "The alerts panel remains clear of any alerts that arrived while the Mute Alerts toggle was active."
+Semantic AI Verification Result: NEGATIVE / UNMET (false)
+Autonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.
 Verdict: FAIL
 
 ## Also verified
@@ -274,3 +370,12 @@ Verdict: FAIL
 - Toggle map between 2D and 3D modes (feature-agent.toggle-map-2d-3d)
 - Drone position marker remains visible when switching back to 2D mode (feature-agent.drone-marker-visible-in-2d)
 - Toggle drone favorite state in devices panel on desktop (feature-agent.toggle-favorite-desktop)
+- Enable Mute Alerts toggle (feature-agent.enable-mute-alerts)
+- Favorite multiple independent drones (feature-agent.multiple-drones-favorite-state)
+- Toggle drone favorite status in devices panel on desktop (feature-agent.toggle-drone-favorite-desktop)
+- Toggle favorited drone back to unfavorited state (feature-agent.unfavorite-drone-desktop)
+- Verify disabling Mute Alerts resumes normal alert display (feature-agent.mute-alerts-resumes-normal)
+- Verify enabling Mute Alerts suppresses incoming alert banners (feature-agent.mute-alerts-suppresses-banners)
+- Verify incoming alert banners are suppressed when muted (feature-agent.suppress-incoming-alert-banners)
+- Verify Mute Alerts toggle is present and disabled by default (feature-agent.mute-alerts-toggle-default)
+- Verify Mute Alerts toggle is present in the cockpit (feature-agent.mute-alerts-toggle-visible)

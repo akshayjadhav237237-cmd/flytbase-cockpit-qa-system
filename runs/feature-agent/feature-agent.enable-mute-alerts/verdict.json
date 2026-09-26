@@ -1,0 +1,20 @@
+{
+  "scenarioId": "feature-agent.enable-mute-alerts",
+  "title": "Enable Mute Alerts toggle",
+  "description": "Autonomous agent goal: Navigate to the cockpit, locate the Mute Alerts control, and click on it to switch it to the enabled state.",
+  "approach": "Agent received natural-language instruction without pre-scripted steps, planned action sequence autonomously via Midscene aiAct(), and outcome was verified via aiBoolean().",
+  "capabilityId": "feature-agent.enable-mute-alerts",
+  "viewport": "desktop",
+  "result": "pass",
+  "confidence": 0.95,
+  "checkType": "visual-judgment",
+  "evidence": {
+    "videoPath": "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.enable-mute-alerts\\video.webm",
+    "screenshotPaths": [
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.enable-mute-alerts\\before.png",
+      "D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\runs\\feature-agent\\feature-agent.enable-mute-alerts\\after.png"
+    ]
+  },
+  "reasoning": "[AUTONOMOUS UX TEST AGENT: Enable Mute Alerts toggle]\nGoal ID: feature-agent.enable-mute-alerts\nNatural-Language Instruction: \"Navigate to the cockpit, locate the Mute Alerts control, and click on it to switch it to the enabled state.\"\nAgent Execution Outcome: Successfully navigated to the cockpit, located the Mute Alerts control, and switched it to the enabled state.\nAgent Action Trail (captured from Midscene execution tasks):\n  1. Planning:\n  2. Action Space:\nMidscene Execution Report: D:\\Akshay final folder\\Antigravity\\FlytBase Hackathon\\qa-system\\midscene_run\\report\\playwright-2026-09-26_17-02-23-18fa2205.html\nVerification Query: \"The Mute Alerts toggle visually updates to show it is enabled or active.\"\nSemantic AI Verification Result: CONFIRMED (true)\nAutonomy Confirmation: Zero hardcoded selectors or locators used in execution step. Decision, element discovery, and actuation were determined dynamically by the AI agent.\nVerdict: PASS",
+  "timestamp": "2026-09-26T11:32:35.217Z"
+}
