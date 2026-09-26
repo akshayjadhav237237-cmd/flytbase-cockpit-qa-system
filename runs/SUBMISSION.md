@@ -1,4 +1,8 @@
 # System Design
+> **Evaluation Deliverable Links & Live Demo Note:**
+> - **Public Static Results Dashboard (Permanent)**: [https://deploy-dashboard-pi.vercel.app](https://deploy-dashboard-pi.vercel.app) — A permanent, always-available record of all 45 scenario verification results with embedded video evidence recordings, viewable anytime by judges with no local server or browser runtime dependencies.
+> - **Live Interactive Control Panel (Live Demo)**: The local control panel (`http://localhost:4500`) provides a real-time, interactive testing interface with streaming execution logs and a live visual browser viewport feed. It is best demonstrated live (in person or via screen share) rather than deployed as a static web link, as it requires a local Playwright/Chromium engine and an active FlytBase Cockpit container running on the host machine.
+
 [placeholder: "TODO: describe testing system architecture here"]
 
 # Scenarios
